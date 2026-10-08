@@ -1,347 +1,353 @@
-=== PDF pages 342-344 (printed 327-329) ===
-         Global Stability of the Origin
-   Actually, for r  1, we can show that every trajectory approaches the origin as
-t l d; the origin is globally stable. Hence there can be no limit cycles or chaos for
-r  1.
-   The proof involves the construction of a Liapunov function, a smooth, positive
-definite function that decreases along trajectories. As discussed in Section 7.2, a
-Liapunov function is a generalization of an energy function for a classical mechan-
-ical system—in the presence of friction or other dissipation, the energy decreases
-monotonically. There is no systematic way to concoct Liapunov functions, but
-often it is wise to try expressions involving sums of squares.
-   Here, consider V ( x, y, z ) = T1 x 2 + y 2 + z 2 . The surfaces of constant V are con-
-centric ellipsoids about the origin (Figure 9.2.3).
-
-                                                        z
-                         V= const                                             y
-
-
-
-                                                                                  x
+=== PDF pages 346-348 (printed 327-329) ===
+The trajectory appears to cross itself repeatedly, but that’s just an artifact of pro-
+jecting the three-dimensional trajectory onto a two-dimensional plane. In three
+dimensions no self-intersections occur.
+    Let’s try to understand Figure 9.3.2 in detail. The trajectory starts near the
+origin, then swings to the right, and then dives into the center of a spiral on the
+left. After a very slow spiral outward, the trajectory shoots back over to the right
+side, spirals around a few times, shoots over to the left, spirals around, and so on
+indefinitely. The number of circuits made on either side varies unpredictably from
+one cycle to the next. In fact, the sequence of the number of circuits has many of
+the characteristics of a random sequence. Physically, the switches between left and
+right correspond to the irregular reversals of the waterwheel that we observed in
+Section 9.1.
+    When the trajectory is viewed in all three dimensions, rather than in a
+two-dimensional projection, it appears to settle onto an exquisitely thin set that
+looks like a pair of butterfly wings. Figure 9.3.3 shows a schematic of this strange
+attractor (a term coined by Ruelle and Takens (1971)). This limiting set is the
+attracting set of zero volume whose existence was deduced in Section 9.2.
 
 
 
 
-                         Figure 9.2.3
+              Figure 9.3.3 Abraham and Shaw (1983), p. 88
 
 
-The idea is to show that if r  1 and ( x,y,z ) v (0,0,0), then V  0 along trajectories.
-This would imply that the trajectory keeps moving to lower V, and hence pene-
-trates smaller and smaller ellipsoids as t l d. But V is bounded below by 0, so
-V ( x (t )) l 0 and hence x ( t ) l 0, as desired.
-    Now calculate:
+What is the geometrical structure of the strange attractor? Figure 9.3.3 suggests
+that it is a pair of surfaces that merge into one in the lower portion of Figure 9.3.3.
+But how can this be, when the uniqueness theorem (Section 6.2) tells us that tra-
+jectories can’t cross or merge? Lorenz (1963) gives a lovely explanation—the two
+surfaces only appear to merge. The illusion is caused by the strong volume con-
+traction of the flow, and insufficient numerical resolution. But watch where that
+idea leads him:
 
-          1
-          2
-              V = T1 xx + yy + zz
-                  = ( yx − x 2 ) + ( ryx − y 2 − xyz ) + ( zxy − bz 2 )
-                  = ( r + 1)xy − x 2 − y 2 − bz 2 .
-
-Completing the square in the first two terms gives
-
-              V = − ⎡⎣ x − r +2 1 y⎤⎦ − ⎡⎢⎣1− ( r +2 1 )2 ⎤⎥⎦ y 2 − bz 2 .
-                                      2
-          1
-          2
+         It would seem, then, that the two surfaces merely appear to merge, and
+         remain distinct surfaces. Following these surfaces along a path parallel to
+         a trajectory, and circling C and C –, we see that each surface is really a
+         pair of surfaces, so that, where they appear to merge, there are really four
+         surfaces. Continuing this process for another circuit, we see that there are
 
 
 
+                                9.3   CHAOS ON A STRANGE ATTRACTOR                327
+          really eight surfaces, etc., and we finally conclude that there is an infinite
+          complex of surfaces, each extremely close to one or the other of two merg-
+          ing surfaces.
 
-We claim that the right-hand side is strictly negative if r  1 and ( x,y,z ) v (0,0,0). It
-is certainly not positive, since it is a negative sum of squares. But could V  0 ?
+   Today this “infinite complex of surfaces” would be called a fractal. It is a set of
+points with zero volume but infinite surface area. In fact, numerical experiments
+suggest that it has a dimension of about 2.05! (See Example 11.5.1.) The amazing
+geometric properties of fractals and strange attractors will be discussed in detail in
+Chapters 11 and 12. But first we want to examine chaos a bit more closely.
 
+          Exponential Divergence of Nearby Trajectories
+    The motion on the attractor exhibits sensitive dependence on initial conditions.
+This means that two trajectories starting very close together will rapidly diverge
+from each other, and thereafter have totally different futures. Color Plate 2 vividly
+illustrates this divergence by plotting the evolution of a small red blob of 10,000
+nearby initial conditions. The blob eventually spreads over the whole attractor.
+Hence nearby trajectories can end up anywhere on the attractor! The practical
+implication is that long-term prediction becomes impossible in a system like this,
+where small uncertainties are amplified enormously fast.
+    Let’s make these ideas more precise. Suppose that we let transients decay, so
+that a trajectory is “on” the attractor. Suppose x( t ) is a point on the attractor at
+time t, and consider a nearby point, say x( t ) E ( t ), where E is a tiny separation
+vector of initial length ||E 0 ||  10 –15, say (Figure 9.3.4).
 
-                        9.2 SIMPLE PROPERTIES OF THE LORENZ EQUATIONS                 323
-That would require each of the terms on the right to vanish separately. Hence
-y  0, z  0, from the second two terms on the right-hand side. (Because of the
-assumption r  1, the coefficient of y2 is nonzero.) Thus the first term reduces to
-–x2 , which vanishes only if x  0.
-   The upshot is that V  0 implies ( x, y, z )  (0, 0, 0). Otherwise V  0. Hence
-the claim is established, and therefore the origin is globally stable for r  1.
-
-         Stability of C+ and C –
-    Now suppose r  1, so that C and C – exist. The calculation of their stability is
-left as Exercise 9.2.1. It turns out that they are linearly stable for
-
-                         T ( T + b + 3)
-         1 < r < rH =
-                            T − b −1
-
-(assuming also that T– b – 1  0). We use a subscript H because C and C – lose
-stability in a Hopf bifurcation at r  rH.
-   What happens immediately after the bifurcation, for r slightly greater than rH ?
-You might suppose that C and C – would each be surrounded by a small stable
-limit cycle. That would occur if the Hopf bifurcation were supercritical. But actu-
-ally it’s subcritical—the limit cycles are unstable and exist only for r  rH . This
-requires a difficult calculation; see Marsden and McCracken (1976) or Drazin
-(1992, Q8.2 on p. 277).
-   Here’s the intuitive picture. For r  rH the phase portrait near C is shown sche-
-matically in Figure 9.2.4.
+                                                 x(t)
 
 
+                                                        δ (t)
 
 
-                                          saddle cycle
-
-
-                                              +
-                                          C
+                                                 x(t) + δ (t)
 
 
 
-
-          unstable manifold
-          of saddle cycle
-
-          Figure 9.2.4
+                                  Figure 9.3.4
 
 
-The fixed point is stable. It is encircled by a saddle cycle, a new type of unstable
-limit cycle that is possible only in phase spaces of three or more dimensions. The
-cycle has a two-dimensional unstable manifold (the sheet in Figure 9.2.4), and a
-two-dimensional stable manifold (not shown). As r l rH from below, the cycle
+Now watch how E ( t ) grows. In numerical studies of the Lorenz attractor, one finds
+that
+          || E ( t ) || _ || E 0 || eMt
 
-
-324       LORENZ EQUATIONS
-shrinks down around the fixed point. At the Hopf bifurcation, the fixed point
-absorbs the saddle cycle and changes into a saddle point. For r  rH there are no
-attractors in the neighborhood.
-   So for r  rH trajectories must fly away to a distant attractor. But what can it be?
-A partial bifurcation diagram for the system, based on the results so far, shows no
-hint of any stable objects for r  rH (Figure 9.2.5).
-
-                                                               unstable
-                x                                              cycle
-
-                                     +
-                                 C
-
-                    origin
-                0
-
-                                       −
-                                  C
-
-
-                                                                          r
-                          r =1                        r = rH
-
-                Figure 9.2.5
-
-
-Could it be that all trajectories are repelled out to infinity? No; we can prove that all
-trajectories eventually enter and remain in a certain large ellipsoid (Exercise 9.2.2).
-Could there be some stable limit cycles that we’re unaware of? Possibly, but Lorenz
-gave a persuasive argument that for r slightly greater than rH , any limit cycles
-would have to be unstable (see Section 9.4).
-   So the trajectories must have a bizarre kind of long-term behavior. Like balls in
-a pinball machine, they are repelled from one unstable object after another. At the
-same time, they are confined to a bounded set of zero volume, yet they manage to
-move on this set forever without intersecting themselves or others.
-   In the next section we’ll see how the trajectories get out of this conundrum.
-
-
-9.3 Chaos on a Strange Attractor
-Lorenz used numerical integration to see what the trajectories would do in the
-long run. He studied the particular case T  10, b  83 , r  28. This value of r is just
-past the Hopf bifurcation value rH  T ( T b 3) / ( T – b – 1) x 24.74, so he knew
-that something strange had to occur. Of course, strange things could occur for
-another reason—the electromechanical computers of those days were unreliable
-and difficult to use, so Lorenz had to interpret his numerical results with caution.
+where M x 0.9. Hence neighboring trajectories separate exponentially fast.
+Equivalently, if we plot ln ||E ( t ) || versus t, we find a curve that is close to a straight
+line with a positive slope of M (Figure 9.3.5).
 
 
 
-                                 9.3     CHAOS ON A STRANGE ATTRACTOR               325
+
+328         LORENZ EQUATIONS
+                                                                      t
+
+                             slope = λ
+
+
+                 ln ||δ ||
+
+
+
+
+                 Figure 9.3.5
+
+
+We need to add some qualifications:
+        1. The curve is never exactly straight. It has wiggles because the strength
+           of the exponential divergence varies somewhat along the attractor.
+        2. The exponential divergence must stop when the separation is compa-
+           rable to the “diameter” of the attractor—the trajectories obviously
+           can’t get any farther apart than that. This explains the leveling off or
+           saturation of the curve in Figure 9.3.5.
+        3. The number M is often called the Liapunov exponent, although this is a
+           sloppy use of the term, for two reasons:
+              First, there are actually n different Liapunov exponents for an
+           n-dimensional system, defined as follows. Consider the evolution of an
+           infinitesimal sphere of perturbed initial conditions. During its evolu-
+           tion, the sphere will become distorted into an infinitesimal ellipsoid.
+           Let E k ( t ), k  1, . . . , n, denote the length of the kth principal axis of
+           the ellipsoid. Then δk (t ) _ δk ( 0 )eλk t , where the M k are the Liapunov
+           exponents. For large t, the diameter of the ellipsoid is controlled by
+           the most positive M k. Thus our M is actually the largest Liapunov
+           exponent.
+              Second, M depends (slightly) on which trajectory we study. We
+           should average over many different points on the same trajectory to
+           get the true value of M.
+   When a system has a positive Liapunov exponent, there is a time horizon beyond
+which prediction breaks down, as shown schematically in Figure 9.3.6. (See
+Lighthill 1986 for a nice discussion.) Suppose we measure the initial conditions of
+an experimental system very accurately. Of course, no measurement is perfect—
+there is always some error ||E 0 || between our estimate and the true initial state.
+
+
+
+
+                                9.3      CHAOS ON A STRANGE ATTRACTOR                329
 
-=== PDF pages 388-391 (printed 373-376) ===
-   Then xn 2 f ( f ( xn )) or more simply, xn 2  f 2 ( xn ) . Similarly, xn 3  f 3 ( xn ) .
-   The third-iterate map f 3 ( x ) is the key to understanding the birth of the
-period-3 cycle. Any point p in a period-3 cycle repeats every three iterates, by defi-
-nition, so such points satisfy p  f 3 ( p ) and are therefore fixed points of the
-third-iterate map. Unfortunately, since f 3 ( x ) is an eighth-degree polynomial, we
-cannot solve for the fixed points explicitly. But a graph provides sufficient insight.
-Figure 10.4.1 plots f 3 ( x ) for r 3.835.
-
-                          1
+=== PDF pages 392-395 (printed 373-376) ===
+from  1 and eventually reaches 1. When this occurs, a flip bifurcation causes
+each of the black dots to split in two; the 3-cycle doubles its period and becomes a
+6-cycle. The same mechanism operates here as in the original period-doubling cas-
+cade, but now produces orbits of period 3 •2n. A similar period-doubling cascade
+can be found in all of the periodic windows.
 
 
-                        0.8
+10.5 Liapunov Exponent
+We have seen that the logistic map can exhibit aperiodic orbits for certain param-
+eter values, but how do we know that this is really chaos? To be called “chaotic,”
+a system should also show sensitive dependence on initial conditions, in the sense
+that neighboring orbits separate exponentially fast, on average. In Section 9.3 we
+quantified sensitive dependence by defining the Liapunov exponent for a chaotic
+differental equation. Now we extend the definition to one-dimensional maps.
+   Here’s the intuition. Given some initial condition x0, consider a nearby point
+x0 E 0, where the initial separation E 0 is extremely small. Let E n be the separation
+after n iterates. If | E n | x | E 0 | enM , then M is called the Liapunov exponent. A positive
+Liapunov exponent is a signature of chaos.
+   A more precise and computationally useful formula for M can be derived. By
+taking logarithms and noting that E n = f n ( x0 E 0 )  f n ( x0 ) , we obtain
+
+                 1 δn
+          λ≈      ln
+                 n δ0
+                 1    f n ( x0 + δ0 ) − f n ( x0 )
+             =     ln
+                 n                δ0
+                 1
+             =     ln ( f n )′( x0 )
+                 n
+where we’ve taken the limit E 0 l 0 in the last step. The term inside the logarithm
+can be expanded by the chain rule:
+
+                           n−1
+          ( f n )′( x0 ) = ∏ f ′( xi ) .
+                           i =0
 
 
-                        0.6
-             3
-           f (x )
-                        0.4
+(We’ve already seen this formula in Example 9.4.1, where it was derived by heuris-
+tic reasoning about multipliers, and in Example 10.3.3, for the special case n 2.)
+Hence
+
+                 1 n−1
+          M≈      ln ∏ f ′( xi )
+                 n i =0
+                 1 n−1
+            =      ∑ ln f ′( xi ) .
+                 n i =0
+
+                                                     10.5 LIAPUNOV EXPONENT               373
+If this expression has a limit as n ld, we define that limit to be the Liapunov
+exponent for the orbit starting at x0:
+
+                   ⎧⎪⎪ 1 n−1           ⎫⎪
+          M = nlim
+                → ∞⎪
+                     ⎨ ∑ ln f ′( xi ) ⎪⎬ .
+                     ⎪⎩ n i =0          ⎪⎪⎭
+
+Note that M depends on x0. However, it is the same for all x0 in the basin of attrac-
+tion of a given attractor. For stable fixed points and cycles, M is negative; for chaotic
+attractors, M is positive.
+   The next two examples deal with special cases where M can be found analytically.
 
 
-                        0.2
+EXAMPLE 10.5.1:
+
+   Suppose that f has a stable p-cycle containing the point x0. Show that the
+Liapunov exponent M 0. If the cycle is superstable, show that M d.
+   Solution: As usual, we convert questions about p-cycles of f into questions
+about fixed points of f p. Since x0 is an element of a p-cycle, x0 is a fixed point of f p.
+By assumption, the cycle is stable; hence the multiplier ( f p )′( x0 )  1. Therefore
+ln ( f p )′( x0 ) < ln(1) = 0, a result that we’ll use in a moment.
+   Next observe that for a p-cycle,
+
+                    ⎧⎪⎪ 1 n−1                  ⎫⎪
+          M = nlim
+                →∞ ⎨        ∑    ln f ′( xi ) ⎪⎬
+                      ⎪⎪⎩ n i =0                ⎪⎪⎭
+                 p−1
+              1
+            = ∑ ln f ′( xi )
+              p i =0
+
+since the same p terms keep appearing in the infinite sum. Finally, using the chain
+rule in reverse, we obtain
+
+          1 p−1                1
+            ∑
+          p i =0
+                 ln f ′( xi ) = ln ( f p )′( x0 ) < 0,
+                               p
+
+as desired. If the cycle is superstable, then ( f p )′( x0 )  0 by definition, and thus
+     1
+M = ln( 0 ) = −∞. ■
+     p
 
 
-                          0
-                              0         0.2         0.4         0.6         0.8            1
-                                                           x
-          Figure 10.4.1
+   The second example concerns the tent map, defined by
 
+                     ⎧⎪rx,      0 ≤ x ≤ 12
+          f ( x ) = ⎪⎨
+                      ⎪⎪r − rx, 12 ≤ x ≤ 1
+                       ⎩
 
-Intersections between the graph and the diagonal line correspond to solutions of
- f 3 ( x ) x. There are eight solutions, six of interest to us and marked with dots,
-and two imposters that are not genuine period-3; they are actually fixed points, or
-period-1 points for which f ( x * ) x *. The black dots in Figure 10.4.1 correspond
-to a stable period-3 cycle; note that the slope of f 3 ( x ) is shallow at these points,
-consistent with the stability of the cycle. In contrast, the slope exceeds 1 at the cycle
-marked by the open dots; this 3-cycle is therefore unstable.
-    Now suppose we decrease r toward the chaotic regime. Then the graph in
-Figure 10.4.1 changes shape—the hills move down and the valleys rise up. The
-curve therefore pulls away from the diagonal. Figure 10.4.2 shows that when
-r 3.8, the six marked intersections have vanished. Hence, for some intermediate
-value between r 3.8 and r 3.835, the graph of f 3 ( x ) must have become tan-
-gent to the diagonal. At this critical value of r, the stable and unstable period-3
-cycles coalesce and annihilate in a tangent bifurcation. This transition defines the
-beginning of the periodic window.
+for 0 br b2 and 0 bx b1 (Figure 10.5.1).
 
 
 
+374        ONE-DIMENSIONAL MAPS
+                                     1
 
-                                                      10.4     PERIODIC WINDOWS                  369
-                               1
+                                 r
+                                 2
 
-
-                           0.8
-
-
-                           0.6
-                   3
-                f (x )
-                           0.4
-
-
-                           0.2
-
-                               0
-                                   0   0.2          0.4       0.6         0.8   1
-                                                          x
-               Figure 10.4.2
-
-
-   One can show analytically that the value of r at the tangent bifurcation is
-1 + 8 = 3.8284. . . (Myrberg 1958). This beautiful result is often mentioned in
-textbooks and articles—but always without proof. Given the resemblance of this
-result to the 1    6 encountered in Example 10.3.3, I’d always assumed it should
-be comparably easy to derive, and once assigned it as a routine homework prob-
-lem. Oops! It turns out to be a bear. See Exercise 10.4.10 for hints, and Saha and
-Strogatz (1994) for Partha Saha’s solution, the most elementary one my class could
-find. Maybe you can do better; if so, let me know!
-
-           Intermittency
-  For r just below the period-3 window, the system exhibits an interesting kind of
-chaos. Figure 10.4.3 shows a typical orbit for r 3.8282.
-
-                         nearly
-                         period-3           chaos                   r =3.8282
-           1
-
-
-      xn
-
-
-           0
-               0                       50                      100                  150
-                                                    n
-
-      Figure 10.4.3
-
-
-Part of the orbit looks like a stable 3-cycle, as indicated by the black dots. But this
-is spooky since the 3-cycle no longer exists! We’re seeing the ghost of the 3-cycle.
-
-
-370            ONE-DIMENSIONAL MAPS
-   We should not be surprised to see ghosts—they always occur near saddle-node
-bifurcations (Sections 4.3 and 8.1) and indeed, a tangent bifurcation is just a
-saddle-node bifurcation by another name. But the new wrinkle is that the orbit
-returns to the ghostly 3-cycle repeatedly, with intermittent bouts of chaos between
-visits. Accordingly, this phenomenon is known as intermittency (Pomeau and
-Manneville 1980).
-   Figure 10.4.4 shows the geometry underlying intermittency.
-             1
-
-                     (a)                                  (b)
-           0.8
-
-
-           0.6
-
-f 3 (x )
-           0.4
-
-
-           0.2
-
-
-             0
-                 0     0.2   0.4       0.6   0.8   1
-                                   x
-
-Figure 10.4.4
-
-
-In Figure 10.4.4a, notice the three narrow channels between the diagonal and the
-graph of f 3 ( x ) . These channels were formed in the aftermath of the tangent
-bifurcation, as the hills and valleys of f 3 ( x ) pulled away from the diagonal. Now
-focus on the channel in the small box of Figure 10.4.4a, enlarged in Figure 10.4.4b.
-The orbit takes many iterations to squeeze through the channel. Hence f 3 ( xn ) x xn
-during the passage, and so the orbit looks like a 3-cycle; this explains why we see a
-ghost.
-   Eventually, the orbit escapes from the channel. Then it bounces around chaot-
-ically until fate sends it back into a channel at some unpredictable later time and
-place.
-   Intermittency is not just a curiosity of the logistic map. It arises commonly in
-systems where the transition from periodic to chaotic behavior takes place by a
-saddle-node bifurcation of cycles. For instance, Exercise 10.4.8 shows that inter-
-mittency can occur in the Lorenz equations. (In fact, it was discovered there; see
-Pomeau and Manneville 1980).
-   In experimental systems, intermittency appears as nearly periodic motion
-interrupted by occasional irregular bursts. The time between bursts is statistically
-distributed, much like a random variable, even though the system is completely
-deterministic. As the control parameter is moved farther away from the periodic
-window, the bursts become more frequent until the system is fully chaotic. This
-progression is known as the intermittency route to chaos.
+                             xn +1
 
 
 
 
-                                                       10.4     PERIODIC WINDOWS   371
-  Figure 10.4.5 shows an experimental example of the intermittency route to
-chaos in a laser.
+                                         0                          1
+                                                    xn
+
+                             Figure 10.5.1
+
+
+Because it is piecewise linear, the tent map is far easier to analyze than the logistic
+map.
+
+
+EXAMPLE 10.5.2:
+
+   Show that M ln r for the tent map, independent of the initial condition x0.
+                                                               ⎪⎧⎪ 1 n−1                 ⎪⎫
+                                                            →∞ ⎪ ∑
+   Solution: Since f a ( x ) o r for all x, we find M = nlim   ⎨         ln f ′( xi ) ⎪⎬ ln r.■
+                                                                 ⎪⎩ n i =0                ⎪⎪⎭
+
+
+Example 10.5.2 suggests that the tent map has chaotic solutions for all r 1, since
+M ln r 0. In fact, the dynamics of the tent map can be understood in detail,
+even in the chaotic regime; see Devaney (1989).
+   In general, one needs to use a computer to calculate Liapunov exponents. The
+next example outlines such a calculation for the logistic map.
+
+
+EXAMPLE 10.5.3:
+
+     Describe a numerical scheme to compute M for the logistic map
+  f ( x ) rx ( 1  x ) . Graph the results as a function of the control parameter r, for
+3brb4.
+     Solution: Fix some value of r. Then, starting from a random initial condition,
+iterate the map long enough to allow transients to decay, say 300 iterates or so.
+Next compute a large number of additional iterates, say 10,000. You only need to
+store the current value of xn, not all the previous iterates. Compute
+ ln f ′( xn ) = ln r − 2rxn and add it to the sum of the previous logarithms. The
+Liapunov exponent is then obtained by dividing the grand total by 10,000. Repeat
+this procedure for the next r, and so on. The end result should look like Figure 10.5.2.
 
 
 
 
-                                0         5          10
-                                     Time ( μ s )
-
-                                Figure 10.4.5
+                                                    10.5 LIAPUNOV EXPONENT                     375
+                  1·0
 
 
-The intensity of the emitted laser light is plotted as a function of time. In the lowest
-panel of Figure 10.4.5, the laser is pulsing periodically. A bifurcation to intermit-
-tency occurs as the system’s control parameter (the tilt of the mirror in the laser
-cavity) is varied. Moving from bottom to top of Figure 10.4.5, we see that the cha-
-otic bursts occur increasingly often.
-   For a nice review of intermittency in fluids and chemical reactions, see Bergé
-et al. (1984). Those authors also review two other types of intermittency (the kind
-considered here is Type I intermittency) and give a much more detailed treatment
-of intermittency in general.
 
-         Period-Doubling in the Window
-   We commented at the end of Section 10.2 that a copy of the orbit diagram
-appears in miniature in the period-3 window. The explanation has to do with hills
-and valleys again. Just after the stable 3-cycle is created in the tangent bifurcation,
-the slope at the black dots in Figure 10.4.1 is close to 1. As we increase r, the hills
-rise and the valleys sink. The slope of f 3 ( x ) at the black dots decreases steadily
+                  0·5
+
+
+
+             λ      0
 
 
 
 
-372       ONE-DIMENSIONAL MAPS
+                 −0·5
+
+
+
+                 −1·0
+                    3·0       3·2         3·4         3·6     3·8   4·0
+                                                 r
+             Figure 10.5.2 Olsen and Degn ( 1985 ) , p. 175
+
+
+   Comparing this graph to the orbit diagram (Figure 10.2.7), we notice that M
+remains negative for r < r∞ ≈ 3.57, and approaches zero at the period-doubling
+bifurcations. The negative spikes correspond to the 2n -cycles. The onset of chaos is
+visible near r x 3.57, where M first becomes positive. For r 3.57 the Liapunov
+exponent generally increases, except for the dips caused by the windows of peri-
+odic behavior. Note the large dip due to the period-3 window near r 3.83. ■
+
+   Actually, all the dips in Figure 10.5.2 should drop down to M d , because a
+superstable cycle is guaranteed to occur somewhere near the middle of each dip,
+and such cycles have M d, by Example 10.5.1. This part of the spike is too nar-
+row to be resolved in Figure 10.5.2.
+
+
+10.6      Universality and Experiments
+This section deals with some of the most astonishing results in all of nonlinear
+dynamics. The ideas are best introduced by way of an example.
+
+
+EXAMPLE 10.6.1:
+
+  Plot the graph of the sine map xn + 1 r sinQxn for 0 br b1 and 0 bx b1, and
+compare it to the logistic map. Then plot the orbit diagrams for both maps, and list
+some similarities and differences.
+  Solution: The graph of the sine map is shown in Figure 10.6.1.
+
+
+
+376       ONE-DIMENSIONAL MAPS
 

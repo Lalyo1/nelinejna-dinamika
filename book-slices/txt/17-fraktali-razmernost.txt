@@ -1,181 +1,5 @@
-=== PDF pages 420-431 (printed 405-416) ===
-10.5.6 Using a computer, compute and plot the Liapunov exponent as a function
-of r for the sine map xn 1 r sin Qxn, for 0 bxn b1 and 0 br b1.
-10.5.7 The graph in Figure 10.5.2 suggests that M 0 at each period-doubling
-bifurcation value rn. Show analytically that this is correct.
-
-10.6 Universality and Experiments
-The first two exercises deal with the sine map xn 1 r sin Qxn, where 0 r b1 and
-x  [0,1]. The goal is to learn about some of the practical problems that come up
-when one tries to estimate E numerically.
-10.6.1 (Naive approach)
-a) At each of 200 equally spaced r values, plot x700 through x1000 vertically above
-   r, starting from some random initial condition x0. Check your orbit diagram
-   against Figure 10.6.2 to be sure your program is working.
-b) Now go to finer resolution near the period-doubling bifurcations, and estimate
-   rn, for n 1, 2, . . . , 6. Try to achieve five significant figures of accuracy.
-                                                                         r −r
-c) Use the numbers from (b) to estimate the Feigenbaum ratio n n−1 .
-                                                                         rn+1 − rn
-   (Note: To get accurate estimates in part (b), you need to be clever, or careful, or
-both. As you probably found, a straightforward approach is hampered by “critical
-slowing down”—the convergence to a cycle becomes unbearably slow when that
-cycle is on the verge of period-doubling. This makes it hard to decide precisely
-where the bifurcation occurs. To achieve the desired accuracy, you may have to
-use double precision arithmetic, and about 104 iterates. But maybe you can find a
-shortcut by reformulating the problem.)
-10.6.2 (Superstable cycles to the rescue) The “critical slowing down” encoun-
-tered in the previous problem is avoided if we compute Rn instead of rn. Here Rn
-denotes the value of r at which the sine map has a superstable cycle of period 2n.
-a) Explain why it should be possible to compute Rn more easily and accurately
-   than rn.
-b) Compute the first six Rn ’s and use them to estimate E.
-   If you’re interested in knowing the best way to compute E, see Briggs (1991) for
-the state of the art.
-10.6.3 (Qualitative universality of patterns) The U-sequence dictates the order-
-ing of the windows, but it actually says more: it dictates the iteration pattern within
-each window. (See Exercise 10.4.7 for the definition of iteration patterns.) For
-instance, consider the large period-6 window for the logistic and sine maps, visible
-in Figure 10.6.2.
-a) For both maps, plot the cobweb for the corresponding superstable 6-cycle,
-   given that it occurs at r 3.6275575 for the logistic map and r 0.8811406 for
-   the sine map. (This cycle acts as a representative for the whole window.)
-b) Find the iteration pattern for both cycles, and confirm that they match.
-
-
-                                                                EXERCISES         401
-10.6.4 (Period 4) Consider the iteration patterns of all possible period-4 orbits
-for the logistic map, or any other unimodal map governed by the U-sequence.
-a) Show that only two patterns are possible for period-4 orbits: RLL and RLR.
-b) Show that the period-4 orbit with pattern RLL always occurs after RLR, i.e., at
-   a larger value of r.
-10.6.5 (Unfamiliar later cycles) The final superstable cycles of periods 5, 6, 4, 6,
-5, 6 in the logistic map occur at approximately the following values of r: 3.9057065,
-3.9375364, 3.9602701, 3.9777664, 3.9902670, 3.9975831 (Metropolis et al. 1973).
-Notice that they’re all near the end of the orbit diagram. They have tiny windows
-around them and tend to be overlooked.
-a) Plot the cobwebs for these cycles.
-b) Did you find it hard to obtain the cycles of periods 5 and 6? If so, can you
-    explain why this trouble occurred?
-10.6.6 (A trick for locating superstable cycles) Hao and Zheng (1989) give an
-amusing algorithm for finding a superstable cycle with a specified iteration pat-
-tern. The idea works for any unimodal map, but for convenience, consider the map
- xn+1 = r − xn2 , for 0 br b2. Define two functions R( y ) = r − y , L( y ) = − r − y .
-These are the right and left branches of the inverse map.
-a) For instance, suppose we want to find the r corresponding to the superstable
-   5-cycle with pattern RLLR. Then Hao and Zheng show that this amounts to
-   solving the equation r RLLR ( 0 ) . Show that when this equation is written out
-   explicitly, it becomes
-
-
-         r = r+ r+ r− r .
-
-b) Solve this equation numerically by iterating the map
-
-
-         rn+1 = rn + rn + rn − rn ,
-
-starting from any reasonable guess, e.g., r0 2 . Show numerically that rn con-
-verges rapidly to 1.860782522. . . .
-c) Verify that the answer to (b) yields a cycle with the desired pattern.
-
-10.7 Renormalization
-10.7.1 (Hands on the functional equation) The functional equation
-g ( x )  Bg2 ( x / B ) arose in our renormalization analysis of period-doubling. Let’s
-
-
-
-
-402        ONE-DIMENSIONAL MAPS
-approximate its solution by brute force, assuming that g ( x ) is even and has a qua-
-dratic maximum at x 0.
-a) Suppose g ( x ) x 1 c2x2 for small x. Solve for c2 and B. (Neglect O ( x4 ) terms.)
-b) Now assume g ( x ) x 1 c2x2 c4x4, and use Mathematica, Maple, Macsyma
-   (or hand calculation) to solve for B, c2, c4. Compare your approximate results to
-   the “exact” values B x 2.5029 . . . , c2 x 1.527 . . . , c4 x 0.1048 . . . .
-10.7.2 Given a map yn 1 f (yn ) , rewrite the map in terms of a rescaled variable
-xn Byn. Use this to show that rescaling and inversion converts f 2 ( x, R1 ) into
-B f 2 ( x / B, R1 ) , as claimed in the text.
-10.7.3 Show that if g is a solution of the functional equation, so is Ng ( x / N ) , with
-the same B.
-10.7.4 (Wildness of the universal function g (x ) ) Near the origin g ( x ) is roughly
-parabolic, but elsewhere it must be rather wild. In fact, the function g ( x ) has
-infinitely many wiggles as x ranges over the real line. Verify these statements by
-demonstrating that g ( x ) crosses the lines y ±x infinitely many times. (Hint:
-Show that if x * is a fixed point of g ( x ) , then so is Bx *.)
-10.7.5 (Crudest possible estimate of B ) Let f ( x, r ) r  x2 .
-a) Write down explicit expressions for f ( x, R0 ) and B f 2 ( x / B, R1 ) .
-b) The two functions in (a) are supposed to resemble each other near the origin,
-   if B is chosen correctly. (That’s the idea behind Figure 10.7.3.) Show the O ( x2 )
-   coefficients of the two functions agree if B 2.
-10.7.6 (Improved estimate of B) Redo Exercise 10.7.5 to one higher order:
-Let f ( x, r ) r  x2 again, but now compare B f 2( x / B, R1 ) to B2 f 4 ( x / B2 , R 2 )
-and match the coefficients of the lowest powers of x. What value of B is obtained
-in this way?
-10.7.7 (Quartic maxima) Develop the renormalization theory for functions with
-a fourth-degree maximum, e.g., f ( x, r ) r  x4. What approximate value of B is
-predicted by the methods of Exercises 10.7.1 and 10.7.5? Estimate the first few terms
-in the power series for the universal function g ( x ) . By numerical experimentation,
-estimate the new value of E for the quartic case.
-    See Briggs (1991) for precise values of B and E for this fourth-degree case, as well
-as for all other integer degrees between 2 and 12.
-10.7.8 (Renormalization approach to intermittency: algebraic version) Consider
-the map xn 1 f ( xn, r ) , where f ( xn, r ) r x  x2. This is the normal form
-for any map close to a tangent bifurcation.
-a) Show that the map undergoes a tangent bifurcation at the origin when r 0.
-b) Suppose r is small and positive. By drawing a cobweb, show that a typical orbit
-   takes many iterations to pass through the bottleneck at the origin.
-
-
-
-
-                                                                    EXERCISES          403
-c) Let N ( r ) denote the typical number of iterations of f required for an orbit to
-   get through the bottleneck. Our goal is to see how N ( r ) scales with r as r l0.
-   We use a renormalization idea: Near the origin, f 2 looks like a rescaled version
-   of f , and hence it too has a bottleneck there. Show that it takes approximately
-    1
-    2
-      N ( r ) iterations for orbits of f 2 to pass through the bottleneck.
-d) Expand f 2( x,r ) and keep only the terms through O ( x2 ) . Rescale x and r to put
-   this new map into the desired normal form F ( X,R ) x R X  X 2. Show
-   that this renormalization implies the recursive relation
-
-          1
-          2
-              N ( r ) xN ( 4r ) .
-
-e) Show that the equation in (d) has solutions N ( r ) arb and solve for b.
-10.7.9 (Renormalization approach to intermittency: functional version) Show
-that if the renormalization procedure in Exercise 10.7.8 is done exactly, we are led
-to the functional equation
-
-         g ( x ) Bg2 ( x / B )
-
-(just as in the case of period-doubling!) but with new boundary conditions appro-
-priate to the tangent bifurcation:
-
-         g ( 0 ) 0, ga ( 0 ) l.
-
-Unlike the period-doubling case, this functional equation can be solved explicitly
-(Hirsch et al. 1982).
-a) Verify that a solution is B 2, g ( x ) x / ( 1 ax ) , with a arbitrary.
-b) Explain why B 2 is almost obvious, in retrospect. (Hint: Draw cobwebs for
-   both g and g2 for an orbit passing through the bottleneck. Both cobwebs look
-   like staircases; compare the lengths of their steps.)
-10.7.10 Fill in the missing algebraic steps in the concrete renormalization calcula-
-tion for period-doubling. Let f ( x ) ( 1 N ) x x2 . Expand p I n l f 2 ( p I n )
-in powers of the small deviation I n, using the fact that p is a fixed point of f 2 .
-Thereby confirm that (10.7.4) and (10.7.5) are correct.
-10.7.11 Give a cobweb analysis of (10.7.10), starting from the initial condition
-N1 0. Show that N k lN*, where N* 0 is a stable fixed point corresponding to
-the onset of chaos.
-
-
-
-
-404           ONE-DIMENSIONAL MAPS
-     11
+=== PDF pages 424-435 (printed 405-416) ===
+     11
           FR ACTALS
 
 
@@ -538,4 +362,201 @@ dimension that can cope with fractals.
 
 
 412        FRACTALS
+         Similarity Dimension
+   The simplest fractals are self-similar, i.e., they are made of scaled-down copies
+of themselves, all the way down to arbitrarily small scales. The dimension of such
+fractals can be defined by extending an elementary observation about classical
+self-similar sets like line segments, squares, or cubes. For instance, consider the
+square region shown in Figure 11.3.2.
+
+
+
+
+                                                               m = number of copies
+                                                               r = scale factor
+
+
+
+
+          m=4                                m =9
+           r=2                                r=3
+
+  Figure 11.3.2
+
+
+If we shrink the square by a factor of 2 in each direction, it takes four of the small
+squares to equal the whole. Or if we scale the original square down by a factor of 3,
+then nine small squares are required. In general, if we reduce the linear dimensions
+of the square region by a factor of r, it takes r2 of the smaller squares to equal the
+original.
+    Now suppose we play the same game with a solid cube. The results are differ-
+ent: if we scale the cube down by a factor of 2, it takes eight of the smaller cubes to
+make up the original. In general, if the cube is scaled down by r, we need r3 of the
+smaller cubes to make up the larger one.
+    The exponents 2 and 3 are no accident; they reflect the two-dimensionality of the
+square and the three-dimensionality of the cube. This connection between dimen-
+sions and exponents suggests the following definition. Suppose that a self-similar
+set is composed of m copies of itself scaled down by a factor of r. Then the similar-
+ity dimension d is the exponent defined by m r d, or equivalently,
+
+              ln m
+         d         .
+               ln r
+
+This formula is easy to use, since m and r are usually clear from inspection.
+
+
+EXAMPLE 11.3.1:
+
+   Find the similarity dimension of the Cantor set C.
+
+
+
+
+                          11.3   DIMENSION OF SELF-SIMILAR FRACTALS                413
+   Solution: As shown in Figure 11.3.3, C is composed of two copies of itself, each
+scaled down by a factor of 3.
+
+                                                                            [ 0, 1]
+
+                                                                              C
+ The left half of the Cantor set
+ is the original Cantor set,
+ scaled down by a factor of 3
+
+
+ Figure 11.3.3
+
+
+So m 2 when r 3. Therefore d ln 2ln 3 x 0.63. ■
+
+   In the next example we confirm our earlier intuition that the von Koch curve
+should have a dimension between 1 and 2.
+
+
+EXAMPLE 11.3.2:
+
+   Show that the von Koch curve has a similarity dimension of ln 4ln 3 x 1.26.
+   Solution: The curve is made up of four equal pieces, each of which is similar
+to the original curve but is scaled down by a factor of 3 in both directions. One of
+these pieces is indicated by the arrows in Figure 11.3.4.
+
+
+
+
+                      Figure 11.3.4
+
+
+Hence m 4 when r 3, and therefore d ln 4ln 3. ■
+
+
+           More General Cantor Sets
+   Other self-similar fractals can be generated by changing the recursive proce-
+dure. For instance, to obtain a new kind of Cantor set, divide an interval into five
+equal pieces, delete the second and fourth subintervals, and then repeat this pro-
+cess indefinitely (Figure 11.3.5).
+
+
+
+
+                 Figure 11.3.5
+
+
+
+
+414          FRACTALS
+We call the limiting set the even-fifths Cantor set, since the even fifths are removed
+at each stage. (Similarly, the standard Cantor set of Section 11.2 is often called the
+middle-thirds Cantor set.)
+
+
+EXAMPLE 11.3.3:
+
+   Find the similarity dimension of the even-fifths Cantor set.
+   Solution: Let the original interval be denoted S 0, and let Sn denote the nth stage
+of the construction. If we scale Sn down by a factor of five, we get one third of the
+set Sn 1. Now setting n d, we see that the even-fifths Cantor set Sd is made of
+three copies of itself, shrunken by a factor of 5. Hence m 3 when r  5, and so
+d ln 3ln 5. ■
+
+   There are so many different Cantor-like sets that mathematicians have
+abstracted their essence in the following definition. A closed set S is called a topo-
+logical Cantor set if it satisfies the following properties:
+         1. S is “totally disconnected.” This means that S contains no connected
+            subsets (other than single points). In this sense, all points in S are
+            separated from each other. For the middle-thirds Cantor set and other
+            subsets of the real line, this condition simply says that S contains no
+            intervals.
+         2. On the other hand, S contains no “isolated points.” This means that
+            every point in S has a neighbor arbitrarily close by—given any point
+            p  S and any small distance F 0, there is some other point q  S
+            within a distance F of p.
+
+   The paradoxical aspects of Cantor sets arise because the first property says
+that points in S are spread apart, whereas the second property says they’re packed
+together! In Exercise 11.3.6, you’re asked to check that the middle-thirds Cantor set
+satisfies both properties.
+   Notice that the definition says nothing about self-similarity or dimension.
+These notions are geometric rather than topological; they depend on concepts of
+distance, volume, and so on, which are too rigid for some purposes. Topological
+features are more robust than geometric ones. For instance, if we continuously
+deform a self-similar Cantor set, we can easily destroy its self-similarity but prop-
+erties 1 and 2 will persist. When we study strange attractors in Chapter 12, we’ll
+see that the cross sections of strange attractors are often topological Cantor sets,
+although they are not necessarily self-similar.
+
+
+
+
+                         11.3   DIMENSION OF SELF-SIMILAR FRACTALS                415
+11.4 Box Dimension
+To deal with fractals that are not self-similar, we need to generalize our notion
+of dimension still further. Various definitions have been proposed; see Falconer
+(1990) for a lucid discussion. All the definitions share the idea of “measurement at a
+scale F”—roughly speaking, we measure the set in a way that ignores irregularities
+of size less than F, and then study how the measurements vary as F l 0.
+
+         Definition of Box Dimension
+   One kind of measurement involves covering the set with boxes of size F
+(Figure 11.4.1).
+
+
+                                                          ε{
+
+
+
+
+                                  L                                     A
+                      N (ε ) ∝                                 N(ε) ∝
+                                  ε                                     ε2
+
+            Figure 11.4.1
+
+
+Let S be a subset of D-dimensional Euclidean space, and let N ( F ) be the minimum
+number of D-dimensional cubes of side F needed to cover S. How does N ( F ) depend
+on F? To get some intuition, consider the classical sets shown in Figure 11.4.1. For
+a smooth curve of length L, N ( F ) r L / F; for a planar region of area A bounded by
+a smooth curve, N ( F ) r A / F2 . The key observation is that the dimension of the set
+equals the exponent d in the power law N ( F ) r 1 / Fd.
+   This power law also holds for most fractal sets S, except that d is no longer an
+integer. By analogy with the classical case, we interpret d as a dimension, usually
+called the capacity or box dimension of S. An equivalent definition is
+
+                      ln N ( F )
+          d = lim                , if the limit exists.
+               F→ 0   ln(1 / F )
+
+
+EXAMPLE 11.4.1:
+
+  Find the box dimension of the Cantor set.
+  Solution: Recall that the Cantor set is covered by each of the sets Sn used in its
+construction (Figure 11.2.1). Each Sn consists of 2 n intervals of length ( 1 / 3 ) n, so if
+we pick F  ( 1 / 3 ) n, we need all 2 n of these intervals to cover the Cantor set. Hence
+N 2 n when F  ( 1 / 3 ) n. Since F l0 as n ld, we find
+
+
+
+416        FRACTALS
 
