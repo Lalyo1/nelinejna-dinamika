@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pitchfork и катастрофи</title>
+<style>
+:root{
+--bg:#f7f6f2;--panel:#fffefb;--ink:#1d2430;--mute:#5f6773;--line:#dcd8cf;--grid:#ebe8e1;--soft:#f0ede6;
+--curve:#1d2430;--stab:#1f7a5c;--unst:#c0392b;--half:#b07a00;--acc:#3459b5;--state:#7a3fb0;--region:rgba(52,89,181,.10)}
+:root[data-theme="dark"]{
+--bg:#121619;--panel:#1a2025;--ink:#e4e7ea;--mute:#9aa3ad;--line:#2f3840;--grid:#252d34;--soft:#20272d;
+--curve:#e4e7ea;--stab:#4fd1a1;--unst:#ff7a6b;--half:#f0b93a;--acc:#86a8ff;--state:#c99bff;--region:rgba(134,168,255,.13)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+--bg:#121619;--panel:#1a2025;--ink:#e4e7ea;--mute:#9aa3ad;--line:#2f3840;--grid:#252d34;--soft:#20272d;
+--curve:#e4e7ea;--stab:#4fd1a1;--unst:#ff7a6b;--half:#f0b93a;--acc:#86a8ff;--state:#c99bff;--region:rgba(134,168,255,.13)}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Charter","Iowan Old Style",Georgia,serif}
+main{max-width:980px;margin:0 auto;padding:18px 16px 56px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:10px}
+h1{font-size:1.6rem;line-height:1.25;margin:.3em 0 .2em}
+h2{font-size:1.35rem;margin:1.8em 0 .4em;padding-top:.4em;border-top:2px solid var(--line)}
+h3{font-size:1.05rem;margin:1.4em 0 .3em;font-family:system-ui,sans-serif;letter-spacing:.01em;color:var(--mute);text-transform:uppercase}
+h4{font-size:1rem;margin:1.1em 0 .2em}
+p,li{max-width:70ch}
+.lead{color:var(--mute);margin:0 0 12px}
+.toc{font-family:system-ui,sans-serif;font-size:.92rem;display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px;padding:0;list-style:none}
+.toc a{color:var(--acc);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;display:inline-block;background:var(--panel)}
+.toc a:hover{text-decoration:underline}
+button{font:inherit}
+.btn{font-family:system-ui,sans-serif;font-size:.88rem;padding:6px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:7px;cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}
+a:focus-visible,button:focus-visible,input:focus-visible,canvas:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0}
+.def{border-left:4px solid var(--acc)}
+.note{border-left:4px solid var(--half);font-size:.95rem}
+.eq{font-style:italic;font-size:1.15rem;text-align:center;margin:.5em 0;overflow-x:auto}
+.eq .n{font-style:normal;color:var(--mute);font-size:.85rem;margin-left:1em}
+.lab{display:inline-block;font-family:system-ui,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--mute);text-transform:uppercase;margin-bottom:2px}
+.widget{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}
+.ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:8px 0;font-family:system-ui,sans-serif;font-size:.9rem}
+.ctl label{display:flex;gap:8px;align-items:center}
+.ctl input[type=range]{width:170px;max-width:52vw}
+.ctl output{min-width:3.6em;font-variant-numeric:tabular-nums;font-weight:600}
+.plots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media(max-width:720px){.plots{grid-template-columns:1fr}body{font-size:16px}}
+canvas{width:100%;height:250px;display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;touch-action:none}
+.cap{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--mute);margin:4px 2px 0}
+.info{font-family:system-ui,sans-serif;font-size:.88rem;margin:6px 0 0;padding:0;list-style:none}
+.info li{padding:4px 0;border-top:1px solid var(--grid);max-width:none}
+.s{color:var(--stab);font-weight:600}.u{color:var(--unst);font-weight:600}.h{color:var(--half);font-weight:600}
+.try{border-left:3px solid var(--state);padding-left:12px;margin:8px 0;font-size:.95rem}
+.quiz{background:var(--soft);border-radius:10px;padding:10px 14px;margin:10px 0}
+.quiz p{margin:.3em 0}
+.ans{border-top:1px dashed var(--line);margin-top:8px;padding-top:6px}
+.legend{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--mute);display:flex;flex-wrap:wrap;gap:14px;margin:4px 0}
+.legend span::before{content:"";display:inline-block;width:22px;height:0;vertical-align:middle;margin-right:6px;border-top:3px solid var(--stab)}
+.legend .lu::before{border-top:3px dashed var(--unst)}
+.legend .ls::before{border-top:0;width:10px;height:10px;border-radius:50%;background:var(--state)}
+table{border-collapse:collapse;font-size:.92rem;margin:8px 0;width:100%;max-width:640px}
+td,th{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-family:system-ui,sans-serif;font-size:.85rem}
+.tablewrap{overflow-x:auto}
+footer{margin-top:28px;color:var(--mute);font-size:.82rem;font-family:system-ui,sans-serif}
+sub,sup{line-height:0}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div>
+    <h1>Тема 5. Pitchfork бифуркация. Неперфектни бифуркации и катастрофи</h1>
+    <p class="lead">Помагало по Строгац, раздели 3.4 и 3.6. Всяка подточка има интуиция, точни формулировки, примерите от учебника с наши думи, жив модел и два въпроса за самопроверка.</p>
+  </div>
+  <button class="btn" id="themeBtn" type="button" aria-label="Смени цветовата тема">Тема: авто</button>
+</header>
+<nav aria-label="Съдържание">
+  <ul class="toc">
+    <li><a href="#pitchfork">1. Pitchfork бифуркация</a></li>
+    <li><a href="#imperfect">2. Неперфектни бифуркации и катастрофи</a></li>
+  </ul>
+</nav>
+<div class="legend" aria-hidden="true"><span>устойчиви неподвижни точки</span><span class="lu">неустойчиви</span><span class="ls">текущо състояние на системата</span></div>
+
+<!-- ============================ 1 ============================ -->
+<section id="pitchfork" aria-labelledby="h-pf">
+<h2 id="h-pf">1. Pitchfork бифуркация (бифуркация „вила“)</h2>
+
+<h3>Интуиция</h3>
+<p>Вземи пластмасова линийка, сложи я вертикално на масата и натискай отгоре с длан. Докато натискаш леко, тя си остава права. Над определена сила линийката внезапно се извива, наляво или надясно. Коя посока ще избере, решава някое незабележимо смущение, защото двете посоки са напълно равноправни.</p>
+<p>Точно това е същността на pitchfork бифуркацията: системата има <b>симетрия ляво-дясно</b>, затова неподвижните точки не могат да се появят поединично, а се раждат <b>по двойки</b>, огледално една на друга. Правото положение (x = 0) продължава да съществува, но губи устойчивост. На диаграмата един клон се разцепва на три, като вила.</p>
+<p>Има два коренно различни сценария. При <b>суперкритичния</b> новите състояния се появяват плавно, с малка амплитуда, и поемат системата. При <b>субкритичния</b> новите състояния са неустойчиви „прагове“, а когато нулата загуби устойчивост, системата отскача далеч изведнъж.</p>
+
+<h3>Строги формулировки</h3>
+<div class="box def">
+<span class="lab">Суперкритична pitchfork бифуркация</span>
+<p>Нормална форма:</p>
+<p class="eq">ẋ = rx − x³ <span class="n">(1)</span></p>
+<p>Уравнението не се променя при смяната x → −x (дясната страна f(x) = rx − x³ е нечетна функция). Това е математическият израз на симетрията ляво-дясно. Следствие: щом f(x*) = 0, то и f(−x*) = 0, т.е. ненулевите неподвижни точки идват по двойки.</p>
+<ul>
+<li><b>r &lt; 0:</b> единствената неподвижна точка е x* = 0, устойчива (f′(0) = r &lt; 0).</li>
+<li><b>r = 0:</b> x* = 0 е още устойчива, но много по-слабо: линеаризацията f′(0) = 0 мълчи. Решението на ẋ = −x³ не затихва експоненциално, а алгебрично (като 1/√(2t) за големи t). Това бавно затихване във физиката се нарича <b>критично забавяне</b> (critical slowing down).</li>
+<li><b>r &gt; 0:</b> x* = 0 е неустойчива (f′(0) = r &gt; 0), а от двете ѝ страни се появяват устойчивите точки x* = ±√r (f′(±√r) = r − 3r = −2r &lt; 0).</li>
+</ul>
+<p>Бифуркационната диаграма (x* спрямо r) прилича на вила с три зъба; затова и името.</p>
+</div>
+
+<div class="box def">
+<span class="lab">Субкритична pitchfork бифуркация</span>
+<p>Ако кубичният член <i>дестабилизира</i> вместо да стабилизира:</p>
+<p class="eq">ẋ = rx + x³ <span class="n">(2)</span></p>
+<ul>
+<li>Ненулевите неподвижни точки x* = ±√(−r) съществуват само при r &lt; 0 (под бифуркацията, оттам „суб-“) и са <b>неустойчиви</b>. Вилата е обърната наляво.</li>
+<li>x* = 0 е устойчива при r &lt; 0 и неустойчива при r &gt; 0, както преди, но при r &gt; 0 нищо не спира отдалечаването: кубичният член дори го ускорява и x(t) → ±∞ за <b>крайно време</b> от всяко x₀ ≠ 0 (blow-up, „взрив“).</li>
+</ul>
+<p>В реалните системи взривът се спира от членове от по-висок ред. Ако симетрията x → −x се запази, функцията трябва да остане нечетна, така че първият възможен стабилизиращ член е −x⁵. Каноничният пример е</p>
+<p class="eq">ẋ = rx + x³ − x⁵ <span class="n">(3)</span></p>
+<p>(коефициентите пред x³ и x⁵ могат да се направят 1 чрез мащабиране на x и t, без загуба на общност).</p>
+<p>Какво се вижда в диаграмата на (3):</p>
+<ul>
+<li>Близо до x = 0 картината е като при (2): два неустойчиви клона се „огъват назад“ от началото при r = 0.</li>
+<li>Заради x⁵ тези клонове се обръщат при някакво r<sub>s</sub> &lt; 0 и стават устойчиви клонове с голяма амплитуда, които съществуват за всички r &gt; r<sub>s</sub>. В r<sub>s</sub> устойчив и неустойчив клон се раждат „от нищото“: това е <b>седлово-възлова (saddle-node) бифуркация</b>.</li>
+<li><b>Бистабилност:</b> при r<sub>s</sub> &lt; r &lt; 0 съжителстват две устойчиви състояния: нулата и големите ±x. Кое ще бъде достигнато, зависи от x₀. Нулата е устойчива при малки смущения, но не и при големи: <i>локално, но не глобално</i> устойчива.</li>
+<li><b>Скокове и хистерезис:</b> ако бавно увеличаваме r от състояние x = 0, то остава там до r = 0, след това и най-малкият тласък изпраща системата на голям клон (скок). Ако сега намаляваме r, системата остава на големия клон и под 0; връща се в нулата едва когато r мине под r<sub>s</sub>. Тази необратимост при промяна на параметъра напред-назад се нарича <b>хистерезис</b>.</li>
+</ul>
+<p class="note box" style="margin-top:8px">Стойността на r<sub>s</sub> не е дадена в откъса; лесно се пресмята: ненулевите корени на r + x² − x⁴ = 0 са x² = (1 ± √(1 + 4r))/2 и са реални само при r ≥ −1/4. Значи r<sub>s</sub> = −1/4, а при r<sub>s</sub> &lt; r &lt; 0 големият клон е x² = (1 + √(1+4r))/2, а неустойчивият праг е x² = (1 − √(1+4r))/2.</p>
+</div>
+
+<div class="box">
+<span class="lab">Терминология</span>
+<div class="tablewrap"><table>
+<tr><th></th><th>Суперкритична</th><th>Субкритична</th></tr>
+<tr><td>Други имена</td><td>„права“ (forward) бифуркация</td><td>обърната, „обратна“ (inverted, backward)</td></tr>
+<tr><td>Статистическа механика</td><td>свързана с непрекъснат фазов преход (от втори род)</td><td>свързана с прекъснат фазов преход (от първи род)</td></tr>
+<tr><td>Инженерство</td><td>„мека“, „безопасна“: новите състояния започват с малка амплитуда</td><td>„твърда“, „опасна“: скок от нула до голяма амплитуда</td></tr>
+</table></div>
+</div>
+
+<h3>Примерите от учебника</h3>
+<h4>Огъване на греда (въвеждащият пример)</h4>
+<p>Вертикална греда с малък товар отгоре стои права: x = 0 (без отклонение) е устойчиво. Над прага на огъване правото положение става неустойчиво и се появяват две огледални равновесия: огъната наляво и огъната надясно. Това е цялата pitchfork картина в механиката.</p>
+
+<h4>Пример 3.4.1: ẋ = −x + β tanh x</h4>
+<p>Такива уравнения се появяват в модели на магнити и невронни мрежи. Неподвижните точки са пресечните точки на правата y = x с кривата y = β tanh x. Ключовото наблюдение: наклонът на β tanh x в нулата е β.</p>
+<ul>
+<li>β &lt; 1: кривата е по-полегата от правата и се пресичат само в 0. f′(0) = −1 + β &lt; 0, нулата е устойчива.</li>
+<li>β = 1: кривата и правата се допират в 0: тук е бифуркацията (x* = 0).</li>
+<li>β &gt; 1: кривата е по-стръмна в нулата, но после се насища (tanh → ±1), затова пресича правата още два пъти, симетрично. Нулата става неустойчива, новите две точки са устойчиви. Суперкритична pitchfork.</li>
+</ul>
+<p><b>Номерът за точната диаграма.</b> Вместо да решаваме x* = β tanh x* числено за всяко β (напр. с Нютон), сменяме гледната точка: приемаме x* за независима променлива и пресмятаме β = x*/tanh x*. Всяка двойка (x*, β) е точка от диаграмата. Работи, защото f зависи от параметъра по-просто (линейно) отколкото от x, което в бифуркационните задачи е честа ситуация. В моделите по-долу всички диаграми са начертани точно така.</p>
+
+<h4>Пример 3.4.2: потенциалът на ẋ = rx − x³</h4>
+<p>Потенциалът се дефинира чрез f(x) = −dV/dx. Интегрираме: V(x) = −½rx² + ¼x⁴ (константата се изпуска). Представи си топче в лепкав мед, което се търкаля по тази крива към дъното:</p>
+<ul>
+<li>r &lt; 0: една квадратична яма в нулата.</li>
+<li>r = 0: ямата е много по-плоска (четвърта степен), затова топчето пълзи бавно (критичното забавяне).</li>
+<li>r &gt; 0: в нулата израства хълм (локален максимум), а встрани се появяват две симетрични ями.</li>
+</ul>
+
+<h3>Интерактивно: четирите модела</h3>
+<div class="widget" id="pfW">
+  <div class="row" role="group" aria-label="Избор на модел" id="pfModels"></div>
+  <div class="ctl">
+    <label><span id="pfPname">r</span> <input type="range" id="pfP"><output id="pfPv"></output></label>
+    <button class="btn" type="button" id="pfPlay">Анимирай x(t)</button>
+  </div>
+  <div class="plots">
+    <div><canvas id="pfPhase" tabindex="0" aria-label="Фазов портрет. Стрелки наляво и надясно местят началното условие x0."></canvas><p class="cap">Фазов портрет ẋ = f(x). Кликни или ползвай стрелките, за да избереш x₀.</p></div>
+    <div><canvas id="pfTime" aria-label="Решения x от t"></canvas><p class="cap">x(t) от няколко начални точки; дебелата линия тръгва от твоето x₀.</p></div>
+    <div><canvas id="pfBif" tabindex="0" aria-label="Бифуркационна диаграма. Клик или стрелки нагоре и надолу сменят параметъра."></canvas><p class="cap">Бифуркационна диаграма x* спрямо параметъра; вертикалната линия е текущата стойност. Кликни, за да я смениш.</p></div>
+    <div><canvas id="pfPot" aria-label="Потенциал V от x"></canvas><p class="cap">Потенциал V(x), f = −dV/dx. Топчето е в x₀.</p></div>
+  </div>
+  <ul class="info" id="pfInfo" aria-live="polite"></ul>
+  <div class="try" id="pfTry"></div>
+</div>
+
+<h3>Интерактивно: хистерезис при ẋ = rx + x³ − x⁵</h3>
+<div class="widget" id="hyW">
+  <p style="margin:0 0 4px">Тук системата „помни“ къде е била. Местиш r бавно с плъзгача (или пускаш автоматичния цикъл), а точката показва реалното състояние, което се изчислява чрез интегриране с малък случаен шум, без да се „скача“ ръчно.</p>
+  <div class="ctl">
+    <label>r <input type="range" id="hyR" min="-0.5" max="0.5" step="0.01" value="-0.4"><output id="hyRv"></output></label>
+    <button class="btn primary" type="button" id="hyPlay">Пусни цикъл</button>
+    <button class="btn" type="button" id="hyReset">Изчисти следата</button>
+  </div>
+  <canvas id="hyC" style="height:300px" aria-label="Бифуркационна диаграма с пътя на състоянието"></canvas>
+  <p class="cap">Сивата линия е изминатият път. Скокът нагоре е при r ≈ 0 (с малко закъснение, защото тласъкът е слаб), скокът надолу е при r<sub>s</sub> = −0,25 (в модела се вижда около −0,27…−0,30, защото близо до седлово-възловата точка движението е много бавно, а r продължава да намалява).</p>
+  <ul class="info" id="hyInfo" aria-live="polite"></ul>
+</div>
+
+<h3>Провери се</h3>
+<div class="quiz">
+  <p><b>1.</b> Защо при ẋ = rx − x³ и r &gt; 0 новите точки ±√r са устойчиви, а при ẋ = rx + x³ точките ±√(−r) са неустойчиви?</p>
+  <button class="btn" type="button" data-ans="q1">Покажи отговора</button>
+  <div class="ans" id="q1" hidden><p>Пресмятаме f′ в тях. За f = rx − x³: f′(±√r) = r − 3r = −2r &lt; 0 при r &gt; 0, следователно устойчиви. За f = rx + x³: f′(±√(−r)) = r + 3(−r) = −2r &gt; 0 при r &lt; 0, следователно неустойчиви. Интуитивно: −x³ връща към нулата, +x³ изтласква навън.</p></div>
+</div>
+<div class="quiz">
+  <p><b>2.</b> Системата ẋ = rx + x³ − x⁵ е при r = −0,1 и в състояние x = 0. Устойчива ли е нулата? Какво става, ако я ударим силно до x = 0,5?</p>
+  <button class="btn" type="button" data-ans="q2">Покажи отговора</button>
+  <div class="ans" id="q2" hidden><p>Нулата е устойчива, защото f′(0) = r = −0,1 &lt; 0. Но −0,25 &lt; r &lt; 0 е бистабилната зона: неустойчивият праг е при x² = (1 − √0,6)/2 ≈ 0,113, т.е. |x| ≈ 0,34, а големият устойчив клон е при x² = (1 + √0,6)/2 ≈ 0,887, т.е. |x| ≈ 0,94. Тласък до 0,5 прескача прага, така че системата отива към x ≈ 0,94 и не се връща в нулата. Нулата е само локално устойчива. (Можеш да го провериш в модела „субкритична с x⁵“.)</p></div>
+</div>
+</section>
+
+<!-- ============================ 2 ============================ -->
+<section id="imperfect" aria-labelledby="h-imp">
+<h2 id="h-imp">2. Неперфектни бифуркации и катастрофи</h2>
+
+<h3>Интуиция</h3>
+<p>Pitchfork изисква идеална симетрия. В истинския свят линийката е леко крива, масата е малко наклонена, гредата е натоварена мъничко встрани. Тогава едната посока е предпочетена: вилата „се скъсва“ и вместо рязка смяна системата плавно се плъзга към предпочетената страна.</p>
+<p>Аналогия: топче в двойна яма (като потенциала при r &gt; 0), но цялата яма е леко наклонена. Едната яма е по-дълбока, другата по-плитка. Ако наклоняваме още, плитката яма изтънява и накрая изчезва: топчето, което е седяло в нея, изведнъж се търкулва в другата. Малка промяна на параметъра води до голям, внезапен скок. Това е <b>катастрофа</b>. И за да върнеш топчето, не стига да върнеш наклона до нула: трябва да наклониш на другата страна, докато изчезне и другата яма.</p>
+
+<h3>Строги формулировки</h3>
+<div class="box def">
+<span class="lab">Модел с несъвършенство</span>
+<p class="eq">ẋ = h + rx − x³ <span class="n">(1)</span></p>
+<p>При h = 0 това е нормалната форма на суперкритичната pitchfork и има симетрия x ↔ −x. При h ≠ 0 симетрията е нарушена; h се нарича <b>параметър на несъвършенството</b>. Сега има <i>два</i> независими параметъра (r, h).</p>
+<p><b>Неподвижни точки</b> (графично): f = 0 означава rx − x³ = −h, т.е. пресечни точки на кубичната крива y = rx − x³ с хоризонталната права y = −h.</p>
+<ul>
+<li><b>r ≤ 0:</b> кубичната крива е монотонно намаляваща, затова пресечната точка е точно една, за всяко h. Тя е устойчива.</li>
+<li><b>r &gt; 0:</b> кривата има локален минимум и максимум, така че пресечните точки са 1, 2 или 3 в зависимост от h.</li>
+</ul>
+<p><b>Критичният случай</b> е допирането на правата до локалния екстремум: това е седлово-възлова бифуркация. От d/dx (rx − x³) = r − 3x² = 0 следва</p>
+<p class="eq">x<sub>max</sub> = √(r/3), &nbsp;&nbsp; r·x<sub>max</sub> − x<sub>max</sub>³ = (2r/3)·√(r/3)</p>
+<p>Стойността в минимума е със същата големина и обратен знак. Затова седлово-възловите бифуркации са при h = ±h<sub>c</sub>(r), където</p>
+<p class="eq">h<sub>c</sub>(r) = (2r/3)·√(r/3)</p>
+<p>При |h| &lt; h<sub>c</sub>(r) има 3 неподвижни точки (външните устойчиви, средната неустойчива), при |h| &gt; h<sub>c</sub>(r) има 1 (устойчива).</p>
+</div>
+<div class="box note">
+<span class="lab">Бележка за формулата</span>
+<p style="margin:.2em 0">В отпечатания откъс знаменателят на h<sub>c</sub>(r) изглежда като 2. Това противоречи на реда точно над формулата, където стойността в максимума е (2r/3)√(r/3); правилно е 3, както е записано тук. Проверка: при r = 3 имаме x³ − 3x − 2 = (x − 2)(x + 1)², двоен корен при h = 2 = (2·3/3)·√1. Същото личи и от диаграмата на устойчивост в книгата: при r = 2 кривата h<sub>c</sub> е около 1,1 ≈ (4/3)·√(2/3), а не 1,63, колкото би дал знаменател 2.</p>
+</div>
+
+<div class="box def">
+<span class="lab">Диаграма на устойчивост, cusp, коразмерност</span>
+<ul>
+<li><b>Бифуркационни криви</b>: h = ±h<sub>c</sub>(r) в равнината (r, h). Картината, която показва какво поведение има във всяка област на <b>пространството на параметрите</b>, се нарича <b>диаграма на устойчивост</b>.</li>
+<li>Двете криви се срещат допирателно в (r, h) = (0, 0). Тази точка се нарича <b>cusp</b> (връх, „шип“).</li>
+<li>По цялата граница на областите има седлово-възлови бифуркации, освен в cusp точката. Там бифуркацията е с <b>коразмерност 2</b>: за да я получиш, трябва да настроиш <i>два</i> параметъра (r и h). Всички бифуркации досега (седлово-възлова, транскритична, pitchfork) се получават с един параметър: коразмерност 1.</li>
+</ul>
+</div>
+
+<div class="box def">
+<span class="lab">Три начина да се видят резултатите</span>
+<ul>
+<li><b>x* спрямо r при фиксирано h:</b> при h = 0 е обикновената вила. При h ≠ 0 вилата се разпада на две несвързани парчета. Горното е изцяло устойчиво; долното има устойчив и неустойчив клон, които се срещат в седлово-възлова точка. Ако увеличаваме r от отрицателни стойности, вече няма рязък преход при r = 0: точката просто се плъзга плавно по горния клон. Долният устойчив клон е достъпен само при доста голямо смущение.</li>
+<li><b>x* спрямо h при фиксирано r:</b> при r ≤ 0 има една устойчива точка за всяко h. При r &gt; 0 кривата е S-образна: при |h| &lt; h<sub>c</sub>(r) има три стойности, средната неустойчива, горната и долната устойчиви. Тази графика е кубичната крива, завъртяна на 90°.</li>
+<li><b>Повърхнина на cusp катастрофата:</b> x* над равнината (r, h). Повърхнината се прегъва върху себе си. Проекцията на гънките върху (r, h) дава бифуркационните криви; сечение при фиксирано h дава първата картина, при фиксирано r втората.</li>
+</ul>
+<p><b>Катастрофа</b>: при промяна на параметрите състоянието може да бъде изнесено до ръба на горния лист на повърхнината и оттам да падне прекъснато на долния. За мост или сграда такъв скок наистина би бил катастрофален.</p>
+</div>
+
+<h3>Примерите от учебника</h3>
+<h4>Графичният метод за ẋ = h + rx − x³</h4>
+<p>Вместо да решаваме кубичното уравнение с формулите на Кардано, чертаем y = rx − x³ и местим хоризонтална линия y = −h нагоре-надолу. Броят пресичания е броят неподвижни точки, а моментите на допиране са бифуркациите. Това е основата на всички картини по-горе и на модела по-долу.</p>
+
+<h4>Топче на наклонена жица</h4>
+<p>Топче с маса m се плъзга по права жица, наклонена под ъгъл θ спрямо хоризонталата. Към него е закачена пружина с коравина k и естествена дължина L₀, чиято опорна точка е на разстояние a от жицата; действа и гравитацията. Координатата x се мери по жицата, с x = 0 в точката, най-близка до опората. Учебникът дава само качествената картина (детайлите са в упражнения):</p>
+<ul>
+<li><b>θ = 0 (жицата е хоризонтална):</b> пълна симетрия ляво-дясно, x = 0 винаги е равновесие. Ако L₀ &lt; a, пружината е опъната и x = 0 се очаква устойчиво. Ако L₀ &gt; a, пружината е свита: x = 0 се очаква неустойчиво, а от двете страни има две устойчиви равновесия. Това е pitchfork в механиката.</li>
+<li><b>θ ≠ 0 (наклон = несъвършенство):</b> при малък наклон и L₀ &gt; a все още има три равновесия. Ако обаче наклонът стане прекалено стръмен, равновесието „нагоре по жицата“ може внезапно да изчезне и топчето да скочи катастрофално към равновесието надолу.</li>
+</ul>
+<p>Връзка с модела (само качествено): хоризонталната жица е симетричният случай h = 0, свитата пружина (L₀ &gt; a) съответства на зоната с три равновесия, а наклонът θ нарушава симетрията, както h. Точното уравнение не е изведено в откъса, затова не твърдим точна формула за съответствието.</p>
+
+<h3>Интерактивно: равнината (r, h) и катастрофата</h3>
+<div class="widget" id="imW">
+  <div class="ctl">
+    <label>r <input type="range" id="imR" min="-1" max="3" step="0.05" value="1.5"><output id="imRv"></output></label>
+    <label>h <input type="range" id="imH" min="-2" max="2" step="0.02" value="0.6"><output id="imHv"></output></label>
+  </div>
+  <div class="row">
+    <span style="font-family:system-ui,sans-serif;font-size:.88rem">Третата графика:</span>
+    <button class="btn" type="button" id="imModeH" aria-pressed="true">x* спрямо h</button>
+    <button class="btn" type="button" id="imModeR" aria-pressed="false">x* спрямо r</button>
+    <button class="btn primary" type="button" id="imPlay">Бавно мести h</button>
+    <button class="btn" type="button" id="imKick">Силен тласък</button>
+    <button class="btn" type="button" id="imClear">Изчисти следата</button>
+  </div>
+  <div class="plots">
+    <div><canvas id="imSt" tabindex="0" aria-label="Диаграма на устойчивост в равнината r h. Кликни или ползвай стрелките."></canvas><p class="cap">Диаграма на устойчивост. Оцветената „човка“ е областта с 3 неподвижни точки. Влачи точката или ползвай стрелките.</p></div>
+    <div><canvas id="imGr" aria-label="Графичен метод"></canvas><p class="cap">Графичният метод: кубичната y = rx − x³ и правата y = −h. Пресечните точки са неподвижните точки.</p></div>
+    <div><canvas id="imBd" aria-label="Бифуркационна диаграма"></canvas><p class="cap" id="imBdCap"></p></div>
+    <div><canvas id="imPot" aria-label="Потенциал"></canvas><p class="cap">Потенциал V(x) = −hx − ½rx² + ¼x⁴. Лилавото топче е състоянието на системата.</p></div>
+  </div>
+  <ul class="info" id="imInfo" aria-live="polite"></ul>
+  <div class="try">Пробвай: сложи r = 1,5 и h = 0,6 (горе). Натисни „Силен тласък“, за да вкараш топчето в плитката (долната) яма, после „Бавно мести h“. Когато h мине над h<sub>c</sub>(1,5) ≈ 0,71, плитката яма изчезва и топчето пада в другата: на третата графика се вижда вертикален скок. После h се връща, но топчето не се връща, докато h не стигне −h<sub>c</sub>. Сложи r ≤ 0 и повтори: скокове няма. Превключи на „x* спрямо r“ при h ≠ 0 и плъзгай r: вилата е скъсана и преходът при r = 0 е плавен.</div>
+</div>
+
+<h3>Провери се</h3>
+<div class="quiz">
+  <p><b>1.</b> При r = 3 за кои h уравнението ẋ = h + rx − x³ има три неподвижни точки? Колко са точно при h = 2?</p>
+  <button class="btn" type="button" data-ans="q3">Покажи отговора</button>
+  <div class="ans" id="q3" hidden><p>h<sub>c</sub>(3) = (2·3/3)·√(3/3) = 2. Три точки има при |h| &lt; 2. При h = 2 правата се допира до екстремум: x³ − 3x − 2 = (x − 2)(x + 1)², така че точките са две: x = 2 (устойчива) и двойната x = −1 (полуустойчива, точно в момента на седлово-възловата бифуркация). При |h| &gt; 2 остава една.</p></div>
+</div>
+<div class="quiz">
+  <p><b>2.</b> Защо cusp точката (0, 0) е бифуркация с коразмерност 2, а точките по кривите h = ±h<sub>c</sub>(r) с коразмерност 1?</p>
+  <button class="btn" type="button" data-ans="q4">Покажи отговора</button>
+  <div class="ans" id="q4" hidden><p>Бифуркационните криви са линии в равнината (r, h): за да стигнеш до тях, стига да настроиш един параметър (например фиксираш r и менеш само h, докато |h| = h<sub>c</sub>(r)). Затова седлово-възловите бифуркации по тях са с коразмерност 1. Cusp точката е една-единствена точка: за да попаднеш в нея, трябва да настроиш едновременно и r = 0, и h = 0. Затова е с коразмерност 2. Там двете криви се срещат допирателно, а трите неподвижни точки се сливат в една (ẋ = −x³ има троен корен в 0).</p></div>
+</div>
+</section>
+
+<footer>Кръгчета на графиките: запълнено = устойчива неподвижна точка, празно = неустойчива, наполовина = полуустойчива (в момента на бифуркация). Всички диаграми са пресметнати числено в браузъра.</footer>
+</main>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const root=document.documentElement;
+const css=n=>getComputedStyle(root).getPropertyValue(n).trim();
+const fmt=(v,d)=>{d=d===undefined?2:d;if(Math.abs(v)<5*Math.pow(10,-d-1))v=0;return v.toFixed(d).replace('.',',').replace('-','−')};
+
+/* ---------- тема ---------- */
+const themes=['auto','light','dark'],tnames={auto:'авто',light:'светла',dark:'тъмна'};
+let ti=0;
+$('themeBtn').addEventListener('click',()=>{ti=(ti+1)%3;const t=themes[ti];
+  if(t==='auto')root.removeAttribute('data-theme');else root.setAttribute('data-theme',t);
+  $('themeBtn').textContent='Тема: '+tnames[t];redrawAll()});
+if(window.matchMedia){const mq=window.matchMedia('(prefers-color-scheme: dark)');
+  if(mq.addEventListener)mq.addEventListener('change',()=>redrawAll());}
+
+/* ---------- отговори ---------- */
+document.querySelectorAll('[data-ans]').forEach(b=>{
+  const a=$(b.dataset.ans);b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls',a.id);
+  b.addEventListener('click',()=>{const open=a.hidden;a.hidden=!open;b.setAttribute('aria-expanded',String(open));
+    b.textContent=open?'Скрий отговора':'Покажи отговора'})});
+
+/* ---------- рисуване ---------- */
+function setup(c){const dpr=window.devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;
+  if(c.width!==Math.round(w*dpr)||c.height!==Math.round(h*dpr)){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr)}
+  const g=c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);return[g,w,h]}
+function view(c,xa,xb,ya,yb){const[g,w,h]=setup(c),m={l:40,r:12,t:12,b:24};
+  const v={g,w,h,m,xa,xb,ya,yb,
+    X:x=>m.l+(x-xa)/(xb-xa)*(w-m.l-m.r),Y:y=>h-m.b-(y-ya)/(yb-ya)*(h-m.t-m.b),
+    ix:px=>xa+(px-m.l)/(w-m.l-m.r)*(xb-xa),iy:py=>ya+(h-m.b-py)/(h-m.t-m.b)*(yb-ya)};
+  return v}
+function axes(v,xl,yl){const g=v.g,gr=css('--grid'),mu=css('--mute');
+  g.lineWidth=1;g.strokeStyle=gr;g.strokeRect(v.m.l,v.m.t,v.w-v.m.l-v.m.r,v.h-v.m.t-v.m.b);
+  g.strokeStyle=css('--line');g.beginPath();
+  const y0=(v.ya<=0&&v.yb>=0)?v.Y(0):v.h-v.m.b,x0=(v.xa<=0&&v.xb>=0)?v.X(0):v.m.l;
+  g.moveTo(v.m.l,y0);g.lineTo(v.w-v.m.r,y0);g.moveTo(x0,v.m.t);g.lineTo(x0,v.h-v.m.b);g.stroke();
+  g.fillStyle=mu;g.font='11px system-ui,sans-serif';g.textBaseline='alphabetic';
+  g.textAlign='left';g.fillText(fmt(v.xa,1),v.m.l,v.h-8);g.textAlign='right';g.fillText(fmt(v.xb,1),v.w-v.m.r,v.h-8);
+  g.fillText(fmt(v.yb,1),v.m.l-4,v.m.t+9);g.fillText(fmt(v.ya,1),v.m.l-4,v.h-v.m.b);
+  g.font='italic 13px Georgia,serif';g.textAlign='right';g.fillText(xl,v.w-v.m.r-4,y0-6);
+  g.textAlign='left';g.fillText(yl,x0+5,v.m.t+13);g.textAlign='left'}
+function inView(v,x,y){const sx=(v.xb-v.xa)*.02,sy=(v.yb-v.ya)*.05;return x>=v.xa-sx&&x<=v.xb+sx&&y>=v.ya-sy&&y<=v.yb+sy}
+function poly(v,pts,col,lw,dash){const g=v.g;g.save();g.beginPath();g.rect(v.m.l,v.m.t,v.w-v.m.l-v.m.r,v.h-v.m.t-v.m.b);g.clip();
+  g.strokeStyle=col;g.lineWidth=lw;g.setLineDash(dash||[]);g.lineJoin='round';g.beginPath();let on=false;
+  for(const p of pts){if(!p||!isFinite(p[0])||!isFinite(p[1])||!inView(v,p[0],p[1])){on=false;continue}
+    const px=v.X(p[0]),py=v.Y(p[1]);if(on)g.lineTo(px,py);else g.moveTo(px,py);on=true}
+  g.stroke();g.restore()}
+/* клонове: масив от [p,x,stable]; рисува устойчивите плътно, неустойчивите на пунктир */
+function branches(v,pts){if(!pts.length)return;let seg=[pts[0]],s=pts[0][2];
+  const flush=()=>{if(seg.length>1)poly(v,seg.map(q=>[q[0],q[1]]),s?css('--stab'):css('--unst'),s?2.6:2,s?[]:[6,5])};
+  for(let i=1;i<pts.length;i++){const q=pts[i];if(q===null){flush();seg=[];continue}
+    if(!seg.length){seg=[q];s=q[2];continue}
+    if(q[2]!==s){seg.push(q);flush();seg=[q];s=q[2]}else seg.push(q)}
+  flush()}
+function dot(v,x,y,kind,r){r=r||6;if(!inView(v,x,y))return;const g=v.g,px=v.X(x),py=v.Y(y);
+  if(kind==='state'){g.fillStyle=css('--state');g.beginPath();g.arc(px,py,r+1,0,7);g.fill();g.strokeStyle=css('--panel');g.lineWidth=2;g.stroke();return}
+  const col=kind==='s'?css('--stab'):kind==='u'?css('--unst'):css('--half');
+  g.lineWidth=2;g.strokeStyle=col;g.fillStyle=kind==='s'?col:css('--panel');g.beginPath();g.arc(px,py,r,0,7);g.fill();g.stroke();
+  if(kind==='h'){g.fillStyle=col;g.beginPath();g.arc(px,py,r,-Math.PI/2,Math.PI/2);g.fill()}}
+function vline(v,x,col,dash){poly(v,[[x,v.ya],[x,v.yb]],col,1.5,dash||[4,4])}
+
+/* ---------- числени помощници ---------- */
+function roots(f,a,b,n){n=n||1200;const xs=[],fs=[],out=[];
+  for(let i=0;i<=n;i++){const x=a+(b-a)*i/n;xs.push(x);fs.push(f(x))}
+  const add=x=>{if(!out.some(y=>Math.abs(y-x)<1e-4))out.push(x)};
+  for(let i=0;i<=n;i++){
+    if(fs[i]===0)add(xs[i]);
+    if(i<n&&fs[i]*fs[i+1]<0){let lo=xs[i],hi=xs[i+1],flo=fs[i];
+      for(let k=0;k<60;k++){const mid=(lo+hi)/2,fm=f(mid);if(flo*fm<=0)hi=mid;else{lo=mid;flo=fm}}add((lo+hi)/2)}
+    if(i>0&&i<n&&Math.abs(fs[i])<Math.abs(fs[i-1])&&Math.abs(fs[i])<=Math.abs(fs[i+1])&&Math.abs(fs[i])<2e-3&&fs[i-1]*fs[i+1]>0&&fs[i-1]*fs[i]>0){
+      let lo=xs[i-1],hi=xs[i+1];const gr=(Math.sqrt(5)-1)/2;
+      for(let k=0;k<80;k++){const c1=hi-gr*(hi-lo),c2=lo+gr*(hi-lo);if(Math.abs(f(c1))<Math.abs(f(c2)))hi=c2;else lo=c1}
+      const xm=(lo+hi)/2;if(Math.abs(f(xm))<1e-6)add(xm)}}
+  return out.sort((p,q)=>p-q)}
+function classify(f,x){const e=1e-4*Math.max(1,Math.abs(x)),l=f(x-e),r=f(x+e);
+  const sl=Math.abs(l)<1e-13?0:Math.sign(l),sr=Math.abs(r)<1e-13?0:Math.sign(r);
+  if(sl>0&&sr<0)return's';if(sl<0&&sr>0)return'u';return'h'}
+const kname={s:'устойчива',u:'неустойчива',h:'полуустойчива'};
+function rk4(f,x,dt){const k1=f(x),k2=f(x+dt*k1/2),k3=f(x+dt*k2/2),k4=f(x+dt*k3);return x+dt*(k1+2*k2+2*k3+k4)/6}
+function randn(){let u=0,w=0;while(u===0)u=Math.random();while(w===0)w=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*w)}
+function relax(f,x,T,sigma){const dt=0.02,n=Math.ceil(T/dt);
+  for(let i=0;i<n;i++){x=rk4(f,x,dt)+(sigma?sigma*Math.sqrt(dt)*randn():0);if(!isFinite(x)||Math.abs(x)>50)return x}return x}
+function lncosh(x){const a=Math.abs(x);return a+Math.log1p(Math.exp(-2*a))-Math.LN2}
+
+/* =====================================================================
+   1. Четири модела на pitchfork
+   ===================================================================== */
+const PF={
+ sup:{btn:'Суперкритична: ẋ = rx − x³',pn:'r',min:-1,max:1,step:.02,v:.5,xr:[-1.6,1.6],T:12,
+   f:(x,p)=>p*x-x*x*x,V:(x,p)=>-p*x*x/2+x*x*x*x/4,pOfX:x=>x*x,d0:p=>p,
+   tr:'Пробвай: плъзни r от −1 към 1. При r = 0 погледни x(t): кривите затихват видимо по-бавно (критично забавяне). При r &gt; 0 нулата става празно кръгче, а ±√r поемат потока. Потенциалът показва как ямата се превръща в хълм между две ями.'},
+ sub:{btn:'Субкритична: ẋ = rx + x³',pn:'r',min:-1,max:1,step:.02,v:-.5,xr:[-1.6,1.6],T:6,
+   f:(x,p)=>p*x+x*x*x,V:(x,p)=>-p*x*x/2-x*x*x*x/4,pOfX:x=>-x*x,d0:p=>p,
+   tr:'Пробвай: при r &lt; 0 избери x₀ малко над √(−r): решението бяга нагоре и излиза от графиката за крайно време (взрив). При r &gt; 0 всяко x₀ ≠ 0 взривява. Вилата сочи наляво и е от неустойчиви точки.'},
+ sub5:{btn:'Субкритична с x⁵: ẋ = rx + x³ − x⁵',pn:'r',min:-.5,max:.5,step:.01,v:-.15,xr:[-1.5,1.5],T:30,
+   f:(x,p)=>p*x+x*x*x-Math.pow(x,5),V:(x,p)=>-p*x*x/2-Math.pow(x,4)/4+Math.pow(x,6)/6,pOfX:x=>Math.pow(x,4)-x*x,d0:p=>p,
+   tr:'Пробвай: при r = −0,15 има три устойчиви точки (бистабилност). Мести x₀ около ±0,4: от едната страна на неустойчивия праг отиваш към нулата, от другата към големия клон. Потенциалът има три ями. Сложи r под −0,25: големите ями изчезват.'},
+ tanh:{btn:'Пример 3.4.1: ẋ = −x + β tanh x',pn:'β',min:0,max:4,step:.05,v:2,xr:[-5,5],T:12,
+   f:(x,p)=>-x+p*Math.tanh(x),V:(x,p)=>x*x/2-p*lncosh(x),pOfX:x=>x/Math.tanh(x),d0:p=>p-1,
+   tr:'Пробвай: мести β около 1. Диаграмата е начертана с номера от учебника: за всяко x* пресмятаме β = x*/tanh x*. При β &gt; 1 нулата е неустойчива, а ненулевите точки растат почти линейно с β (защото tanh x* → 1 и x* ≈ β).'}
+};
+const pf={key:'sup',p:.5,x0:.08,anim:null,t0:0};
+const pfKeys=Object.keys(PF);
+pfKeys.forEach(k=>{const b=document.createElement('button');b.type='button';b.className='btn';b.textContent=PF[k].btn;b.dataset.k=k;
+  b.addEventListener('click',()=>pfSelect(k));$('pfModels').appendChild(b)});
+function pfSelect(k){pf.key=k;const M=PF[k];pf.p=M.v;pf.anim=null;
+  pf.x0=k==='tanh'?0.4:(k==='sub'?0.3:0.08);
+  document.querySelectorAll('#pfModels button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.k===k)));
+  const s=$('pfP');s.min=M.min;s.max=M.max;s.step=M.step;s.value=M.v;$('pfPname').textContent=M.pn;
+  $('pfTry').innerHTML=M.tr;pfDraw()}
+$('pfP').addEventListener('input',e=>{pf.p=+e.target.value;pfDraw()});
+function pfTraj(f,x0,T,N){const dt=T/N,out=[x0];let x=x0;
+  for(let i=0;i<N;i++){if(!isFinite(x)||Math.abs(x)>40){out.push(NaN);x=NaN;continue}x=rk4(f,x,dt);out.push(x)}return out}
+function pfDraw(){
+  const M=PF[pf.key],p=pf.p,f=x=>M.f(x,p),[xa,xb]=M.xr;$('pfPv').textContent=fmt(p);
+  const fps=roots(f,xa-.01,xb+.01).filter(x=>x>=xa&&x<=xb),kinds=fps.map(x=>classify(f,x));
+  /* фазов портрет */
+  const ab=[];for(let i=0;i<=200;i++){const y=f(xa+(xb-xa)*i/200);if(isFinite(y))ab.push(Math.abs(y))}ab.sort((a,b)=>a-b);
+  const A=Math.max(ab[Math.floor(ab.length*.7)]*1.3,.15);
+  let v=view($('pfPhase'),xa,xb,-A,A);axes(v,'x','ẋ');
+  const cur=[];for(let i=0;i<=400;i++){const x=xa+(xb-xa)*i/400;cur.push([x,f(x)])}poly(v,cur,css('--curve'),2);
+  const g=v.g;for(let i=0;i<16;i++){const x=xa+(xb-xa)*(i+.5)/16,y=f(x);
+    if(Math.abs(y)<A*.02||fps.some(q=>Math.abs(q-x)<(xb-xa)/30))continue;
+    const d=Math.sign(y),px=v.X(x),py=v.Y(0);g.fillStyle=css('--acc');g.beginPath();g.moveTo(px+d*7,py);g.lineTo(px-d*4,py-5);g.lineTo(px-d*4,py+5);g.fill()}
+  fps.forEach((x,i)=>dot(v,x,0,kinds[i]));
+  /* траектории */
+  const N=500,T=M.T,main=pfTraj(f,pf.x0,T,N);
+  let k=null;if(pf.anim!==null)k=Math.min(N,Math.floor(pf.anim/T*N));
+  const xs=k===null?pf.x0:main[k];if(isFinite(xs))dot(v,xs,0,'state',5);
+  v=view($('pfTime'),0,T,xa,xb);axes(v,'t','x');
+  fps.forEach(x=>poly(v,[[0,x],[T,x]],css('--grid'),1,[4,4]));
+  for(let i=0;i<10;i++){const x0=xa+(xb-xa)*(i+.5)/10,tr=pfTraj(f,x0,T,N);poly(v,tr.map((x,j)=>[j/N*T,x]),css('--line'),1.3)}
+  poly(v,main.map((x,j)=>[j/N*T,x]),css('--ink'),2.6);
+  if(k!==null&&isFinite(main[k]))dot(v,k/N*T,main[k],'state',4);
+  /* бифуркационна диаграма */
+  v=view($('pfBif'),M.min,M.max,xa,xb);axes(v,M.pn,'x*');
+  const o=[];for(let i=0;i<=300;i++){const q=M.min+(M.max-M.min)*i/300;o.push([q,0,M.d0(q)<0])}branches(v,o);
+  [[1e-3,xb],[-1e-3,xa]].forEach(([s,e])=>{const pts=[];for(let i=0;i<=500;i++){const x=s+(e-s)*i/500,q=M.pOfX(x),ee=1e-5;
+    const d=(M.f(x+ee,q)-M.f(x-ee,q))/(2*ee);pts.push([q,x,d<0])}branches(v,pts)});
+  vline(v,p,css('--acc'));fps.forEach((x,i)=>dot(v,p,x,kinds[i],5));
+  /* потенциал */
+  const Vs=[];let vmin=Infinity,vmax=-Infinity;for(let i=0;i<=300;i++){const x=xa+(xb-xa)*i/300,y=M.V(x,p);Vs.push([x,y]);vmin=Math.min(vmin,y);vmax=Math.max(vmax,y)}
+  const span=Math.max(vmax-vmin,.05);v=view($('pfPot'),xa,xb,vmin-span*.08,vmin+span*1.05);axes(v,'x','V');
+  poly(v,Vs,css('--curve'),2);if(isFinite(xs))dot(v,xs,M.V(xs,p),'state',6);
+  /* текст */
+  $('pfInfo').innerHTML='<li>'+M.pn+' = '+fmt(p)+'; неподвижни точки: '+fps.length+'</li>'+
+    fps.map((x,i)=>{const e=1e-5,d=(f(x+e)-f(x-e))/(2*e);return '<li>x* = '+fmt(x,3)+': f′(x*) = '+fmt(d,3)+', <span class="'+kinds[i]+'">'+kname[kinds[i]]+'</span>'+(Math.abs(d)<1e-3?' (f′ = 0, линеаризацията не решава; устойчивостта е от знака на f наоколо)':'')+'</li>'}).join('')+
+    '<li>x₀ = '+fmt(pf.x0,2)+'</li>';
+}
+function pfFrame(ts){if(pf.anim===null)return;if(!pf.t0)pf.t0=ts;const M=PF[pf.key];pf.anim=(ts-pf.t0)/1000*M.T/5;
+  if(pf.anim>=M.T){pf.anim=null;pf.t0=0;pfDraw();return}pfDraw();requestAnimationFrame(pfFrame)}
+$('pfPlay').addEventListener('click',()=>{pf.t0=0;pf.anim=0;requestAnimationFrame(pfFrame)});
+(function(){const c=$('pfPhase');let drag=false;
+  const pick=ev=>{const r=c.getBoundingClientRect(),M=PF[pf.key],[a,b]=M.xr,u=(ev.clientX-r.left-40)/(r.width-52);
+    pf.x0=Math.min(b,Math.max(a,a+u*(b-a)));pf.anim=null;pfDraw()};
+  c.addEventListener('pointerdown',ev=>{drag=true;c.setPointerCapture(ev.pointerId);pick(ev)});
+  c.addEventListener('pointermove',ev=>{if(drag)pick(ev)});
+  c.addEventListener('pointerup',()=>{drag=false});c.addEventListener('pointercancel',()=>{drag=false});
+  c.addEventListener('keydown',ev=>{const[a,b]=PF[pf.key].xr,s=(b-a)/100;
+    if(ev.key==='ArrowRight'||ev.key==='ArrowLeft'){ev.preventDefault();pf.x0=Math.min(b,Math.max(a,pf.x0+(ev.key==='ArrowRight'?s:-s)));pf.anim=null;pfDraw()}});
+  const cb=$('pfBif');const setP=q=>{const M=PF[pf.key];q=Math.round(q/M.step)*M.step;pf.p=Math.min(M.max,Math.max(M.min,q));$('pfP').value=pf.p;pfDraw()};
+  let dragB=false;const pickB=ev=>{const r=cb.getBoundingClientRect(),M=PF[pf.key],u=(ev.clientX-r.left-40)/(r.width-52);setP(M.min+u*(M.max-M.min))};
+  cb.addEventListener('pointerdown',ev=>{dragB=true;cb.setPointerCapture(ev.pointerId);pickB(ev)});
+  cb.addEventListener('pointermove',ev=>{if(dragB)pickB(ev)});
+  cb.addEventListener('pointerup',()=>{dragB=false});cb.addEventListener('pointercancel',()=>{dragB=false});
+  cb.addEventListener('keydown',ev=>{const M=PF[pf.key];
+    if(['ArrowRight','ArrowUp'].includes(ev.key)){ev.preventDefault();setP(pf.p+M.step)}
+    if(['ArrowLeft','ArrowDown'].includes(ev.key)){ev.preventDefault();setP(pf.p-M.step)}});
+})();
+
+/* =====================================================================
+   1б. Хистерезис при rx + x^3 - x^5
+   ===================================================================== */
+const hy={r:-.4,x:0,trail:[],play:false,dir:1};
+const hyF=r=>x=>r*x+x*x*x-Math.pow(x,5);
+function hyStep(newR,T){const r0=hy.r;hy.r=newR;
+  hy.x=relax(hyF(hy.r),hy.x,T,0.004);
+  if(!isFinite(hy.x))hy.x=0;hy.trail.push([r0,hy.x],[hy.r,hy.x]);if(hy.trail.length>6000)hy.trail.splice(0,2000)}
+$('hyR').addEventListener('input',e=>{hyStep(+e.target.value,40);hyDraw()});
+$('hyReset').addEventListener('click',()=>{hy.trail=[];hyDraw()});
+$('hyPlay').addEventListener('click',()=>{hy.play=!hy.play;$('hyPlay').textContent=hy.play?'Спри':'Пусни цикъл';if(hy.play)requestAnimationFrame(hyFrame)});
+function hyFrame(){if(!hy.play)return;let r=hy.r+hy.dir*0.0025;
+  if(r>=.45){r=.45;hy.dir=-1}if(r<=-.45){r=-.45;hy.dir=1}
+  hyStep(r,1.2);$('hyR').value=hy.r;hyDraw();requestAnimationFrame(hyFrame)}
+function hyDraw(){$('hyRv').textContent=fmt(hy.r);
+  const v=view($('hyC'),-.5,.5,-1.25,1.25);axes(v,'r','x');
+  poly(v,[[-.25,v.ya],[-.25,v.yb]],css('--grid'),1,[2,4]);
+  v.g.fillStyle=css('--mute');v.g.font='11px system-ui,sans-serif';v.g.fillText('r_s = −0,25',v.X(-.25)+4,v.m.t+12);
+  const o=[];for(let i=0;i<=200;i++){const q=-.5+i/200;o.push([q,0,q<0])}branches(v,o);
+  const f5=(x,q)=>q*x+x*x*x-Math.pow(x,5);
+  [[1e-3,1.25],[-1e-3,-1.25]].forEach(([s,e])=>{const pts=[];for(let i=0;i<=400;i++){const x=s+(e-s)*i/400,q=Math.pow(x,4)-x*x,ee=1e-5;
+    pts.push([q,x,(f5(x+ee,q)-f5(x-ee,q))/(2*ee)<0])}branches(v,pts)});
+  poly(v,hy.trail,css('--mute'),1.4);
+  vline(v,hy.r,css('--acc'));dot(v,hy.r,hy.x,'state',6);
+  const where=Math.abs(hy.x)<.15?'близо до нулата':(hy.x>0?'на горния голям клон':'на долния голям клон');
+  $('hyInfo').innerHTML='<li>r = '+fmt(hy.r)+', състояние x = '+fmt(hy.x,3)+' ('+where+')</li><li>'+
+    (hy.r< -.25?'Само нулата е устойчива.':hy.r<0?'Бистабилна зона: и нулата, и големите клонове са устойчиви. Къде си, зависи от историята.':'Нулата е неустойчива; устойчиви са само големите клонове.')+'</li>'}
+
+/* =====================================================================
+   2. Неперфектна бифуркация ẋ = h + r x - x^3
+   ===================================================================== */
+const im={r:1.5,h:.6,x:1.5,mode:'h',trail:[],play:false,dir:1};
+const imF=(r,h)=>x=>h+r*x-x*x*x;
+const hc=r=>r>0?(2*r/3)*Math.sqrt(r/3):0;
+function imSet(r,h,T){const r0=im.r,h0=im.h;im.r=r;im.h=h;im.x=relax(imF(r,h),im.x,T===undefined?40:T,0.002);if(!isFinite(im.x))im.x=0;
+  const pa=im.mode==='h'?h0:r0,pb=im.mode==='h'?h:r;im.trail.push([pa,im.x],[pb,im.x]);if(im.trail.length>6000)im.trail.splice(0,2000)}
+$('imR').addEventListener('input',e=>{imSet(+e.target.value,im.h);imDraw()});
+$('imH').addEventListener('input',e=>{imSet(im.r,+e.target.value);imDraw()});
+function imMode(m){im.mode=m;im.trail=[];$('imModeH').setAttribute('aria-pressed',String(m==='h'));$('imModeR').setAttribute('aria-pressed',String(m==='r'));
+  $('imPlay').textContent=im.play?'Спри':(m==='h'?'Бавно мести h':'Бавно мести r');imDraw()}
+$('imModeH').addEventListener('click',()=>imMode('h'));$('imModeR').addEventListener('click',()=>imMode('r'));
+$('imClear').addEventListener('click',()=>{im.trail=[];imDraw()});
+$('imKick').addEventListener('click',()=>{const f=imF(im.r,im.h),fps=roots(f,-3,3).filter(x=>classify(f,x)==='s');
+  let target=-im.x;if(fps.length>1){const far=fps.reduce((a,b)=>Math.abs(b-im.x)>Math.abs(a-im.x)?b:a);target=far}
+  im.x=target;im.x=relax(f,im.x,40,0.002);imDraw()});
+$('imPlay').addEventListener('click',()=>{im.play=!im.play;$('imPlay').textContent=im.play?'Спри':(im.mode==='h'?'Бавно мести h':'Бавно мести r');if(im.play)requestAnimationFrame(imFrame)});
+function imFrame(){if(!im.play)return;
+  if(im.mode==='h'){let h=im.h+im.dir*0.008;if(h>=2){h=2;im.dir=-1}if(h<=-2){h=-2;im.dir=1}imSet(im.r,h,0.8);$('imH').value=im.h}
+  else{let r=im.r+im.dir*0.012;if(r>=3){r=3;im.dir=-1}if(r<=-1){r=-1;im.dir=1}imSet(r,im.h,0.8);$('imR').value=im.r}
+  imDraw();requestAnimationFrame(imFrame)}
+function imDraw(){
+  const r=im.r,h=im.h,f=imF(r,h);$('imRv').textContent=fmt(r);$('imHv').textContent=fmt(h);
+  const fps=roots(f,-3,3),kinds=fps.map(x=>classify(f,x));
+  /* диаграма на устойчивост */
+  let v=view($('imSt'),-1,3,-2.2,2.2);
+  const g=v.g;g.fillStyle=css('--region');g.beginPath();g.moveTo(v.X(0),v.Y(0));
+  for(let i=0;i<=200;i++){const q=3*i/200;g.lineTo(v.X(q),v.Y(hc(q)))}for(let i=200;i>=0;i--){const q=3*i/200;g.lineTo(v.X(q),v.Y(-hc(q)))}g.closePath();g.fill();
+  axes(v,'r','h');
+  const up=[],dn=[];for(let i=0;i<=200;i++){const q=3*i/200;up.push([q,hc(q)]);dn.push([q,-hc(q)])}
+  poly(v,up,css('--ink'),2);poly(v,dn,css('--ink'),2);
+  g.fillStyle=css('--mute');g.font='12px system-ui,sans-serif';g.fillText('1 неподвижна точка',v.X(-.85),v.Y(1.5));
+  g.fillText('3',v.X(2.3),v.Y(.05));g.fillText('h = h_c(r)',v.X(1.6),v.Y(2.05));g.fillText('h = −h_c(r)',v.X(1.6),v.Y(-1.95));g.fillText('cusp',v.X(.05),v.Y(-.35));
+  dot(v,0,0,'h',3);
+  g.fillStyle=css('--acc');g.beginPath();g.arc(v.X(r),v.Y(h),7,0,7);g.fill();g.strokeStyle=css('--panel');g.lineWidth=2;g.stroke();
+  /* графичен метод */
+  v=view($('imGr'),-2.6,2.6,-3.2,3.2);axes(v,'x','y');
+  const cub=[];for(let i=0;i<=300;i++){const x=-2.6+5.2*i/300;cub.push([x,r*x-x*x*x])}poly(v,cub,css('--curve'),2);
+  poly(v,[[-2.6,-h],[2.6,-h]],css('--acc'),2,[7,5]);
+  v.g.fillStyle=css('--acc');v.g.font='italic 12px Georgia,serif';v.g.fillText('y = −h',v.X(1.5),v.Y(-h)-6);
+  if(r>0){const xm=Math.sqrt(r/3);poly(v,[[-2.6,hc(r)],[2.6,hc(r)]],css('--grid'),1,[2,4]);poly(v,[[-2.6,-hc(r)],[2.6,-hc(r)]],css('--grid'),1,[2,4]);void xm}
+  fps.forEach((x,i)=>dot(v,x,-h,kinds[i]));
+  /* бифуркационна диаграма */
+  if(im.mode==='h'){
+    v=view($('imBd'),-2,2,-2.6,2.6);axes(v,'h','x*');
+    const pts=[];for(let i=0;i<=600;i++){const x=-2.6+5.2*i/600;pts.push([x*x*x-r*x,x,r-3*x*x<0])}branches(v,pts);
+    poly(v,im.trail,css('--mute'),1.4);vline(v,h,css('--acc'));fps.forEach((x,i)=>dot(v,h,x,kinds[i],5));dot(v,h,im.x,'state',5);
+    $('imBdCap').innerHTML='x* спрямо h при r = '+fmt(r)+'. Начертано чрез h = x³ − rx (параметърът като функция на x). Сивата следа е пътят на състоянието.';
+  }else{
+    v=view($('imBd'),-1,3,-2.6,2.6);axes(v,'r','x*');
+    if(Math.abs(h)<1e-9){const o=[];for(let i=0;i<=200;i++){const q=-1+4*i/200;o.push([q,0,q<0])}branches(v,o);
+      const pts=[];for(let i=0;i<=400;i++){const x=-1.75+3.5*i/400;pts.push([x*x,x,x!==0])}branches(v,pts.filter(q=>Math.abs(q[1])>1e-3));}
+    else{[[1e-3,2.6],[-1e-3,-2.6]].forEach(([s,e])=>{const pts=[];for(let i=0;i<=800;i++){const x=s+(e-s)*Math.pow(i/800,1);const q=(x*x*x-h)/x;pts.push([q,x,q-3*x*x<0])}branches(v,pts)})}
+    poly(v,im.trail,css('--mute'),1.4);vline(v,r,css('--acc'));fps.forEach((x,i)=>dot(v,r,x,kinds[i],5));dot(v,r,im.x,'state',5);
+    $('imBdCap').innerHTML='x* спрямо r при h = '+fmt(h)+'. Начертано чрез r = (x³ − h)/x. При h ≠ 0 вилата е скъсана на две парчета.';
+  }
+  /* потенциал */
+  const V=x=>-h*x-r*x*x/2+x*x*x*x/4;const Vs=[];let vmin=Infinity;
+  for(let i=0;i<=300;i++){const x=-2.6+5.2*i/300,y=V(x);Vs.push([x,y]);vmin=Math.min(vmin,y)}
+  const top=Math.max(vmin+2,V(0)+1.2);v=view($('imPot'),-2.6,2.6,vmin-.3,top);axes(v,'x','V');
+  poly(v,Vs,css('--curve'),2);dot(v,im.x,V(im.x),'state',6);
+  /* текст */
+  const n=fps.length;
+  let msg='r = '+fmt(r)+', h = '+fmt(h)+'. ';
+  msg+=r>0?'h_c(r) = '+fmt(hc(r),3)+', |h| '+(Math.abs(Math.abs(h)-hc(r))<1e-3?'= h_c (бифуркация)':(Math.abs(h)<hc(r)?'&lt; h_c':'&gt; h_c'))+'.':'r ≤ 0: винаги една точка.';
+  $('imInfo').innerHTML='<li>'+msg+' Неподвижни точки: '+n+'</li>'+
+    fps.map((x,i)=>'<li>x* = '+fmt(x,3)+': <span class="'+kinds[i]+'">'+kname[kinds[i]]+'</span></li>').join('')+
+    '<li>Състояние на системата: x = '+fmt(im.x,3)+'</li>';
+}
+(function(){const c=$('imSt');let drag=false;
+  const set=(r,h)=>{r=Math.min(3,Math.max(-1,Math.round(r/.05)*.05));h=Math.min(2,Math.max(-2,Math.round(h/.02)*.02));
+    $('imR').value=r;$('imH').value=h;imSet(r,h);imDraw()};
+  const pick=ev=>{const b=c.getBoundingClientRect(),m={l:40,r:12,t:12,b:24};
+    const u=(ev.clientX-b.left-m.l)/(b.width-m.l-m.r),w=(b.height-m.b-(ev.clientY-b.top))/(b.height-m.t-m.b);set(-1+4*u,-2.2+4.4*w)};
+  c.addEventListener('pointerdown',ev=>{drag=true;c.setPointerCapture(ev.pointerId);pick(ev)});
+  c.addEventListener('pointermove',ev=>{if(drag)pick(ev)});
+  c.addEventListener('pointerup',()=>{drag=false});c.addEventListener('pointercancel',()=>{drag=false});
+  c.addEventListener('keydown',ev=>{const k=ev.key;let r=im.r,h=im.h;
+    if(k==='ArrowRight')r+=.05;else if(k==='ArrowLeft')r-=.05;else if(k==='ArrowUp')h+=.02;else if(k==='ArrowDown')h-=.02;else return;
+    ev.preventDefault();set(r,h)});
+})();
+
+/* ---------- старт ---------- */
+function redrawAll(){pfDraw();hyDraw();imDraw()}
+let rt=null;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(redrawAll,80)});
+pfSelect('sup');
+hy.x=0;hyDraw();
+im.x=relax(imF(im.r,im.h),1.5,40,0);imMode('h');
+})();
+</script>
+</body>
+</html>
