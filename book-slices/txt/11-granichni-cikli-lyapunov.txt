@@ -1,0 +1,736 @@
+=== PDF pages 213-227 (printed 198-212) ===
+          7
+           LIMIT CYCLES
+
+
+
+
+7.0 Introduction
+A limit cycle is an isolated closed trajectory. Isolated means that neighboring
+trajectories are not closed; they spiral either toward or away from the limit cycle
+(Figure 7.0.1).
+
+
+
+
+                 stable                       unstable                   half -stable
+                 limit cycle                  limit cycle                limit cycle
+
+
+  Figure 7.0.1
+
+
+If all neighboring trajectories approach the limit cycle, we say the limit cycle is
+stable or attracting. Otherwise the limit cycle is unstable, or in exceptional cases,
+half-stable.
+    Stable limit cycles are very important scientifically—they model systems that
+exhibit self-sustained oscillations. In other words, these systems oscillate even in
+the absence of external periodic forcing. Of the countless examples that could be
+given, we mention only a few: the beating of a heart; the periodic firing of a pace-
+maker neuron; daily rhythms in human body temperature and hormone secretion;
+chemical reactions that oscillate spontaneously; and dangerous self-excited vibra-
+tions in bridges and airplane wings. In each case, there is a standard oscillation
+of some preferred period, waveform, and amplitude. If the system is perturbed
+slightly, it always returns to the standard cycle.
+
+
+
+
+198        LIMIT CYCLES
+    Limit cycles are inherently nonlinear phenomena; they can’t occur in linear sys-
+tems. Of course, a linear system x  Ax can have closed orbits, but they won’t be
+isolated; if x( t ) is a periodic solution, then so is cx( t ) for any constant c v 0. Hence
+x( t ) is surrounded by a one-parameter family of closed orbits (Figure 7.0.2).
+                                    Consequently, the amplitude of a linear oscillation
+                             cx(t)
+                                    is set entirely by its initial conditions; any slight dis-
+                         x(t)       turbance to the amplitude will persist forever. In
+                                    contrast, limit cycle oscillations are determined by
+                                    the structure of the system itself.
+                                        The next section presents two examples of sys-
+                                    tems with limit cycles. In the first case, the limit
+                                    cycle is obvious by inspection, but normally it’s
+                                    difficult to tell whether a given system has a limit
+                                    cycle, or indeed any closed orbits, from the govern-
+Figure 7.0.2                        ing equations alone. Sections 7.2-7.4 present some
+                                    techniques for ruling out closed orbits or for prov-
+ing their existence. The remainder of the chapter discusses analytical methods for
+approximating the shape and period of a closed orbit and for studying its stability.
+
+
+7.1     Examples
+It’s straightforward to construct examples of limit cycles if we use polar coordinates.
+
+
+EXAMPLE 7.1.1: A SIMPLE LIMIT CYCLE
+
+Consider the system
+
+          r = r(1− r 2 ),    R = 1                                            (1)
+where r p 0. The radial and angular dynamics are uncoupled and so can be ana-
+lyzed separately. Treating r = r(1− r 2 ) as a vector field on the line, we see that
+r*  0 is an unstable fixed point and r*  1 is stable (Figure 7.1.1).
+
+                              .
+                              r
+
+
+
+
+                                                              r
+                                                   1
+
+
+
+                              Figure 7.1.1
+
+
+
+
+                                                                  7.1   EXAMPLES         199
+                      y                     Hence, back in the phase plane, all tra-
+                                            jectories (except r*  0) approach the
+                                            unit circle r*  1 monotonically. Since
+                                            the motion in the R-direction is simply
+                                            rotation at constant angular velocity,
+                                       x
+                                            we see that all trajectories spiral asymp-
+                                            totically toward a limit cycle at r  1
+                                            (Figure 7.1.2).
+                                               It is also instructive to plot solu-
+                                            tions as functions of t. For instance, in
+Figure 7.1.2
+                                            Figure 7.1.3 we plot x ( t )  r ( t ) cosR ( t )
+                                            for a trajectory starting outside the limit
+cycle. As expected, the solution settles down to a sinusoidal oscillation of constant
+amplitude, corresponding to the limit cycle solution x ( t )  cos ( t R0 ) of (1). ■
+                          2
+
+
+
+                  x
+
+
+                          0                                               t
+                                                                     25
+
+
+
+
+                    −2
+
+
+                  Figure 7.1.3
+
+
+
+
+EXAMPLE 7.1.2: VAN DER POL OSCILLATOR
+
+A less transparent example, but one that played a central role in the development
+of nonlinear dynamics, is given by the van der Pol equation
+
+           x   N( x 2 1)x    x0                                           (2)
+where N p 0 is a parameter. Historically, this equation arose in connection with the
+nonlinear electrical circuits used in the first radios (see Exercise 7.1.6 for the cir-
+cuit). Equation (2) looks like a simple harmonic oscillator, but with a nonlinear
+                    2
+damping term N( x 1)x . This term acts like ordinary positive damping for |x| 
+1, but like negative damping for |x| l. In other words, it causes large-amplitude
+oscillations to decay, but it pumps them back up if they become too small.
+   As you might guess, the system eventually settles into a self-sustained oscilla-
+tion where the energy dissipated over one cycle balances the energy pumped in.
+
+
+200        LIMIT CYCLES
+This idea can be made rigorous, and with quite a bit of work, one can prove that
+the van der Pol equation has a unique, stable limit cycle for each N  0. This result
+follows from a more general theorem discussed in Section 7.4.
+   To give a concrete illustration, suppose we numerically integrate (2) for N  1.5,
+starting from ( x, x )  (0.5, 0) at t  0. Figure 7.1.4 plots the solution in the phase
+plane and Figure 7.1.5 shows the graph of x ( t ). Now, in contrast to Example 7.1.1,
+the limit cycle is not a circle and the stable waveform is not a sine wave. ■
+
+                .
+               x
+                                            3
+          3
+
+                                        x
+
+                             x              0                                        t
+−3                       3                                  10              20
+
+
+                    −3
+                                         −3
+
+Figure 7.1.4                            Figure 7.1.5
+
+
+
+
+7.2 Ruling Out Closed Orbits
+Suppose we have a strong suspicion, based on numerical evidence or otherwise,
+that a particular system has no periodic solutions. How could we prove this? In the
+last chapter we mentioned one method, based on index theory (see Examples 6.8.5
+and 6.8.6). Now we present three other ways of ruling out closed orbits. They are
+of limited applicability, but they’re worth knowing about, in case you get lucky.
+
+          Gradient Systems
+   Suppose the system can be written in the form x = −∇V , for some continu-
+ously differentiable, single-valued scalar function V (x). Such a system is called a
+gradient system with potential function V.
+          Theorem 7.2.1: Closed orbits are impossible in gradient systems.
+
+         Proof: Suppose there were a closed orbit. We obtain a contradiction by
+considering the change in V after one circuit. On the one hand, %V  0 since V is
+single-valued. But on the other hand,
+
+
+
+
+                                        7.2     RULING OUT CLOSED ORBITS            201
+                    T   dV
+          ΔV = ∫            dt
+                    0    dt
+                    T
+               = ∫ (∇V ⋅ x )dt
+                    0
+                        T
+               = −∫
+                                 2
+                                x dt
+                        0
+
+               <0
+(unless x w 0, in which case the trajectory is a fixed point, not a closed orbit). This
+contradiction shows that closed orbits can’t exist in gradient systems. ■
+
+   The trouble with Theorem 7.2.1 is that most two-dimensional systems are not
+gradient systems. (Although, curiously, all vector fields on the line are gradient
+systems; this gives another explanation for the absence of oscillations noted in
+Sections 2.6 and 2.7.)
+
+
+EXAMPLE 7.2.1:
+
+Show that there are no closed orbits for the system x  sin y, y  x cos y.
+   Solution: The system is a gradient system with potential function V ( x,y ) 
+–x sin y, since x = −∂V ∂x and y = −∂V ∂y . By Theorem 7.2.1, there are no
+closed orbits. ■
+
+How can you tell whether a system is a gradient system? And if it is, how do you
+find its potential function V ? See Exercises 7.2.5 and 7.2.6.
+   Even if the system is not a gradient system, similar techniques may still work, as
+in the following example. We examine the change in an energy-like function after
+one circuit around the putative closed orbit, and derive a contradiction.
+
+
+EXAMPLE 7.2.2:
+
+Show that the nonlinearly damped oscillator x + ( x )3 + x = 0 has no periodic
+solutions.
+   Solution: Suppose that there were a periodic solution x ( t ) of period T. Consider
+the energy function E (x, x ) = 12 ( x 2 + x 2 ). After one cycle, x and x return to their
+starting values, and therefore %E  0 around any closed orbit.
+                                      T
+   On the other hand, ΔE =              ∫E dt. If we can show this integral is nonzero,
+                                            0
+
+we’ve reached a contradiction. Note that E = x (x + x) = x (−x 3 ) = −x 4 ≤ 0.
+                            T
+Therefore ΔE = −∫ ( x )4 dt ≤ 0, with equality only if x w 0. But x w 0 would
+                            0
+
+mean the trajectory is a fixed point, contrary to the original assumption that it’s a
+
+
+
+
+202        LIMIT CYCLES
+closed orbit. Thus %E is strictly negative, which contradicts %E  0. Hence there
+are no periodic solutions. ■
+
+         Liapunov Functions
+   Even for systems that have nothing to do with mechanics, it is occasionally pos-
+sible to construct an energy-like function that decreases along trajectories. Such a
+function is called a Liapunov function. If a Liapunov function exists, then closed
+orbits are forbidden, by the same reasoning as in Example 7.2.2.
+   To be more precise, consider a system x  f ( x ) with a fixed point at x*. Suppose
+that we can find a Liapunov function, i.e., a continuously differentiable, real-valued
+function V (x) with the following properties:
+         1. V (x)  0 for all x v x*, and V (x*)  0. (We say that V is positive definite.)
+         2. V  0 for all x v x*. (All trajectories flow “downhill” toward x*.)
+
+Then x* is globally asymptotically stable: for all initial conditions, x( t ) l x* as
+t l d. In particular the system has no closed orbits. (For a proof, see Jordan and
+Smith 1987.)
+   The intuition is that all trajectories move monotonically down the graph of V (x)
+toward x* (Figure 7.2.1).
+
+                                                    V(x)
+
+
+                                       x (t)
+
+
+                                               x*
+
+                                Figure 7.2.1
+
+
+The solutions can’t get stuck anywhere else because if they did, V would stop
+changing, but by assumption, V  0 everywhere except at x*.
+  Unfortunately, there is no systematic way to construct Liapunov functions.
+Divine inspiration is usually required, although sometimes one can work back-
+wards. Sums of squares occasionally work, as in the following example.
+
+
+EXAMPLE 7.2.3:
+
+By constructing a Liapunov function, show that the system x = −x + 4 y,
+y = −x − y3 has no closed orbits.
+   Solution: Consider V ( x,y )  x2 ay2, where a is a parameter to be chosen later.
+Then V = 2xx + 2ayy = 2 x(−x + 4y ) + 2ay(−x − y3 ) = −2x 2 + (8 − 2a )xy − 2ay 4 .
+
+
+
+
+                                         7.2   RULING OUT CLOSED ORBITS               203
+If we choose a  4, the xy term disappears and V = −2 x 2 − 8y 4 . By inspection,
+V  0 and V  0 for all ( x,y ) v (0,0). Hence V  x2 4y2 is a Liapunov function
+and so there are no closed orbits. In fact, all trajectories approach the origin as
+t l d. ■
+
+         Dulac’s Criterion
+    The third method for ruling out closed orbits is based on Green’s theorem, and
+is known as Dulac’s criterion.
+                                  f ( x ) be a continuously differentiable vector
+         Dulac’s Criterion: Let x
+field defined on a simply connected subset R of the plane. If there exists a continu-
+ously differentiable, real-valued function g (x) such that ∇⋅( gx ) has one sign
+throughout R, then there are no closed orbits lying entirely in R.
+         Proof: Suppose there were a closed orbit C lying entirely in the region R.
+Let A denote the region inside C (Figure 7.2.2). Then Green’s theorem yields
+
+
+         ∫∫ ∇⋅ ( g x )dA = ∫ g x ⋅ n d 
+           A                   C
+
+where n is the outward normal and d A is the element of arc length along C. Look
+first at the double integral on the left: it must be nonzero, since ∇⋅( gx ) has one
+sign in R. On the other hand, the line integral on the right equals zero since
+ x ⋅ n = 0 everywhere, by the assumption that C is a trajectory (the tangent vector
+ x is orthogonal to n). This contradiction implies that no such C can exist. ■
+
+
+                                   n          C
+                                                      R
+                           .
+                           x             A
+
+
+
+
+                        Figure 7.2.2
+
+
+    Dulac’s criterion suffers from the same drawback as Liapunov’s method: there
+is no algorithm for finding g (x). Candidates that occasionally work are g  1,
+1 / xayb, eax, and eay.
+
+
+EXAMPLE 7.2.4:
+
+Show that the system x = x( 2 − x − y ), y = y( 4x − x 2 − 3) has no closed orbits
+in the positive quadrant x, y  0.
+
+
+
+204       LIMIT CYCLES
+   Solution: A hunch tells us to pick g  1 / xy. Then
+
+                      ∂             ∂
+          ∇⋅ ( g x ) =   ( gx ) + ( gy )
+                      ∂x            ∂y
+                      ∂ ⎛⎜ 2 − x − y ⎞⎟ ∂ ⎛⎜ 4x − x 2 − 3 ⎞⎟
+                    =     ⎜            ⎟⎟ + ⎜              ⎟⎟
+                      ∂x ⎜⎝       y     ⎟⎠ ∂y ⎜⎝ x          ⎠⎟
+                    = −1 / y
+                    < 0.
+Since the region x, y  0 is simply connected and g and f satisfy the required
+smoothness conditions, Dulac’s criterion implies there are no closed orbits in the
+positive quadrant. ■
+
+
+EXAMPLE 7.2.5:
+
+Show that the system x  y, y = −x − y + x 2 + y 2 has no closed orbits.
+  Solution: Let g  e2x. Then ∇⋅ ( gx ) = −2e−2 x y + e−2 x (−1 + 2 y ) = − e−2 x < 0.
+By Dulac’s criterion, there are no closed orbits. ■
+
+
+7.3      Poincaré−Bendixson Theorem
+Now that we know how to rule out closed orbits, we turn to the opposite task:
+finding methods to establish that closed orbits exist in particular systems. The fol-
+lowing theorem is one of the few results in this direction. It is also one of the key
+theoretical results in nonlinear dynamics, because it implies that chaos can’t occur
+in the phase plane, as discussed briefly at the end of this section.
+         Poincaré−Bendixson Theorem: Suppose that:
+   (1)   R is a closed, bounded subset of the plane;
+   (2)    x  f ( x ) is a continuously differentiable vector field on an open set con-
+         taining R;
+   (3)   R does not contain any fixed points; and
+   (4)   There exists a trajectory C that is “confined” in R, in the sense that it
+         starts in R and stays in R for all future time (Figure 7.3.1).
+                                            Then either C is a closed orbit, or it spirals
+                                            toward a closed orbit as t l d. In either
+                                      R     case, R contains a closed orbit (shown as a
+                               C
+                                            heavy curve in Figure 7.3.1).
+                P
+                                               The proof of this theorem is subtle,
+                                             and requires some advanced ideas from
+
+Figure 7.3.1
+
+
+
+
+                                     7.3 POINCARÉ-BENDIXSON THEOREM                  205
+topology. For details, see Perko (1991), Coddington and Levinson (1955), Hurewicz
+(1958), or Cesari (1963).
+    In Figure 7.3.1, we have drawn R as a ring-shaped region because any closed
+orbit must encircle a fixed point ( P in Figure 7.3.1) and no fixed points are allowed
+in R.
+    When applying the Poincaré-Bendixson theorem, it’s easy to satisfy conditions
+(l)–(3); condition (4) is the tough one. How can we be sure that a confined trajectory
+C exists? The standard trick is to construct a trapping region R, i.e., a closed con-
+nected set such that the vector field points “inward” everywhere on the boundary
+                                           of R (Figure 7.3.2). Then all trajectories
+                                           in R are confined. If we can also arrange
+                                           that there are no fixed points in R, then
+                                           the Poincaré-Bendixson theorem ensures
+                                           that R contains a closed orbit.
+                                 R            The Poincaré-Bendixson theorem can
+                                           be difficult to apply in practice. One con-
+                                           venient case occurs when the system has
+                                           a simple representation in polar coordi-
+Figure 7.3.2                               nates, as in the following example.
+
+
+EXAMPLE 7.3.1:
+
+Consider the system
+
+         r = r(1− r 2 ) + μr cos θ
+                                                                            (1)
+         θ = 1.
+When N  0, there’s a stable limit cycle at r  1, as discussed in Example 7.1.1. Show
+that a closed orbit still exists for N  0, as long as N is sufficiently small.
+    Solution: We seek two concentric circles with radii rmin and rmax, such that r  0
+on the outer circle and r  0 on the inner circle. Then the annulus 0  rmin
+b r b rmax will be our desired trapping region. Note that there are no fixed points
+in the annulus since R  0; hence if rmin and rmax can be found, the Poincaré-
+Bendixson theorem will imply the existence of a closed orbit.
+    To find rmin, we require r  r(l  r 2 ) μr cos R  0 for all R. Since cos R p –1, a
+sufficient condition for rmin is 1 – r2 – N  0. Hence any rmin  1 μ will work, as
+long as N  1 so that the square root makes sense. We should choose rmin as large as
+possible, to hem in the limit cycle as tightly as we can. For instance, we could pick
+rmin  0.999 1 μ . (Even rmin  1 μ works, but more careful reasoning is
+required.) By a similar argument, the flow is inward on the outer circle if
+ rmax  1.00l 1   μ.
+
+
+
+
+206        LIMIT CYCLES
+  Therefore a closed orbit exists for all N  1, and it lies somewhere in the annulus
+0.999 1 μ  r  1.001 1 μ . ■
+
+    The estimates used in Example 7.3.1 are conservative. In fact, the closed orbit
+can exist even if N p 1. Figure 7.3.3 shows a computer-generated phase portrait of
+(1) for N  1. In Exercise 7.3.8, you’re asked to explore what happens for larger N,
+and in particular, whether there’s a critical N beyond which the closed orbit disap-
+pears. It’s also possible to obtain some analytical insight about the closed orbit for
+small N (Exercise 7.3.9).
+
+                                       y
+
+
+                                           1
+
+
+                                                limit
+                                                cycle
+                                                                    x
+                           −1                           1
+
+
+
+                                           −1
+
+
+
+
+               Figure 7.3.3
+
+
+   When polar coordinates are inconvenient, we may still be able to find an appro-
+priate trapping region by examining the system’s nullclines, as in the next example.
+
+
+EXAMPLE 7.3.2:
+
+In the fundamental biochemical process called glycolysis, living cells obtain energy
+by breaking down sugar. In intact yeast cells as well as in yeast or muscle extracts,
+glycolysis can proceed in an oscillatory fashion, with the concentrations of various
+intermediates waxing and waning with a period of several minutes. For reviews,
+see Chance et al. (1973) or Goldbeter (1980).
+   A simple model of these oscillations has been proposed by Sel’kov (1968). In
+dimensionless form, the equations are
+
+         x = −x + ay + x 2 y
+         y = b − ay − x 2 y
+
+
+
+
+                                 7.3 POINCARÉ-BENDIXSON THEOREM                  207
+where x and y are the concentrations of ADP (adenosine diphosphate) and F6P
+(fructose-6-phosphate), and a,b  0 are kinetic parameters. Construct a trapping
+region for this system.
+   Solution: First we find the nullclines. The first equation shows that x  0 on
+the curve y  x / ( a x2 ) and the second equation shows that y  0 on the curve
+y  b / ( a x2 ). These nullclines are sketched in Figure 7.3.4, along with some rep-
+resentative vectors.
+         y
+
+               y = b / (a+x2 )
+
+
+
+                                       .
+                                       x> 0
+                                       y<0
+             .
+             x> 0
+             .
+             y>0
+
+
+
+
+                .
+                x< 0                                            y = x /(a+x2 )
+                .                              .       .
+                y>0                            x < 0 , y <0
+                                                                           x
+         Figure 7.3.4
+
+How did we know how to sketch these vectors? By definition, the arrows are verti-
+cal on the x  0 nullcline, and horizontal on the y  0 nullcline. The direction of
+flow is determined by the signs of x and y . For instance, in the region above both
+nullclines, the governing equations imply x  0 and y  0 , so the arrows point
+down and to the right, as shown in Figure 7.3.4.
+    Now consider the region bounded by the dashed line shown in Figure 7.3.5. We
+claim that it’s a trapping region. To verify this, we have to show that all the vectors
+on the boundary point into the box. On the horizontal and vertical sides, there’s no
+problem: the claim follows from Figure 7.3.4. The tricky part of the construction
+is the diagonal line of slope –1 extending from the point ( b, b / a ) to the nullcline
+y  x / ( a x2 ). Where did this come from?
+
+
+
+
+208       LIMIT CYCLES
+           y
+                       (b, b / a)
+        b/a
+
+
+
+
+                   y = b / (a+x2 )
+
+
+
+
+                                                         2
+                                            y = x/ (a+x )
+
+
+
+                                                                             x
+                        b
+
+        Figure 7.3.5
+
+To get the right intuition, consider x and y in the limit of very large x. Then
+ x x x 2 y and y ≈ −x 2 y , so y / x = dy dx ≈ −1 along trajectories. Hence the vec-
+tor field at large x is roughly parallel to the diagonal line. This suggests that in a
+more precise calculation, we should compare the sizes of x and y , for some
+sufficiently large x.
+    In particular, consider x − (−y ) . We find
+
+         x − (−y ) = − x + ay + x 2 y + ( b − ay − x 2 y )
+                     = b − x.
+
+Hence
+
+         −y > x if x > b.
+This inequality implies that the vector field points inward on the diagonal line in
+Figure 7.3.5, because dy / dx is more negative than –1, and therefore the vectors are
+steeper than the diagonal line. Thus the region is a trapping region, as claimed. ■
+
+  Can we conclude that there is a closed orbit inside the trapping region? No!
+There is a fixed point in the region (at the intersection of the nullclines), and so the
+conditions of the Poincaré−Bendixson theorem are not satisfied. But if this fixed
+point is a repeller, then we can prove the existence of a closed orbit by considering
+
+
+
+                                     7.3 POINCARÉ-BENDIXSON THEOREM                209
+the modified “punctured” region shown in Figure 7.3.6. (The hole is infinitesimal,
+but drawn larger for clarity.)
+           y
+
+
+
+
+                                                                          x
+          Figure 7.3.6
+
+The repeller drives all neighboring trajectories into the shaded region, and since
+this region is free of fixed points, the Poincaré-Bendixson theorem applies.
+   Now we find conditions under which the fixed point is a repeller.
+
+
+EXAMPLE 7.3.3:
+
+Once again, consider the glycolytic oscillator x = −x + ay + x 2 y, y = b − ay − x 2 y
+of Example 7.3.2. Prove that a closed orbit exists if a and b satisfy an appropriate
+condition, to be determined. (As before, a,b  0.)
+   Solution: By the argument above, it suffices to find conditions under which the
+fixed point is a repeller, i.e., an unstable node or spiral. In general, the Jacobian is
+
+               ⎛−1 + 2 xy  a + x 2 ⎞⎟
+         A = ⎜⎜⎜                       ⎟⎟.
+               ⎜⎝ −2 xy   −( a + x 2 )⎟⎠
+
+After some algebra, we find that at the fixed point
+
+                                  b
+         x* = b,         y* =          ,
+                                a + b2
+
+the Jacobian has determinant %  a           b2  0 and trace
+
+
+
+210       LIMIT CYCLES
+                b 4 + ( 2a −1)b 2 + ( a + a 2 )
+         U =−                                   .
+                            a + b2
+
+Hence the fixed point is unstable for U  0, and stable for U  0. The dividing line
+U  0 occurs when
+
+                (
+         b 2 = 12 1− 2a ± 1− 8a .    )
+This defines a curve in ( a,b ) space, as shown in Figure 7.3.7.
+
+                     1.2
+
+                       1
+
+                     0.8
+
+                     0.6                 stable
+                b                        limit cycle
+                     0.4
+                                                        stable
+                     0.2                                fixed point
+
+                       0
+                           0   0.02 0.04 0.06 0.08       0.1   0.12 0.14
+                                             a
+
+                Figure 7.3.7
+
+
+For parameters in the region corresponding to U  0, we are guaranteed that the
+system has a closed orbit—numerical integration shows that it is actually a stable
+limit cycle. Figure 7.3.8 shows a computer-generated phase portrait for the typical
+case a  0.08, b  0.6. ■
+
+                       y
+
+
+
+                      2
+
+
+
+                      1
+
+
+
+                                                                      x
+                                    1               2      3
+
+
+                    Figure 7.3.8
+
+
+
+
+                                    7.3 POINCARÉ-BENDIXSON THEOREM              211
+         No Chaos in the Phase Plane
+   The Poincaré-Bendixson theorem is one of the central results of nonlinear
+dynamics. It says that the dynamical possibilities in the phase plane are very lim-
+ited: if a trajectory is confined to a closed, bounded region that contains no fixed
+points, then the trajectory must eventually approach a closed orbit. Nothing more
+complicated is possible.
+   This result depends crucially on the two-dimensionality of the plane. In
+higher-dimensional systems ( n p 3), the Poincaré-Bendixson theorem no longer
+applies, and something radically new can happen: trajectories may wander around
+forever in a bounded region without settling down to a fixed point or a closed orbit.
+In some cases, the trajectories are attracted to a complex geometric object called a
+strange attractor, a fractal set on which the motion is aperiodic and sensitive to tiny
+changes in the initial conditions. This sensitivity makes the motion unpredictable
+in the long run. We are now face to face with chaos. We’ll discuss this fascinating
+topic soon enough, but for now you should appreciate that the Poincaré-Bendixson
+theorem implies that chaos can never occur in the phase plane.
+
+
+7.4 Liénard Systems
+In the early days of nonlinear dynamics, say from about 1920 to 1950, there was a
+great deal of research on nonlinear oscillations. The work was initially motivated
+by the development of radio and vacuum tube technology, and later it took on a
+mathematical life of its own. It was found that many oscillating circuits could be
+modeled by second-order differential equations of the form
+
+         x + f ( x )x + g ( x ) = 0,                                   (1)
+
+now known as Liénard’s equation. This equation is a generalization of the van der
+Pol oscillator x μ( x 2 1)x x  0 mentioned in Section 7.1. It can also be
+interpreted mechanically as the equation of motion for a unit mass subject to a
+nonlinear damping force  f ( x )x and a nonlinear restoring force g ( x ).
+   Liénard’s equation is equivalent to the system
+
+         x = y
+                                                                          (2)
+         y = −g ( x ) − f ( x ) y.
+
+The following theorem states that this system has a unique, stable limit cycle under
+appropriate hypotheses on f and g. For a proof, see Jordan and Smith (1987),
+Grimshaw (1990), or Perko (1991).
+         Liénard’s Theorem: Suppose that f ( x ) and g ( x ) satisfy the following
+conditions:
+
+
+
+212       LIMIT CYCLES
+

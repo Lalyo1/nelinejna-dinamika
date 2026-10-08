@@ -1,0 +1,538 @@
+=== PDF pages 161-171 (printed 146-156) ===
+          6
+           PHASE PLANE
+
+
+
+
+6.0      Introduction
+This chapter begins our study of two-dimensional nonlinear systems. First we con-
+sider some of their general properties. Then we classify the kinds of fixed points
+that can arise, building on our knowledge of linear systems (Chapter 5). The the-
+ory is further developed through a series of examples from biology (competition
+between two species) and physics (conservative systems, reversible systems, and
+the pendulum). The chapter concludes with a discussion of index theory, a topo-
+logical method that provides global information about the phase portrait.
+   This chapter is mainly about fixed points. The next two chapters will discuss
+closed orbits and bifurcations in two-dimensional systems.
+
+
+6.1     Phase Portraits
+The general form of a vector field on the phase plane is
+
+          x1  f1 ( x1 , x2 )
+          x 2  f2 ( x1 , x2 )
+
+where f1 and f2 are given functions. This system can be written more compactly in
+vector notation as
+
+          x  f ( x )
+where x  ( x1, x2 ) and f (x)  ( f1 (x), f2 (x)). Here x represents a point in the phase
+plane, and x is the velocity vector at that point. By flowing along the vector field,
+
+
+
+
+146        PHASE PLANE
+                  Ẋ         a phase point traces out a solution x( t ), corresponding
+          X (t)
+                             to a trajectory winding through the phase plane
+                             (Figure 6.1.1). Furthermore, the entire phase plane is
+                             filled with trajectories, since each point can play the
+Figure 6.1.1                 role of an initial condition.
+                                 For nonlinear systems, there’s typically no hope of
+finding the trajectories analytically. Even when explicit formulas are available,
+they are often too complicated to provide much insight. Instead we will try to
+determine the qualitative behavior of the solutions. Our goal is to find the system’s
+phase portrait directly from the properties of f (x). An enormous variety of phase
+portraits is possible; one example is shown in Figure 6.1.2.
+
+
+
+
+                                      D     B
+
+                        A                               C
+
+
+
+
+             Figure 6.1.2
+
+
+Some of the most salient features of any phase portrait are:
+         1. The fixed points, like A, B, and C in Figure 6.1.2. Fixed points satisfy
+            f (x* )  0, and correspond to steady states or equilibria of the system.
+         2. The closed orbits, like D in Figure 6.1.2. These correspond to periodic
+            solutions, i.e., solutions for which x(t + T ) = x(t ) for all t, for some
+            T0.
+         3. The arrangement of trajectories near the fixed points and closed orbits.
+            For example, the flow pattern near A and C is similar, and different
+            from that near B.
+         4. The stability or instability of the fixed points and closed orbits. Here,
+            the fixed points A, B, and C are unstable, because nearby trajectories
+            tend to move away from them, whereas the closed orbit D is stable.
+
+         Numerical Computation of Phase Portraits
+   Sometimes we are also interested in quantitative aspects of the phase portrait.
+Fortunately, numerical integration of x  f ( x ) is not much harder than that of
+x  f ( x ) . The numerical methods of Section 2.8 still work, as long as we replace
+
+
+
+
+                                                  6.1 PHASE PORTRAITS            147
+the numbers x and f ( x ) by the vectors x and f (x). We will always use the Runge-
+Kutta method, which in vector form is
+
+          x n+1 = x n + 61 (k I + 2k 2 + 2k 3 + k 4 )
+where
+
+          k1 = f ( x n )Δt
+          k 2 = f ( x n + 12 k1 )Δt
+          k 3 = f ( x n + 12 k 2 )Δt
+          k 4 = f ( x n + k 3 )Δt.
+
+A stepsize %t  0.1 usually provides sufficient accuracy for our purposes.
+   When plotting the phase portrait, it often helps to see a grid of representative
+vectors in the vector field. Unfortunately, the arrowheads and different lengths of
+the vectors tend to clutter such pictures. A plot of the direction field is clearer: short
+line segments are used to indicate the local direction of flow.
+
+
+EXAMPLE 6.1.1:
+
+Consider the system x = x + e− y , y = −y . First use qualitative arguments to
+obtain information about the phase portrait. Then, using a computer, plot the
+direction field. Finally, use the Runge-Kutta method to compute several trajecto-
+ries, and plot them on the phase plane.
+   Solution: First we find the fixed points by solving x  0 , y  0 simultaneously.
+The only solution is ( x*, y* )  (1, 0). To determine its stability, note that y ( t ) l 0
+as t l d, since the solution to y = −y is y ( t )  y0 e t. Hence e y l 1 and so in the
+long run, the equation for x becomes x ≈ x +1; this has exponentially growing
+solutions, which suggests that the fixed point is unstable. In fact, if we restrict our
+attention to initial conditions on the x-axis, then y0  0 and so y ( t )  0 for all time.
+Hence the flow on the x-axis is governed strictly by x = x +1. Therefore the fixed
+point is unstable.
+   To sketch the phase portrait, it is helpful to plot the nullclines, defined as the
+curves where either x  0 or y  0 . The nullclines indicate where the flow is
+purely horizontal or vertical (Figure 6.1.3). For example, the flow is horizontal
+where y  0 , and since y = −y, this occurs on the line y  0. Along this line, the
+flow is to the right where x = x + 1 > 0 , that is, where x  1.
+   Similarly, the flow is vertical where x = x + e− y = 0 , which occurs on the curve
+shown in Figure 6.1.3. On the upper part of the curve where y  0, the flow is down-
+ward, since y  0.
+
+
+
+
+148        PHASE PLANE
+                                                 y
+
+                                                         .
+                                                         x >0
+                             .                           .
+                             x<0                         y <0
+                             .
+                             y <0
+
+
+                .                                    .              x
+                x<0                                  y =0
+                .
+                y >0
+                         .            .
+                        x =0          x >0
+                                      .
+                                      y >0
+
+
+
+                Figure 6.1.3
+
+
+   The nullclines also partition the plane into regions where x and y have various
+signs. Some of the typical vectors are sketched above in Figure 6.1.3. Even with the
+limited information obtained so far, Figure 6.1.3 gives a good sense of the overall
+flow pattern.
+   Now we use the computer to finish the problem. The direction field is indicated
+by the line segments in Figure 6.1.4, and several trajectories are shown. Note how
+the trajectories always follow the local slope.
+
+                                             y
+
+
+
+
+                                                                x
+
+
+
+
+                       Figure 6.1.4
+
+
+The fixed point is now seen to be a nonlinear version of a saddle point. ■
+
+
+6.2 Existence, Uniqueness, and Topological
+Consequences
+We have been a bit optimistic so far—at this stage, we have no guarantee that the
+general nonlinear system x  f ( x ) even has solutions! Fortunately the existence
+and uniqueness theorem given in Section 2.5 can be generalized to two-dimensional
+
+
+ 6.2 EXISTENCE, UNIQUENESS, AND TOPOLOGICAL CONSEQUENCES                        149
+systems. We state the result for n-dimensional systems, since no extra effort is
+involved:
+
+             Existence and Uniqueness Theorem: Consider the initial value problem
+ x  f ( x ) , x (0)  x0. Suppose that f is continuous and that all its partial derivatives
+sfi / sxj , i, j  1, . . . , n, are continuous for x in some open connected set D  Rn.
+Then for x0  D, the initial value problem has a solution x ( t ) on some time
+interval (U, U ) about t  0, and the solution is unique.
+
+In other words, existence and uniqueness of solutions are guaranteed if f is contin-
+uously differentiable. The proof of the theorem is similar to that for the case n  1,
+and can be found in most texts on differential equations. Stronger versions of the
+theorem are available, but this one suffices for most applications.
+   From now on, we’ll assume that all our vector fields are smooth enough to
+ensure the existence and uniqueness of solutions, starting from any point in phase
+space.
+   The existence and uniqueness theorem has an important corollary: different
+trajectories never intersect. If two trajectories did intersect, then there would be two
+solutions starting from the same point (the crossing point), and this would violate
+the uniqueness part of the theorem. In more intuitive language, a trajectory can’t
+move in two directions at once.
+                                        Because trajectories can’t intersect, phase por-
+                                     traits always have a well-groomed look to them.
+                                     Otherwise they might degenerate into a snarl
+                                     of criss-crossed curves (Figure 6.2.1). The exis-
+                                     tence and uniqueness theorem prevents this from
+                                     happening.
+Figure 6.2.1
+                                        In two-dimensional phase spaces (as opposed
+                                     to higher-dimensional phase spaces), these results
+have especially strong topological consequences. For example, suppose there is a
+closed orbit C in the phase plane. Then any trajectory starting inside C is trapped
+in there forever (Figure 6.2.2).
+   What is the fate of such a bounded trajectory? If there are fixed points inside
+C, then of course the trajectory might eventually approach one of them. But what
+                                   if there aren’t any fixed points? Your intuition may
+C                                  tell you that the trajectory can’t meander around
+                                   forever—if so, you’re right. For vector fields on the
+                                   plane, the Poincaré-Bendixson theorem states that if
+                                   a trajectory is confined to a closed, bounded region
+                                   and there are no fixed points in the region, then the
+                                   trajectory must eventually approach a closed orbit.
+                                   We’ll discuss this important theorem in Section 7.3.
+Figure 6.2.2
+
+
+
+
+150        PHASE PLANE
+   But that part of our story comes later. First we must become better acquainted
+with fixed points.
+
+
+6.3 Fixed Points and Linearization
+In this section we extend the linearization technique developed earlier for one-
+dimensional systems (Section 2.4). The hope is that we can approximate the phase
+portrait near a fixed point by that of a corresponding linear system.
+
+         Linearized System
+Consider the system
+
+          x  f ( x, y )
+          y  g ( x, y )
+
+and suppose that ( x*, y*) is a fixed point, i.e.,
+
+         f ( x*, y*)  0,        g( x*, y*)  0.
+Let
+         u  x  x *,            vyy*
+denote the components of a small disturbance from the fixed point. To see whether
+the disturbance grows or decays, we need to derive differential equations for u and
+v. Let’s do the u-equation first:
+
+          u  x                                             (since x * is a constant)
+
+            = f ( x * +u, y * +v )                            (by substitution)
+
+
+                                  ∂f    ∂f
+            = f ( x*, y*) + u        +v    + O( u 2 , v 2 , uv ) (Taylor series expansion)
+                                  ∂x    ∂y
+
+                    ∂f    ∂f
+            =u         +v    + O( u 2 , v 2 , uv )            (since f ( x*, y*) 0).
+                    ∂x    ∂y
+
+
+To simplify the notation, we have written sf / sx and sf / sy, but please remem-
+ber that these partial derivatives are to be evaluated at the fixed point ( x*, y*);
+thus they are numbers, not functions. Also, the shorthand notation O ( u2, v2, uv )
+denotes quadratic terms in u and v. Since u and v are small, these quadratic terms
+are extremely small.
+
+
+
+
+                                      6.3 FIXED POINTS AND LINEARIZATION                     151
+   Similarly we find
+
+                   ∂g    ∂g
+          v = u      +v    + O( u 2 , v 2 , uv ).
+                   ∂x    ∂y
+
+Hence the disturbance ( u, v ) evolves according to
+
+         ⎛u ⎞⎟ ⎛⎜ ∂x                   ⎞⎟⎛u⎞
+                       ∂f     ∂f
+         ⎜⎜ ⎟ = ⎜             ∂y         ⎟⎟⎜⎜ ⎟⎟
+          ⎜⎝v ⎟⎟⎠ ⎜⎜⎜ ∂g
+                                                       quadratic terms.      (1)
+                     ⎝∂x
+                              ∂g
+                              ∂y
+                                          ⎟⎟⎠⎜⎝v ⎟⎟⎠
+
+The matrix
+
+               ⎛ ∂f         ∂f   ⎞⎟
+               ⎜ ∂x               ⎟⎟
+          A = ⎜⎜ ∂g
+                            ∂y
+
+               ⎜⎜⎝          ∂g     ⎟⎟
+                   ∂x               ⎠
+                            ∂y ( x *, y*)
+
+
+is called the Jacobian matrix at the fixed point ( x*, y*). It is the multivariable ana-
+log of the derivative f ′( x*) seen in Section 2.4.
+    Now since the quadratic terms in (1) are tiny, it’s tempting to neglect them alto-
+gether. If we do that, we obtain the linearized system
+
+         ⎛u ⎞⎟ ⎛⎜ ∂x            ⎞⎟⎛u⎞
+                       ∂f     ∂f
+         ⎜⎜ ⎟ = ⎜             ∂y  ⎟⎟⎜ ⎟⎟
+          ⎜⎝v ⎟⎟⎠ ⎜⎜⎜ ∂g     ∂g ⎟⎜
+                                                                             (2)
+                     ⎝∂x      ∂y ⎠
+                                   ⎟⎜⎝v ⎟⎟⎠
+
+whose dynamics can be analyzed by the methods of Section 5.2.
+
+         The Effect of Small Nonlinear Terms
+    Is it really safe to neglect the quadratic terms in (1)? In other words, does the
+linearized system give a qualitatively correct picture of the phase portrait near
+( x*, y*) ? The answer is yes, as long as the fixed point for the linearized system is not
+one of the borderline cases discussed in Section 5.2. In other words, if the linearized
+system predicts a saddle, node, or a spiral, then the fixed point really is a saddle,
+node, or spiral for the original nonlinear system. See Andronov et al. (1973) for a
+proof of this result, and Example 6.3.1 for a concrete illustration.
+    The borderline cases (centers, degenerate nodes, stars, or non-isolated fixed
+points) are much more delicate. They can be altered by small nonlinear terms, as
+we’ll see in Example 6.3.2 and in Exercise 6.3.11.
+
+
+EXAMPLE 6.3.1:
+
+Find all the fixed points of the system x = −x + x3 , y = −2 y , and use lineariza-
+tion to classify them. Then check your conclusions by deriving the phase portrait
+for the full nonlinear system.
+
+
+
+152        PHASE PLANE
+   Solution: Fixed points occur where x  0 and y  0 simultaneously. Hence we
+need x  0 or x  o1, and y  0. Thus, there are three fixed points: (0, 0), (1, 0), and
+(1, 0). The Jacobian matrix at a general point ( x, y ) is
+
+               ⎛ ∂∂xx     ∂x ⎞⎟ ⎛−1 + 3x 2    0 ⎞⎟
+               ⎜           ∂y
+                                ⎟ = ⎜⎜
+          A = ⎜⎜ ∂y       ∂y ⎟⎟ ⎜⎜⎝
+                                                   ⎟⎟.
+               ⎜⎝ ∂x       ∂y ⎟ ⎠      0       −2⎠⎟
+
+                                                                    ⎛−1 0 ⎞⎟
+Next we evaluate A at the fixed points. At (0, 0) , we find A = ⎜⎜            ⎟ , so (0, 0) is
+                                                                    ⎜⎝ 0 −2⎟⎟⎠
+                                ⎛2 0 ⎞⎟
+a stable node. At (o1, 0), A = ⎜⎜       ⎟ , so both (1, 0) and (1, 0) are saddle points.
+                                ⎜⎝0 −2⎟⎟⎠
+    Now because stable nodes and saddle points are not borderline cases, we can
+be certain that the fixed points for the full nonlinear system have been predicted
+correctly.
+    This conclusion can be checked explicitly for the nonlinear system, since the x
+and y equations are uncoupled; the system is essentially two independent first-order
+systems at right angles to each other. In the y-direction, all trajectories decay expo-
+nentially to y  0. In the x-direction, the trajectories are attracted to x  0 and
+repelled from x  o1. The vertical lines x  0 and x  o1 are invariant, because
+ x  0 on them; hence any trajectory that starts on these lines stays on them for-
+ever. Similarly, y  0 is an invariant horizontal line. As a final observation, we note
+that the phase portrait must be symmetric in both the x and y axes, since the equa-
+tions are invariant under the transformations x l x and y l y. Putting all this
+information together, we arrive at the phase portrait shown in Figure 6.3.1.
+
+                                               y
+
+
+
+
+                                                                         x
+
+
+
+
+                         Figure 6.3.1
+
+
+   This picture confirms that (0, 0) is a stable node, and (o1, 0) are saddles, as
+expected from the linearization. ■
+
+   The next example shows that small nonlinear terms can change a center into a
+spiral.
+
+
+                                        6.3 FIXED POINTS AND LINEARIZATION               153
+EXAMPLE 6.3.2:
+
+Consider the system
+
+          x = −y + ax( x 2 + y 2 )
+          y = x + ay( x 2 + y 2 )
+
+where a is a parameter. Show that the linearized system incorrectly predicts that
+the origin is a center for all values of a, whereas in fact the origin is a stable spiral
+if a  0 and an unstable spiral if a  0.
+    Solution: To obtain the linearization about ( x*, y*)  (0, 0), we can either com-
+pute the Jacobian matrix directly from the definition, or we can take the following
+shortcut. For any system with a fixed point at the origin, x and y represent devia-
+tions from the fixed point, since u  x  x*  x and v  y  y*  y; hence we can
+linearize by simply omitting nonlinear terms in x and y . Thus the linearized sys-
+tem is x = −y , y  x . The Jacobian is
+
+               ⎛0 −1⎞⎟
+          A = ⎜⎜       ⎟
+               ⎜⎝1 0 ⎟⎟⎠
+
+which has U  0, %  1  0, so the origin is always a center, according to the
+linearization.
+   To analyze the nonlinear system, we change variables to polar coordinates. Let
+x  r cos R, y  r sin R. To derive a differential equation for r, we note x2 y2  r2,
+so xx + yy = rr . Substituting for x and y yields
+
+         rr = x (−y + ax( x 2 + y 2 )) + y (x + ay(x 2 + y 2 ))
+            = a ( x 2 + y 2 )2
+            = ar 4 .
+
+Hence r  ar 3 . In Exercise 6.3.12, you are asked to derive the following differential
+equation for R:
+
+              xy − yx
+         R =           .
+                  r2
+
+After substituting for x and y we find R  1 . Thus in polar coordinates the orig-
+inal system becomes
+
+         r  ar 3
+         R  1.
+
+
+
+154        PHASE PLANE
+  The system is easy to analyze in this form, because the radial and angular
+motions are independent. All trajectories rotate about the origin with constant
+angular velocity R  1 .
+  The radial motion depends on a, as shown in Figure 6.3.2.
+
+
+
+
+           a<0                             a=0                          a>0
+
+Figure 6.3.2
+
+
+    If a  0, then r ( t ) l 0 monotonically as t l d. In this case, the origin is a
+stable spiral. (However, note that the decay is extremely slow, as suggested by the
+computer-generated trajectories shown in Figure 6.3.2.) If a  0, then r ( t )  r0 for
+all t and the origin is a center. Finally, if a  0 , then r ( t ) ld monotonically and
+the origin is an unstable spiral.
+    We can see now why centers are so delicate: all trajectories are required to close
+perfectly after one cycle. The slightest miss converts the center into a spiral. ■
+
+   Similarly, stars and degenerate nodes can be altered by small nonlinearities,
+but unlike centers, their stability doesn’t change. For example, a stable star may
+be changed into a stable spiral (Exercise 6.3.11) but not into an unstable spiral.
+This is plausible, given the classification of linear systems in Figure 5.2.8: stars and
+degenerate nodes live squarely in the stable or unstable region, whereas centers live
+on the razor’s edge between stability and instability.
+   If we’re only interested in stability, and not in the detailed geometry of the tra-
+jectories, then we can classify fixed points more coarsely as follows:
+
+               Robust cases:
+               Repellers (also called sources): both eigenvalues have positive real part.
+               Attractors (also called sinks): both eigenvalues have negative real part.
+               Saddles: one eigenvalue is positive and one is negative.
+
+               Marginal cases:
+               Centers: both eigenvalues are pure imaginary.
+               Higher-order and non-isolated fixed points: at least one eigenvalue is
+               zero.
+Thus, from the point of view of stability, the marginal cases are those where at least
+one eigenvalue satisfies Re ( M )  0.
+
+
+                                  6.3   FIXED POINTS AND LINEARIZATION              155
+         Hyperbolic Fixed Points, Topological Equivalence, and
+         Structural Stability
+    If Re ( M ) v 0 for both eigenvalues, the fixed point is often called hyperbolic. (This
+is an unfortunate name—it sounds like it should mean “saddle point”—but it has
+become standard.) Hyperbolic fixed points are sturdy; their stability type is unaf-
+fected by small nonlinear terms. Nonhyperbolic fixed points are the fragile ones.
+    We’ve already seen a simple instance of hyperbolicity in the context of vector
+fields on the line. In Section 2.4 we saw that the stability of a fixed point was
+accurately predicted by the linearization, as long as f ′( x*) v 0. This condition is
+the exact analog of Re ( M ) v 0.
+    These ideas also generalize neatly to higher-order systems. A fixed point of an
+nth-order system is hyperbolic if all the eigenvalues of the linearization lie off the
+imaginary axis, i.e., Re ( M i ) v 0 for i  1, . . . , n. The important Hartman-Grobman
+theorem states that the local phase portrait near a hyperbolic fixed point is “topo-
+logically equivalent” to the phase portrait of the linearization; in particular, the
+stability type of the fixed point is faithfully captured by the linearization. Here
+topologically equivalent means that there is a homeomorphism (a continuous defor-
+mation with a continuous inverse) that maps one local phase portrait onto the
+other, such that trajectories map onto trajectories and the sense of time (the direc-
+tion of the arrows) is preserved.
+    Intuitively, two phase portraits are topologically equivalent if one is a distorted ver-
+sion of the other. Bending and warping are allowed, but not ripping, so closed orbits
+must remain closed, trajectories connecting saddle points must not be broken, etc.
+    Hyperbolic fixed points also illustrate the important general notion of struc-
+tural stability. A phase portrait is structurally stable if its topology cannot be
+changed by an arbitrarily small perturbation to the vector field. For instance, the
+phase portrait of a saddle point is structurally stable, but that of a center is not:
+an arbitrarily small amount of damping converts the center to a spiral.
+
+
+6.4 Rabbits versus Sheep
+In the next few sections we’ll consider some simple examples of phase plane anal-
+ysis. We begin with the classic Lotka-Volterra model of competition between two
+species, here imagined to be rabbits and sheep. Suppose that both species are
+competing for the same food supply (grass) and the amount available is limited.
+Furthermore, ignore all other complications, like predators, seasonal effects, and
+other sources of food. Then there are two main effects we should consider:
+         1. Each species would grow to its carrying capacity in the absence of the
+            other. This can be modeled by assuming logistic growth for each spe-
+            cies (recall Section 2.3). Rabbits have a legendary ability to repro-
+            duce, so perhaps we should assign them a higher intrinsic growth rate.
+
+
+
+156        PHASE PLANE
+

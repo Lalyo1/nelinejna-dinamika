@@ -1,0 +1,541 @@
+=== PDF pages 420-431 (printed 405-416) ===
+10.5.6 Using a computer, compute and plot the Liapunov exponent as a function
+of r for the sine map xn 1 r sin Qxn, for 0 bxn b1 and 0 br b1.
+10.5.7 The graph in Figure 10.5.2 suggests that M 0 at each period-doubling
+bifurcation value rn. Show analytically that this is correct.
+
+10.6 Universality and Experiments
+The first two exercises deal with the sine map xn 1 r sin Qxn, where 0 r b1 and
+x  [0,1]. The goal is to learn about some of the practical problems that come up
+when one tries to estimate E numerically.
+10.6.1 (Naive approach)
+a) At each of 200 equally spaced r values, plot x700 through x1000 vertically above
+   r, starting from some random initial condition x0. Check your orbit diagram
+   against Figure 10.6.2 to be sure your program is working.
+b) Now go to finer resolution near the period-doubling bifurcations, and estimate
+   rn, for n 1, 2, . . . , 6. Try to achieve five significant figures of accuracy.
+                                                                         r −r
+c) Use the numbers from (b) to estimate the Feigenbaum ratio n n−1 .
+                                                                         rn+1 − rn
+   (Note: To get accurate estimates in part (b), you need to be clever, or careful, or
+both. As you probably found, a straightforward approach is hampered by “critical
+slowing down”—the convergence to a cycle becomes unbearably slow when that
+cycle is on the verge of period-doubling. This makes it hard to decide precisely
+where the bifurcation occurs. To achieve the desired accuracy, you may have to
+use double precision arithmetic, and about 104 iterates. But maybe you can find a
+shortcut by reformulating the problem.)
+10.6.2 (Superstable cycles to the rescue) The “critical slowing down” encoun-
+tered in the previous problem is avoided if we compute Rn instead of rn. Here Rn
+denotes the value of r at which the sine map has a superstable cycle of period 2n.
+a) Explain why it should be possible to compute Rn more easily and accurately
+   than rn.
+b) Compute the first six Rn ’s and use them to estimate E.
+   If you’re interested in knowing the best way to compute E, see Briggs (1991) for
+the state of the art.
+10.6.3 (Qualitative universality of patterns) The U-sequence dictates the order-
+ing of the windows, but it actually says more: it dictates the iteration pattern within
+each window. (See Exercise 10.4.7 for the definition of iteration patterns.) For
+instance, consider the large period-6 window for the logistic and sine maps, visible
+in Figure 10.6.2.
+a) For both maps, plot the cobweb for the corresponding superstable 6-cycle,
+   given that it occurs at r 3.6275575 for the logistic map and r 0.8811406 for
+   the sine map. (This cycle acts as a representative for the whole window.)
+b) Find the iteration pattern for both cycles, and confirm that they match.
+
+
+                                                                EXERCISES         401
+10.6.4 (Period 4) Consider the iteration patterns of all possible period-4 orbits
+for the logistic map, or any other unimodal map governed by the U-sequence.
+a) Show that only two patterns are possible for period-4 orbits: RLL and RLR.
+b) Show that the period-4 orbit with pattern RLL always occurs after RLR, i.e., at
+   a larger value of r.
+10.6.5 (Unfamiliar later cycles) The final superstable cycles of periods 5, 6, 4, 6,
+5, 6 in the logistic map occur at approximately the following values of r: 3.9057065,
+3.9375364, 3.9602701, 3.9777664, 3.9902670, 3.9975831 (Metropolis et al. 1973).
+Notice that they’re all near the end of the orbit diagram. They have tiny windows
+around them and tend to be overlooked.
+a) Plot the cobwebs for these cycles.
+b) Did you find it hard to obtain the cycles of periods 5 and 6? If so, can you
+    explain why this trouble occurred?
+10.6.6 (A trick for locating superstable cycles) Hao and Zheng (1989) give an
+amusing algorithm for finding a superstable cycle with a specified iteration pat-
+tern. The idea works for any unimodal map, but for convenience, consider the map
+ xn+1 = r − xn2 , for 0 br b2. Define two functions R( y ) = r − y , L( y ) = − r − y .
+These are the right and left branches of the inverse map.
+a) For instance, suppose we want to find the r corresponding to the superstable
+   5-cycle with pattern RLLR. Then Hao and Zheng show that this amounts to
+   solving the equation r RLLR ( 0 ) . Show that when this equation is written out
+   explicitly, it becomes
+
+
+         r = r+ r+ r− r .
+
+b) Solve this equation numerically by iterating the map
+
+
+         rn+1 = rn + rn + rn − rn ,
+
+starting from any reasonable guess, e.g., r0 2 . Show numerically that rn con-
+verges rapidly to 1.860782522. . . .
+c) Verify that the answer to (b) yields a cycle with the desired pattern.
+
+10.7 Renormalization
+10.7.1 (Hands on the functional equation) The functional equation
+g ( x )  Bg2 ( x / B ) arose in our renormalization analysis of period-doubling. Let’s
+
+
+
+
+402        ONE-DIMENSIONAL MAPS
+approximate its solution by brute force, assuming that g ( x ) is even and has a qua-
+dratic maximum at x 0.
+a) Suppose g ( x ) x 1 c2x2 for small x. Solve for c2 and B. (Neglect O ( x4 ) terms.)
+b) Now assume g ( x ) x 1 c2x2 c4x4, and use Mathematica, Maple, Macsyma
+   (or hand calculation) to solve for B, c2, c4. Compare your approximate results to
+   the “exact” values B x 2.5029 . . . , c2 x 1.527 . . . , c4 x 0.1048 . . . .
+10.7.2 Given a map yn 1 f (yn ) , rewrite the map in terms of a rescaled variable
+xn Byn. Use this to show that rescaling and inversion converts f 2 ( x, R1 ) into
+B f 2 ( x / B, R1 ) , as claimed in the text.
+10.7.3 Show that if g is a solution of the functional equation, so is Ng ( x / N ) , with
+the same B.
+10.7.4 (Wildness of the universal function g (x ) ) Near the origin g ( x ) is roughly
+parabolic, but elsewhere it must be rather wild. In fact, the function g ( x ) has
+infinitely many wiggles as x ranges over the real line. Verify these statements by
+demonstrating that g ( x ) crosses the lines y ±x infinitely many times. (Hint:
+Show that if x * is a fixed point of g ( x ) , then so is Bx *.)
+10.7.5 (Crudest possible estimate of B ) Let f ( x, r ) r  x2 .
+a) Write down explicit expressions for f ( x, R0 ) and B f 2 ( x / B, R1 ) .
+b) The two functions in (a) are supposed to resemble each other near the origin,
+   if B is chosen correctly. (That’s the idea behind Figure 10.7.3.) Show the O ( x2 )
+   coefficients of the two functions agree if B 2.
+10.7.6 (Improved estimate of B) Redo Exercise 10.7.5 to one higher order:
+Let f ( x, r ) r  x2 again, but now compare B f 2( x / B, R1 ) to B2 f 4 ( x / B2 , R 2 )
+and match the coefficients of the lowest powers of x. What value of B is obtained
+in this way?
+10.7.7 (Quartic maxima) Develop the renormalization theory for functions with
+a fourth-degree maximum, e.g., f ( x, r ) r  x4. What approximate value of B is
+predicted by the methods of Exercises 10.7.1 and 10.7.5? Estimate the first few terms
+in the power series for the universal function g ( x ) . By numerical experimentation,
+estimate the new value of E for the quartic case.
+    See Briggs (1991) for precise values of B and E for this fourth-degree case, as well
+as for all other integer degrees between 2 and 12.
+10.7.8 (Renormalization approach to intermittency: algebraic version) Consider
+the map xn 1 f ( xn, r ) , where f ( xn, r ) r x  x2. This is the normal form
+for any map close to a tangent bifurcation.
+a) Show that the map undergoes a tangent bifurcation at the origin when r 0.
+b) Suppose r is small and positive. By drawing a cobweb, show that a typical orbit
+   takes many iterations to pass through the bottleneck at the origin.
+
+
+
+
+                                                                    EXERCISES          403
+c) Let N ( r ) denote the typical number of iterations of f required for an orbit to
+   get through the bottleneck. Our goal is to see how N ( r ) scales with r as r l0.
+   We use a renormalization idea: Near the origin, f 2 looks like a rescaled version
+   of f , and hence it too has a bottleneck there. Show that it takes approximately
+    1
+    2
+      N ( r ) iterations for orbits of f 2 to pass through the bottleneck.
+d) Expand f 2( x,r ) and keep only the terms through O ( x2 ) . Rescale x and r to put
+   this new map into the desired normal form F ( X,R ) x R X  X 2. Show
+   that this renormalization implies the recursive relation
+
+          1
+          2
+              N ( r ) xN ( 4r ) .
+
+e) Show that the equation in (d) has solutions N ( r ) arb and solve for b.
+10.7.9 (Renormalization approach to intermittency: functional version) Show
+that if the renormalization procedure in Exercise 10.7.8 is done exactly, we are led
+to the functional equation
+
+         g ( x ) Bg2 ( x / B )
+
+(just as in the case of period-doubling!) but with new boundary conditions appro-
+priate to the tangent bifurcation:
+
+         g ( 0 ) 0, ga ( 0 ) l.
+
+Unlike the period-doubling case, this functional equation can be solved explicitly
+(Hirsch et al. 1982).
+a) Verify that a solution is B 2, g ( x ) x / ( 1 ax ) , with a arbitrary.
+b) Explain why B 2 is almost obvious, in retrospect. (Hint: Draw cobwebs for
+   both g and g2 for an orbit passing through the bottleneck. Both cobwebs look
+   like staircases; compare the lengths of their steps.)
+10.7.10 Fill in the missing algebraic steps in the concrete renormalization calcula-
+tion for period-doubling. Let f ( x ) ( 1 N ) x x2 . Expand p I n l f 2 ( p I n )
+in powers of the small deviation I n, using the fact that p is a fixed point of f 2 .
+Thereby confirm that (10.7.4) and (10.7.5) are correct.
+10.7.11 Give a cobweb analysis of (10.7.10), starting from the initial condition
+N1 0. Show that N k lN*, where N* 0 is a stable fixed point corresponding to
+the onset of chaos.
+
+
+
+
+404           ONE-DIMENSIONAL MAPS
+     11
+          FR ACTALS
+
+
+
+
+11.0 Introduction
+Back in Chapter 9, we found that the solutions of the Lorenz equations settle down
+to a complicated set in phase space. This set is the strange attractor. As Lorenz
+(1963) realized, the geometry of this set must be very peculiar, something like
+an “infinite complex of surfaces.” In this chapter we develop the ideas needed to
+describe such strange sets more precisely. The tools come from fractal geometry.
+   Roughly speaking, fractals are complex geometric shapes with fine structure at
+arbitrarily small scales. Usually they have some degree of self-similarity. In other
+words, if we magnify a tiny part of a fractal, we will see features reminiscent of
+the whole. Sometimes the similarity is exact; more often it is only approximate or
+statistical.
+   Fractals are of great interest because of their exquisite combination of beauty,
+complexity, and endless structure. They are reminiscent of natural objects like
+mountains, clouds, coastlines, blood vessel networks, and even broccoli, in a way
+that classical shapes like cones and squares can’t match. They have also turned out
+to be useful in scientific applications ranging from computer graphics and image
+compression to the structural mechanics of cracks and the fluid mechanics of vis-
+cous fingering.
+   Our goals in this chapter are modest. We want to become familiar with the sim-
+plest fractals and to understand the various notions of fractal dimension. These ideas
+will be used in Chapter 12 to clarify the geometric structure of strange attractors.
+   Unfortunately, we will not be able to delve into the scientific applications of
+fractals, nor the lovely mathematical theory behind them. For the clearest intro-
+duction to the theory and applications of fractals, see Falconer (1990). The books
+of Mandelbrot (1982), Peitgen and Richter (1986), Barnsley (1988), Feder (1988),
+and Schroeder (1991) are also recommended for their many fascinating pictures
+and examples.
+
+
+                                                   11.0 INTRODUCTION             405
+11.1 Countable and Uncountable Sets
+This section reviews the parts of set theory that we’ll need in later discussions of
+fractals. You may be familiar with this material already; if not, read on.
+   Are some infinities larger than others? Surprisingly, the answer is yes. In the late
+1800s, Georg Cantor invented a clever way to compare different infinite sets. Two
+sets X and Y are said to have the same cardinality (or number of elements) if there is
+an invertible mapping that pairs each element x  X with precisely one y  Y. Such
+a mapping is called a one-to-one correspondence; it’s like a buddy system, where
+every x has a buddy y, and no one in either set is left out or counted twice.
+   A familiar infinite set is the set of natural numbers N {1,2,3,4, . . .}. This set
+provides a basis for comparison—if another set X can be put into one-to-one cor-
+respondence with the natural numbers, then X is said to be countable. Otherwise
+X is uncountable.
+   These definitions lead to some surprising conclusions, as the following exam-
+ples show.
+
+
+EXAMPLE 11.1.1:
+
+   Show that the set of even natural numbers E {2,4,6, . . .} is countable.
+   Solution: We need to find a one-to-one correspondence between E and N. Such
+a correspondence is given by the invertible mapping that pairs each natural num-
+ber n with the even number 2n; thus l j 2, 2 j 4, 3 j 6, and so on.
+   Hence there are exactly as many even numbers as natural numbers. You might
+have thought that there would be only half as many, since all the odd numbers are
+missing! ■
+
+   There is an equivalent characterization of countable sets which is frequently
+useful. A set X is countable if it can be written as a list {x1, x2, x3, . . .}, with every
+x  X appearing somewhere in the list. In other words, given any x, there is some
+finite n such that xn x.
+   A convenient way to exhibit such a list is to give an algorithm that systemati-
+cally counts the elements of X. This strategy is used in the next two examples.
+
+
+EXAMPLE 11.1.2:
+
+   Show that the integers are countable.
+   Solution: Here’s an algorithm for listing all the integers: We start with 0 and
+then work in order of increasing absolute value. Thus the list is {0,1,1,2,2,3,
+–3, . . .}. Any particular integer appears eventually, so the integers are countable. ■
+
+
+
+
+406        FRACTALS
+EXAMPLE 11.1.3:
+
+   Show that the positive rational numbers are countable.
+   Solution: Here’s a wrong way: we start listing the numbers 11 , 12 , 13 , 14 ... in order.
+Unfortunately we never finish the 1n ’s and so numbers like 23 are never counted!
+   The right way is to make a table where the pq-th entry is p / q. Then the rationals
+can be counted by the weaving procedure shown in Figure 11.1.1. Any given p / q is
+reached after a finite number of steps, so the rationals are countable. ■
+
+
+                          1         1          1         1
+                          1         2          3         4
+
+                          2         2          2         2
+                          1         2          3         4
+
+                          3         3          3         3
+                          1         2          3         4
+
+
+                          Figure 11.1.1
+
+
+   Now we consider our first example of an uncountable set.
+
+
+EXAMPLE 11.1.4:
+
+   Let X denote the set of all real numbers between 0 and 1. Show that X is
+uncountable.
+   Solution: The proof is by contradiction. If X were countable, we could list all
+the real numbers between 0 and 1 as a set {x1, x2, x3, . . .}. Rewrite these numbers
+in decimal form:
+
+         x1 0.x11x12x13x14…
+         x2 0.x21x22x23x24…
+         x3 0.x31x32x33x34…
+         #
+where xij denotes the jth digit of the real number xi .
+   To obtain a contradiction, we’ll show that there’s a number r between 0 and 1
+that is not on the list. Hence any list is necessarily incomplete, and so the reals are
+uncountable.
+
+
+
+                              11.1 COUNTABLE AND UNCOUNTABLE SETS                       407
+    We construct r as follows: its first digit is anything other than x11, the first digit of
+x1. Similarly, its second digit is anything other than the second digit of x2. In gen-
+eral, the nth digit of r is xnn , defined as any digit other than xnn. Then we claim that
+the number r  x11x22 x33 ... is not on the list. Why not? It can’t be equal to x1,
+because it differs from x1 in the first decimal place. Similarly, r differs from x2 in
+the second decimal place, from x3 in the third decimal place, and so on. Hence r is
+not on the list, and thus X is uncountable. ■
+
+  This argument (devised by Cantor) is called the diagonal argument, because r is
+constructed by changing the diagonal entries xnn in the matrix of digits [ xij ].
+
+
+11.2 Cantor Set
+Now we turn to another of Cantor’s creations, a fractal known as the Cantor set. It
+is simple and therefore pedagogically useful, but it is also much more than that—
+as we’ll see in Chapter 12, the Cantor set is intimately related to the geometry of
+strange attractors.
+    Figure 11.2.1 shows how to construct the Cantor set.
+
+                                                                                       S0
+  0                                                                                1
+                                                                                       S1
+  0                          1                          2                          1
+                             3                          3
+                                                                                       S2
+
+                                                                                       S3
+
+                                                                                       S4
+
+
+                                     Cantor Set C                                      S∞
+
+  Figure 11.2.1
+
+
+We start with the closed interval S 0 [ 0, 1 ] and remove its open middle third, i.e.,
+we delete the interval ( 13 , 23 ) and leave the endpoints behind. This produces the
+pair of closed intervals shown as S1. Then we remove the open middle thirds of
+those two intervals to produce S2, and so on. The limiting set C Sd is the Cantor
+set. It is difficult to visualize, but Figure 11.2.1 suggests that it consists of an infinite
+number of infinitesimal pieces, separated by gaps of various sizes.
+
+         Fractal Properties of the Cantor Set
+   The Cantor set C has several properties that are typical of fractals more
+generally:
+
+
+
+408        FRACTALS
+         1. C has structure at arbitrarily small scales. If we enlarge part of C
+            repeatedly, we continue to see a complex pattern of points separated
+            by gaps of various sizes. This structure is neverending, like worlds
+            within worlds. In contrast, when we look at a smooth curve or sur-
+            face under repeated magnification, the picture becomes more and
+            more featureless.
+         2. C is self-similar. It contains smaller copies of itself at all scales. For
+            instance, if we take the left part of C (the part contained in the interval
+             ⎡ 0, 13 ⎤ ) and enlarge it by a factor of three, we get C back again. Similarly,
+             ⎣ ⎦
+            the parts of C in each of the four intervals of S2 are geometrically sim-
+            ilar to C, except scaled down by a factor of nine.
+                 If you’re having trouble seeing the self-similarity, it may help to
+            think about the sets Sn rather than the mind-boggling set Sd . Focus
+            on the left half of S2—it looks just like S1, except three times smaller.
+            Similarly, the left half of S3 is S2, reduced by a factor of three. In
+            general, the left half of Sn + 1 looks like all of Sn, scaled down by three.
+            Now set n d. The conclusion is that the left half of Sd looks like Sd,
+            scaled down by three, just as we claimed earlier.
+                 Warning: The strict self-similarity of the Cantor set is found only
+            in the simplest fractals. More general fractals are only approximately
+            self-similar.
+         3. The dimension of C is not an integer. As we’ll show in Section 11.3, its
+            dimension is actually ln 2ln 3 x 0.63! The idea of a noninteger dimen-
+            sion is bewildering at first, but it turns out to be a natural generaliza-
+            tion of our intuitive ideas about dimension, and provides a very useful
+            tool for quantifying the structure of fractals.
+
+   Two other properties of the Cantor set are worth noting, although they are not
+fractal properties as such: C has measure zero and it consists of uncountably many
+points. These properties are clarified in the examples below.
+
+
+EXAMPLE 11.2.1:
+
+    Show that the measure of the Cantor set is zero, in the sense that it can be cov-
+ered by intervals whose total length is arbitrarily small.
+    Solution: Figure 11.2.1 shows that each set Sn completely covers all the sets that
+come after it in the construction. Hence the Cantor set C Sd is covered by each
+of the sets Sn. So the total length of the Cantor set must be less than the total length
+of Sn, for any n. Let Ln denote the length of Sn. Then from Figure 11.2.1 we see that
+L 0 1, L1  23 , L2 = ( 23 )( 23 ) = ( 23 ) , and in general, Ln = ( 23 ) . Since Ln l0 as
+                                             2                             n
+
+
+n ld, the Cantor set has a total length of zero. ■
+
+
+
+
+                                                           11.2 CANTOR SET              409
+   Example 11.2.1 suggests that the Cantor set is “small” in some sense. On the
+other hand, it contains tremendously many points—uncountably many, in fact. To
+see this, we first develop an elegant characterization of the Cantor set.
+
+
+EXAMPLE 11.2.2:
+
+   Show that the Cantor set C consists of all points c  [ 0, 1 ] that have no 1’s in
+their base-3 expansion.
+   Solution: The idea of expanding numbers in different bases may be unfamiliar,
+unless you were one of those children who was taught “New Math” in elementary
+school. Now you finally get to see why base-3 is useful!
+   First let’s remember how to write an arbitrary number x  [ 0,1 ] in base-3. We
+                                          a    a    a
+expand in powers of 1 / 3: thus if x = 1 + 22 + 33 + . . . , then x .a1a2 a3 . . . in
+                                           3 3      3
+base-3, where the digits an are 0, 1, or 2. This expansion has a nice geometric inter-
+pretation (Figure 11.2.2).
+
+                     .0...                 .1...                 .2...
+
+
+
+
+            .00...   .01... .02...                      .20...   .21... .22...
+
+            Figure 11.2.2
+
+
+If we imagine that [ 0,1 ] is divided into three equal pieces, then the first digit a1 tells
+us whether x is in the left, middle, or right piece. For instance, all numbers with
+a1 0 are in the left piece. (Ordinary base-10 works the same way, except that we
+divide [ 0,1 ] into ten pieces instead of three.) The second digit a2 provides more
+refined information: it tells us whether x is in the left, middle, or right third of a
+given piece. For instance, points of the form x .01. . . are in the middle part of the
+left third of [ 0,1 ], as shown in Figure 11.2.2.
+    Now think about the base-3 expansion of points in the Cantor set C. We deleted
+the middle third of [ 0,1 ] at the first stage of constructing C; this removed all points
+whose first digit is 1. So those points can’t be in C. The points left over (the only
+ones with a chance of ultimately being in C ) must have 0 or 2 as their first digit.
+Similarly, points whose second digit is 1 were deleted at the next stage in the con-
+struction. By repeating this argument, we see that C consists of all points whose
+base-3 expansion contains no l’s, as claimed. ■
+
+
+
+
+410        FRACTALS
+   There’s still a fussy point to be addressed. What about endpoints like
+1
+3
+   .1000. . . ? It’s in the Cantor set, yet it has a 1 in its base-3 expansion. Does this
+contradict what we said above? No, because this point can also be written solely in
+terms of 0’s and 2’s, as follows: 13  .1000. . .  .02222. . . . By this trick, each point
+in the Cantor set can be written such that no l’s appear in its base-3 expansion, as
+claimed.
+   Now for the payoff.
+
+
+EXAMPLE 11.2.3:
+
+    Show that the Cantor set is uncountable.
+    Solution: This is just a rewrite of the Cantor diagonal argument of Example 11.1.4,
+so we’ll be brief. Suppose there were a list {c1, c2 , c3, . . .} of all points in C . To show
+that C is uncountable, we produce a point c that is in C but not on the list. Let cij
+denote the jth digit in the base-3 expansion of ci. Define c  c11c22 . . . , where the
+overbar means we switch 0’s and 2’s: thus cnn  0 if cnn 2 and cnn  2 if cnn 0.
+Then c is in C, since it’s written solely with 0’s and 2’s, but c is not on the list, since
+it differs from cn in the nth digit. This contradicts the original assumption that the
+list is complete. Hence C is uncountable. ■
+
+
+
+
+11.3 Dimension of Self-Similar Fractals
+What is the “dimension” of a set of points? For familiar geometric objects, the
+answer is clear—lines and smooth curves are one-dimensional, planes and smooth
+surfaces are two-dimensional, solids are three-dimensional, and so on. If forced
+to give a definition, we could say that the dimension is the minimum number of
+coordinates needed to describe every point in the set. For instance, a smooth curve
+is one-dimensional because every point on it is determined by one number, the arc
+length from some fixed reference point on the curve.
+    But when we try to apply this definition to fractals, we quickly run into para-
+doxes. Consider the von Koch curve, defined recursively in Figure 11.3.1.
+    We start with a line segment S 0. To generate S1, we delete the middle third of S0
+and replace it with the other two sides of an equilateral triangle. Subsequent stages
+are generated recursively by the same rule: Sn is obtained by replacing the middle
+third of each line segment in Sn1 by the other two sides of an equilateral triangle.
+The limiting set K Sd is the von Koch curve.
+
+
+
+
+                            11.3   DIMENSION OF SELF-SIMILAR FRACTALS                    411
+                                                                        S0
+
+
+
+                                                                        S1
+
+
+
+                                                                        S2
+
+
+
+                                                                        S3
+
+
+
+                                                                        S4
+
+                           von Koch curve K
+               Figure 11.3.1
+
+
+
+         A Paradox
+   What is the dimension of the von Koch curve? Since it’s a curve, you might be
+tempted to say it’s one-dimensional. But the trouble is that K has infinite arc length!
+To see this, observe that if the length of S0 is L 0, then the length of S1 is L1  34 L0 ,
+because S1 contains four segments, each of length 13 L0 . The length increases by a
+factor of 34 at each stage of the construction, so Ln  ( 34 )n L 0 ld as n ld.
+   Moreover, the arc length between any two points on K is infinite, by similar rea-
+soning. Hence points on K aren’t determined by their arc length from a particular
+point, because every point is infinitely far from every other!
+   This suggests that K is more than one-dimensional. But would we really want to
+say that K is two-dimensional? It certainly doesn’t seem to have any “area.” So the
+dimension should be between 1 and 2, whatever that means.
+   With this paradox as motivation, we now consider some improved notions of
+dimension that can cope with fractals.
+
+
+412        FRACTALS
+

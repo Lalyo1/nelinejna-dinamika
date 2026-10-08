@@ -1,0 +1,691 @@
+=== PDF pages 232-245 (printed 217-230) ===
+and the crawls. See Grimshaw (1990, pp. 161–163) for a readable derivation of this
+wonderful formula, discovered by Mary Cartwright (1952). See also Stoker (1950)
+for more about relaxation oscillations.
+   One last remark: We have seen that a relaxation oscillation has two time scales
+that operate sequentially—a slow buildup is followed by a fast discharge. In the
+next section we will encounter problems where two time scales operate concur-
+rently, and that makes the problems a bit more subtle.
+
+
+7.6    Weakly Nonlinear Oscillators
+This section deals with equations of the form
+
+         x + x + Fh( x, x ) = 0                                       (1)
+where 0 b F  1 and h (x, x ) is an arbitrary smooth function. Such equations
+represent small perturbations of the linear oscillator x + x = 0 and are therefore
+called weakly nonlinear oscillators. Two fundamental examples are the van der Pol
+equation
+
+         x + x + F( x 2 −1)x = 0,                                     (2)
+(now in the limit of small nonlinearity), and the Duffing equation
+
+         x + x + Fx3 = 0.                                              (3)
+To illustrate the kinds of phenomena that can arise, Figure 7.6.1 shows a comput-
+er-generated solution of the van der Pol equation in the ( x, x ) phase plane, for
+F  0.1 and an initial condition close to the origin. The trajectory is a slowly wind-
+ing spiral; it takes many cycles for the amplitude to grow substantially. Eventually
+the trajectory asymptotes to an approximately circular limit cycle whose radius is
+close to 2.
+
+                                          .   3
+                                          x
+
+
+
+
+                                                                 x
+                        −3                                3
+
+
+
+
+                                         −3
+
+
+                   Figure 7.6.1
+
+
+
+                                     7.6 WEAKLY NONLINEAR OSCILLATORS             217
+We’d like to be able to predict the shape, period, and radius of this limit cycle.
+Our analysis will exploit the fact that the oscillator is “close to” a simple harmonic
+oscillator, which we understand completely.
+
+         Regular Perturbation Theory and Its Failure
+  As a first approach, we seek solutions of (1) in the form of a power series in F.
+Thus if x ( t, F ) is a solution, we expand it as
+
+         x ( t, F )  x0 ( t )    Fx1 ( t )    F2x2 ( t ) . . . ,             (4)
+where the unknown functions xk ( t ) are to be determined from the governing equa-
+tion and the initial conditions. The hope is that all the important information is
+captured by the first few terms—ideally, the first two—and that the higher-order
+terms represent only tiny corrections. This technique is called regular perturbation
+theory. It works well on certain classes of problems (for instance, Exercise 7.3.9),
+but as we’ll see, it runs into trouble here.
+   To expose the source of the difficulties, we begin with a practice problem that
+can be solved exactly. Consider the weakly damped linear oscillator
+
+         x + 2Fx + x = 0,                                                   (5)
+with initial conditions
+
+         x (0)  0, x (0) = 1.                                                (6)
+Using the techniques of Chapter 5, we find the exact solution
+
+         x(t, F ) = (1− F 2 )−1 2 e−Ft sin ⎡⎣⎢(1− F 2 )1 2 t ⎤⎦⎥ .             (7)
+
+
+   Now let’s solve the same problem using perturbation theory. Substitution of (4)
+into (5) yields
+
+d2                           d
+   2
+     ( x0 + Fx1 + . . .) + 2F ( x0 + Fx1 + . . .) + ( x0 + Fx1 + . . .) = 0.   (8)
+dt                           dt
+
+If we group the terms according to powers of F, we get
+
+         [ x0 + x0 ] + F[ x1 + 2 x 0 + x1 ] + O( F 2 ) = 0.               (9)
+Since (9) is supposed to hold for all sufficiently small F, the coefficients of each
+power of F must vanish separately. Thus we find
+
+         O(1) : x0 + x0 = 0                                                  (10)
+         O( F ) : x1 + 2 x 0 + x1 = 0.                                      (11)
+
+
+
+
+218        LIMIT CYCLES
+(We’re ignoring the O ( F2 ) and higher equations, in the optimistic spirit mentioned
+earlier.)
+    The appropriate initial conditions for these equations come from (6). At t  0,
+(4) implies that 0  x0 (0) Fx1 (0) . . . ; this holds for all F, so
+
+         x0 (0)  0, x1 (0)  0.                                              (12)
+                                   0 ) we obtain
+By applying a similar argument to x(
+
+          x 0 ( 0 )  1, x1 ( 0 )  0.                                      (13)
+  Now we solve the initial-value problems one by one; they fall like dominoes.
+The solution of (10), subject to the initial conditions x0 (0)  0, x 0 ( 0 )  1, is
+
+         x0 ( t )  sin t.                                                    (14)
+Plugging this solution into (11) gives
+
+          x1 + x1 = −2 cos t.                                               (15)
+Here’s the first sign of trouble: the right-hand side of (15) is a resonant forcing. The
+solution of (15) subject to x1 (0)  0, x1 ( 0 )  0 is
+
+         x1 ( t )  –t sin t,                                                 (16)
+which is a secular term, i.e., a term that grows without bound as t l d.
+  In summary, the solution of (5), (6) according to perturbation theory is
+
+         x ( t, F )  sin t – Ft sin t        O ( F2 ).                       (17)
+How does this compare with the exact solution (7)? In Exercise 7.6.1, you are asked
+to show that the two formulas agree in the following sense: If (7) is expanded as
+power series in F, the first two terms are given by (17). In fact, (17) is the beginning
+of a convergent series expansion for the true solution. For any fixed t, (17) provides
+a good approximation as long as F is small enough—specifically, we need Ft  1
+so that the correction term (which is actually O ( F2t2 ) ) is negligible.
+   But normally we are interested in the behavior for fixed F, not fixed t. In that
+case we can only expect the perturbation approximation to work for times t 
+O (1 / F ). To illustrate this limitation, Figure 7.6.2 plots the exact solution (7) and the
+perturbation series (17) for F  0.1. As expected, the perturbation series works
+reasonably well if t  1F  10, but it breaks down after that.
+
+
+
+
+                                           7.6 WEAKLY NONLINEAR OSCILLATORS            219
+                      3
+
+                      2
+                                        exact
+                      1
+
+                x     0
+
+                    −1
+
+                    −2             perturbation
+                                      theory
+                    −3
+                          0       10         20       30       40        50
+                                                  t
+
+                Figure 7.6.2
+
+
+
+In many situations we’d like our approximation to capture the true solution’s qual-
+itative behavior for all t, or at least for large t. By this criterion, (17) is a failure, as
+Figure 7.6.2 makes obvious. There are two major problems:
+         1. The true solution (7) exhibits two time scales: a fast time t _ O (1) for the
+            sinusoidal oscillations and a slow time t _ 1 / F over which the ampli-
+            tude decays. Equation (17) completely misrepresents the slow time
+            scale behavior. In particular, because of the secular term t sin t, (17)
+            falsely suggests that the solution grows with time whereas we know
+            from (7) that the amplitude A  (l – F2 )–1 / 2 e–Ft decays exponentially.
+               The discrepancy occurs because e–Ft  1 – Ft O ( F2t2 ), so to this
+            order in F, it appears (incorrectly) that the amplitude increases with t.
+            To get the correct result, we’d need to calculate an infinite number of
+            terms in the series. That’s worthless; we want series approximations
+            that work well with just one or two terms.
+         2. The frequency of the oscillations in (7) is ω = ( l − ε 2 )1/ 2 ≈ 1− 12 ε 2 ,
+            which is shifted slightly from the frequency X  1 of (17). After a very
+            long time t _ O (1 / F2 ), this frequency error will have a significant
+            cumulative effect. Note that this is a third, super-slow time scale!
+
+         Two-Timing
+   The elementary example above reveals a more general truth: There are going to
+be (at least) two time scales in weakly nonlinear oscillators. We’ve already met this
+phenomenon in Figure 7.6.1, where the amplitude of the spiral grew very slowly
+compared to the cycle time. An analytical method called two-timing builds in the
+fact of two time scales from the start, and produces better approximations than
+
+
+
+220        LIMIT CYCLES
+regular perturbation theory. In fact, more than two times can be used, but we’ll
+stick to the simplest case.
+    To apply two-timing to (1), let U  t denote the fast O (1) time, and let T  Ft
+denote the slow time. We’ll treat these two times as if they were independent vari-
+ables. In particular, functions of the slow time T will be regarded as constants on
+the fast time scale U. It’s hard to justify this idea rigorously, but it works! (Here’s
+an analogy: it’s like saying that your height is constant on the time scale of a day.
+Of course, over many months or years your height can change dramatically, espe-
+cially if you’re an infant or a pubescent teenager, but over one day your height stays
+constant, to a good approximation.)
+    Now we turn to the mechanics of the method. We expand the solution of (1) as
+a series
+
+         x ( t, F )  x0 ( U, T )     Fx1 ( U, T )      O ( F2 ).                      (18)
+The time derivatives in (1) are transformed using the chain rule:
+
+                dx ∂x ∂x ∂T ∂x      ∂x
+         x =     =  +      =    +ε    .                                               (19)
+                dt ∂τ ∂T ∂t   ∂τ    ∂T
+
+A subscript notation for differentiation is more compact; thus we write (19) as
+
+         x = ∂ τ x + ε∂T x.                                                           (20)
+After substituting (18) into (20) and collecting powers of F, we find
+
+         x = ∂ τ x0 + ε (∂T x0 + ∂ τ x1 ) + O( ε 2 ).                                 (21)
+Similarly,
+
+         x = ∂ ττ x0 + ε(∂ ττ x1 + 2∂T τ x0 ) + O( ε 2 ).                            (22)
+To illustrate the method, let’s apply it to our earlier test problem.
+
+
+EXAMPLE 7.6.1:
+
+Use two-timing to approximate the solution to the damped linear oscillator
+x + 2Fx + x = 0, with initial conditions x (0)  0, x(
+                                                        0 )  1.
+    Solution: After substituting (21) and (22) for x and x , we get
+
+         s UUx0    F ( s UUxl       2s5Ux0 )     2Fs Ux0       x0   Fx1   O ( F2 )  0. (23)
+Collecting powers of F yields a pair of differential equations:
+
+         O (1): s UUx0          x0 0                                                 (24)
+         O ( F ): s UUxl        2 sTUx0        2s Ux0    x1  0.                       (25)
+
+
+
+                                       7.6 WEAKLY NONLINEAR OSCILLATORS                        221
+Equation (24) is just a simple harmonic oscillator. Its general solution is
+
+         x0  A sin U        B cos U,                                                       (26)
+but now comes the interesting part: The “constants” A and B are actually functions
+of the slow time T. Here we are invoking the above-mentioned ideas that U and T
+should be regarded as independent variables, with functions of T behaving like
+constants on the fast time scale U.
+   To determine A ( T ) and B ( T ), we need to go to the next order of F. Substituting
+(26) into (25) gives
+
+         s UUx1     x1  –2( sTUx0 s Ux0 )
+                        –2( Aa A )cos U             2( Ba      B )sin U                    (27)
+
+where the prime denotes differentiation with respect to T.
+    Now we face the same predicament that ruined us after (15). As in that case,
+the right-hand side of (27) is a resonant forcing that will produce secular terms like
+U sinU and U cosU in the solution for x1. These terms would lead to a convergent but
+useless series expansion for x. Since we want an approximation free from secular
+terms, we set the coefficients of the resonant terms to zero—this manuever is char-
+acteristic of all two-timing calculations. Here it yields
+
+         Aa       A0                                                                       (28)
+         Ba       B  0.                                                                    (29)
+
+The solutions of (28) and (29) are
+
+         A ( T )  A (0) eT
+         B ( T )  B (0) eT.
+
+   The last step is to find the initial values A (0) and B (0). They are determined by
+(18), (26), and the given initial conditions x (0)  0, x(
+                                                          0 )  1, as follows. Equation
+                                                     2
+(18) gives 0  x (0)  x0 (0,0) Fx1 (0,0) O ( F ). To satisfy this equation for all
+sufficiently small F, we must have
+
+         x0 (0,0)  0                                                                       (30)
+and x1 (0,0)  0. Similarly,
+
+         1 = x ( 0 ) = ∂ τ x0 ( 0, 0 ) + ε (∂T x0 ( 0, 0 ) + ∂ τ x1 ( 0, 0 )) + O( ε 2 )
+so
+
+         s Ux0 (0, 0)  1                                                                   (31)
+
+
+
+
+222        LIMIT CYCLES
+and sTx0 (0, 0) s Ux1 (0, 0)  0. Combining (26) and (30) we find B (0)  0; hence
+B ( T ) w 0. Similarly, (26) and (31) imply A (0)  1, so A ( T )  eT. Thus (26) becomes
+
+         x0 ( U, T )  eT sin U.                                            (32)
+Hence
+
+         x  eT sin U        O(F)
+            e–Ft sin t       O(F)                                           (33)
+
+is the approximate solution predicted by two-timing. ■
+
+   Figure 7.6.3 compares the two-timing solution (33) to the exact solution (7) for
+F  0.1. The two curves are almost indistinguishable, even though F is not terribly
+small. This is a characteristic feature of the method—it often works better than it
+has any right to.
+
+                      1
+
+                                                         exact
+                    0.5                                  two timing
+
+
+
+
+               x      0
+
+
+                   −0.5
+
+
+                    −1
+                          0          10    20       30       40        50
+                                                t
+
+               Figure 7.6.3
+
+
+If we wanted to go further with Example 7.6.1, we could either solve for x1 and
+higher-order corrections, or introduce a super-slow time |  F2t to investigate
+the long-term phase shift caused by the O ( F2 ) error in frequency. But Figure 7.6.3
+shows that we already have a good approximation.
+   OK, enough practice problems! Now that we have calibrated the method, let’s
+unleash it on a genuine nonlinear problem.
+
+
+EXAMPLE 7.6.2:
+
+Use two-timing to show that the van der Pol oscillator (2) has a stable limit cycle
+that is nearly circular, with a radius  2 O ( F ) and a frequency X  1 O ( F2 ).
+
+
+
+                                     7.6 WEAKLY NONLINEAR OSCILLATORS                223
+   Solution: The equation is x + x + F( x 2 −1)x = 0. Using (21) and (22) and col-
+lecting powers of F, we find the following equations:
+
+         O (l): s UUx0 x0  0                                                (34)
+         O ( F ): s UUx1 x1  –2s UT x0 – ( x02 – l) s Ux0.                  (35)
+
+As always, the O (1) equation is a simple harmonic oscillator. Its general solution
+can be written as (26), or alternatively, as
+
+         x0  r ( T ) cos ( U    G(T))                                       (36)
+where r ( T ) and G ( T ) are the slowly-varying amplitude and phase of x0.
+  To find equations governing r and G, we insert (36) into (35). This yields
+
+         s UUxl    x1  –2( ra sin ( U G ) rGa cos ( U G ) )
+                         – r sin ( U G ) [ r2 cos2 ( U G ) – l ].            (37)
+
+As before, we need to avoid resonant terms on the right-hand side. These are
+terms proportional to cos ( U G ) and sin ( U G ). Some terms of this form already
+appear explicitly in (37). But—and this is the important point—there is also a res-
+onant term lurking in sin ( U G ) cos2 ( U G ), because of the trigonometric identity
+
+         sin(τ + φ ) cos 2 ( τ + φ ) = 14 [sin( τ + φ ) + sin3( τ + φ )].    (38)
+(Exercise 7.6.10 reminds you how to derive such identities, but usually we won’t
+need them—shortcuts are available, as we’ll see.) After substituting (38) into (37),
+we get
+
+         ∂ ττ x1 + x1 = ⎡⎣⎢−2r ′ + r − 14 r 3 ⎤⎦⎥ sin (τ + φ )
+                                                                             (39)
+                          + [−2rφ ′ ] cos( τ + φ ) − 14 r 3 sin3
+                                                               3( τ + φ ).
+
+To avoid secular terms, we require
+
+         −2r ′ + r − 14 r 3 = 0                                              (40)
+
+         –2rGa  0.                                                          (41)
+
+   First consider (40). It may be rewritten as a vector field
+
+         r ′ = 18 r( 4 − r 2 )                                               (42)
+on the half-line r p 0. Following the methods of Chapter 2 or Example 7.1.1, we
+see that r*  0 is an unstable fixed point and r*  2 is a stable fixed point. Hence
+
+
+
+
+224       LIMIT CYCLES
+r ( T ) l 2 as T l d. Secondly, (41) implies Ga  0, so G ( T )  G 0 for some constant
+G 0. Hence x0 ( U, T ) l 2cos ( U G 0 ) and therefore
+
+         x ( t ) l 2 cos ( t    G0 )    O(F)                                 (43)
+as t l d. Thus x ( t ) approaches a stable limit cycle of radius  2 O ( F ).
+   To find the frequency implied by (43), let R  t G ( T ) denote the argument of
+the cosine. Then the angular frequency X is given by
+
+                dθ      d φ dT
+          ω=       = 1+        = 1 + εφ ′ = 1,                               (44)
+                dt      dT dt
+
+through first order in F. Hence X  1 O ( F2 ) ; if we want an explicit formula for
+this O ( F2 ) correction term, we’d need to introduce a super-slow time |  F2t, or we
+could use the Poincaré-Lindstedt method, as discussed in the exercises. ■
+
+         Averaged Equations
+   The same steps occur again and again in problems about weakly nonlinear
+oscillators. We can save time by deriving some general formulas.
+   Consider the equation for a general weakly nonlinear oscillator:
+
+          x + x + Fh (x, x ) = 0.                                         (45)
+The usual two-timing substitutions give
+
+         O (l): s UUx0 x0  0                                                (46)
+         O ( F ): s UUx1 x1  –2s UTx0 – h                                   (47)
+
+where now h  h ( x0 , s Ux0 ). As in Example 7.6.2, the solution of the O (1) equation is
+
+         x0  r ( T ) cos ( U   G ( T ) ).                                   (48)
+   Our goal is to derive differential equations for ra and Ga, analogous to (40) and
+(41). We’ll find these equations by insisting, as usual, that there be no terms pro-
+portional to cos ( U G ) and sin ( U G ) on the right-hand side of (47). Substituting
+(48) into (47), we see that this right-hand side is
+
+         2 [ ra sin ( U   G)    rGa cos ( t    G)]  h                       (49)
+where now h  h ( r cos ( U G ), – r sin ( U G ) ).
+  To extract the terms in h proportional to cos ( U G ) and sin ( U G ), we bor-
+row some ideas from Fourier analysis. (If you’re unfamiliar with Fourier analysis,
+don’t worry—we’ll derive all that we need in Exercise 7.6.12.) Notice that h is a
+2Q-periodic function of U G. Let
+
+         RU        G.
+
+
+                                       7.6 WEAKLY NONLINEAR OSCILLATORS              225
+Fourier analysis tells us that h ( R ) can be written as a Fourier series
+
+                              ∞                              ∞
+                h(R ) = ∑ ak cos kR + ∑ bk sin kR                                                               (50)
+                             k =0                           k =1
+
+
+where the Fourier coefficients are given by
+
+                                       2π
+                a0 = 21π ∫                  h( θ ) d θ
+                                   0
+                                   2π
+                ak = π1 ∫                  h(θ ) cos kθ d θ,         k ≥1                                       (51)
+                               0
+                                   2π
+                bk = π1 ∫                  h(θ ) sin kθ d θ,         k ≥ 1.
+                               0
+
+
+
+Hence (49) becomes
+
+                                                             ∞                    ∞
+                2 [r ′ sin θ + rφ′ cos θ ]− ∑ ak cos kθ − ∑ bk sin kθ.                                          (52)
+                                                            k =0                 k =1
+
+
+The only resonant terms in (52) are [ 2ra – b1 ] sin R and [ 2rGa – a1 ] cos R. Therefore,
+to avoid secular terms we need ra  b1 / 2 and rGa  a / 2. Using the expressions in
+(51) for a1 and b1, we obtain
+
+                                   2π
+                r ′ = 21π ∫                h(θ )sin θ d θ ≡ 〈h sin θ〉
+                               0
+                                           2π
+                                                                                                                (53)
+                rφ ′ = 21π ∫                    h(θ ) cos θ d θ ≡ 〈h cos θ〉
+                                       0
+
+
+
+where the angled brackets 〈⋅〉 denote an average over one cycle of R.
+    The equations in (53) are called the averaged or slow-time equations. To use
+them, we write out h  h ( r cos ( U G ), –r sin ( U G ) )  h ( r cosR, –r sinR ) explic-
+itly, and then compute the relevant averages over the fast variable R, treating the
+slow variable r as constant. Here are some averages that appear often:
+
+〈cos〉 = 〈sin〉 = 0,                     〈sin cos〉 = 0,              〈cos3 〉 = 〈sin3 〉 = 0,      〈cos 2 n+1 〉 = 〈sin 2 n+1 〉 = 0,
+〈cos 2 〉 = 〈sin2 〉 = 12 ,                       〈cos 4 〉 = 〈sin 4 〉 = 38 ,    〈cos 2 sin 2 〉 = 18 ,
+〈cos 2 n 〉 = 〈sin2 n 〉 = 1⋅23⋅⋅45⋅!6!( 2(n2−n1) ) ,         n ≥ 1.
+                                                                                                                (54)
+Other averages can either be derived from these, or found by direct integration.
+For instance,
+
+
+
+
+226              LIMIT CYCLES
+            cos 2 sin 4  (1 sin2 )sin 4  sin 4  sin6  38  15
+                                                                48
+                                                                    161
+
+and
+
+                                        2π                                             2π
+            cos3 sin = 21π ∫                 cos3 θ sin θd θ = − 21π ⎡⎣⎢ cos 4 θ ⎤⎦⎥        = 0.
+                                    0                                                  0
+
+
+
+
+EXAMPLE 7.6.3:
+
+Consider the van der Pol equation x + x + F( x 2 −1)x = 0, subject to the initial
+                        0 )  0. Find the averaged equations, and then solve them
+conditions x (0)  1, x(
+to obtain an approximate formula for x ( t, F ). Compare your result to a numerical
+solution of the full equation, for F  0.1.
+   Solution: The van der Pol equation has h = ( x 2 −1)x = ( r 2 cos 2 R −1)(−r sin R).
+Hence (53) becomes
+
+          r ′ = h sin R = ( r 2 cos 2 R −1)(−r sin R )sin R
+             = r sin2 R − r 3 cos 2 R sin2 R
+             = 12 r − 18 r 3
+
+and
+
+          rφ ′ = h cos θ = ( r 2 cos 2 θ −1)(−r sin θ ) cos θ
+               = r sin θ cos θ − r 3 cos3 θ sin θ
+               = 0 − 0 = 0.
+
+These equations match those found in Example 7.6.2, as they should.
+   The initial conditions x (0)  1 and x(        0 )  0 imply r( 0 ) ≈ x( 0 )2 + x ( 0 )2 = 1
+and φ( 0 ) ≈ tan−1 (x ( 0 ) x( 0 )) − τ = 0 − 0 = 0. Since Ga  0, we find G ( T ) w 0. To
+find r ( T ), we solve r ′ = 12 r − 18 r 3 subject to r (0)  l. The differential equation sep-
+arates to
+
+                 8dr
+          ∫ r( 4 − r ) = ∫ dT .
+                       2
+
+
+
+After integrating by partial fractions and using r (0)  1, we find
+
+          r ( T )  2(l        3eT )l / 2.                                                       (55)
+
+
+
+
+                                               7.6 WEAKLY NONLINEAR OSCILLATORS                           227
+Hence
+
+         x(t, ε ) ∼ x0 ( τ ,T ) + O( ε )
+                   2                                                           (56)
+         =                   cos t + O( ε ).
+                       −εt
+             1 + 3e
+
+Equation (56) describes the transient dynamics of the oscillator as it spirals out to
+its limit cycle. Notice that r ( T ) l 2 as T l d, as in Example 7.6.2.
+    In Figure 7.6.4 we plot the “exact” solution of the van der Pol equation, obtained
+by numerical integration for F  0.1 and initial conditions x (0)  1, x( 0 )  0. For
+comparison, the slowly-varying amplitude r ( T ) predicted by (55) is also shown.
+The agreement is striking. Alternatively, we could have plotted the whole solution
+(56) instead of just its envelope; then the two curves would be virtually indistin-
+guishable, like those in Figure 7.6.3. ■
+
+                        3
+                                      envelope predicted
+                        2             by averaging theory
+
+
+                        1
+
+               x        0
+
+                       −1
+
+                       −2
+                                   exact solution
+                       −3
+                             0         10           20          30   40   50
+                                                            t
+
+               Figure 7.6.4
+
+
+   Now we consider an example in which the frequency of an oscillator depends
+on its amplitude. This is a common phenomenon, and one that is intrinsically non-
+linear—it cannot occur for linear oscillators.
+
+
+EXAMPLE 7.6.4:
+
+Find an approximate relation between the amplitude and frequency of the Duffing
+oscillator x + x + Fx3 = 0, where F can have either sign. Interpret the results
+physically.
+   Solution: Here h  x3  r3 cos3 R. Equation (53) becomes
+
+
+
+
+228       LIMIT CYCLES
+         r ′ = h sin R = r 3 cos3R sin R = 0
+
+
+and
+
+         rφ ′ = h cos θ = r 3 cos 4 θ = 38 r 3 .
+
+
+Hence r ( T ) w a, for some constant a, and G ′ = 38 a 2 . As in Example 7.6.2, the fre-
+quency X is given by
+
+         ω = 1 + εφ ′ = 1 + 38 εa 2 + O( ε 2 ).                            (57)
+   Now for the physical interpretation. The Duffing equation describes the
+undamped motion of a unit mass attached to a nonlinear spring with restoring
+force F ( x )  –x – Fx3. We can use our intuition about ordinary linear springs if we
+write F ( x )  –kx, where the spring stiffness is now dependent on x :
+
+         k  k(x)  1       Fx2.
+Suppose F  0. Then the spring gets stiffer as the displacement x increases—this
+is called a hardening spring. On physical grounds we’d expect it to increase the fre-
+quency of the oscillations, consistent with (57). For F  0 we have a softening spring,
+exemplified by the pendulum (Exercise 7.6.15).
+    It also makes sense that ra  0. The Duffing equation is a conservative sys-
+tem and for all F sufficiently small, it has a nonlinear center at the origin (Exercise
+6.5.13). Since all orbits close to the origin are periodic, there can be no long-term
+change in amplitude, consistent with ra  0. ■
+
+         Validity of Two-Timing
+    We conclude with a few comments about the validity of the two-timing method.
+The rule of thumb is that the one-term approximation x0 will be within O ( F ) of the
+true solution x for all times up to and including t _ O (1 / F ), assuming that both x
+and x0 start from the same initial condition. If x is a periodic solution, the situation
+is even better: x0 remains within O ( F ) of x for all t.
+    But for precise statements and rigorous results about these matters, and for
+discussions of the subtleties that can occur, you should consult more advanced
+treatments, such as Guckenheimer and Holmes (1983) or Grimshaw (1990). Those
+authors use the method of averaging, an alternative approach that yields the same
+results as two-timing. See Exercise 7.6.25 for an introduction to this powerful
+technique.
+    Also, we have been very loose about the sense in which our formulas approxi-
+mate the true solutions. The relevant notion is that of asymptotic approximation.
+For introductions to asymptotics, see Lin and Segel (1988) or Bender and Orszag
+(1978).
+
+
+                                   7.6 WEAKLY NONLINEAR OSCILLATORS                229
+ EXERCISES FOR CHAPTER 7
+
+
+7.1 Examples
+Sketch the phase portrait for each of the following systems. (As usual, r, R denote
+polar coordinates.)
+
+7.1.1     r = r 3 − 4r, R = 1                         7.1.2      r = r(1− r 2 )(9 − r 2 ), R = 1
+7.1.3     r = r( l − r 2 )( 4 − r 2 ), R = 2 − r 2    7.1.4      r  r sin r, R  l
+7.1.5     (From polar to Cartesian coordinates) Show that the system r = r( l − r 2 ),
+R  1 is equivalent to
+
+          x = x − y − x( x 2 + y 2 ),             y = x + y − y( x 2 + y 2 ),
+where x  r cosR, y  r sinR. (Hint: x = dtd ( r cos R ) = r cos R − rR sin R.)
+7.1.6    (Circuit for van der Pol oscillator) Figure 1 shows the “tetrode multivibra-
+tor” circuit used in the earliest commercial radios and analyzed by van der Pol. In
+                                 van der Pol’s day, the active element was a vacuum
+             L                   tube; today it would be a semiconductor device. It
+  1                       2      acts like an ordinary resistor when I is high, but like
+                                 a negative resistor (energy source) when I is low. Its
+I                           C
+                                 current-voltage characteristic V  f ( I ) resembles a
+  4                       3
+                                 cubic function, as discussed below.
+                                    Suppose a source of current is attached to the
+         V = f (I )
+                                 circuit and then withdrawn. What equations govern
+Figure 1                         the subsequent evolution of the current and the var-
+                                 ious voltages?
+a) Let V  V32  –V23 denote the voltage drop from point 3 to point 2 in the circuit.
+    Show that V = −I / C and V = LI + f ( I ).
+b) Show that the equations in (a) are equivalent to
+
+           dw                     dx
+              = −x,                  = w − μF ( x )
+           dτ                     dτ
+
+where x  L1 / 2I, w  C1 / 2 V, U  ( LC )1 / 2 t, and F ( x )  f ( L1 / 2x ).
+  In Section 7.5, we’ll see that this system for ( w, x ) is equivalent to the van der Pol
+equation, if F ( x ) = 13 x3 − x. Thus the circuit produces self-sustained oscillations.
+
+7.1.7       (Waveform) Consider the system r = r( 4 − r 2 ), R  1, and let x ( t ) 
+r ( t ) cos R ( t ). Given the initial condition x (0)  0.1, y (0)  0, sketch the approxi-
+mate waveform of x ( t ), without obtaining an explicit expression for it.
+
+
+
+
+230         LIMIT CYCLES
+

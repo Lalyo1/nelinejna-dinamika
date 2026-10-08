@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Потоци върху линия: примерите от учебника, интерактивно</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f8fa;--panel:#fff;--ink:#14263a;--mute:#5b6b7b;--line:#d5dde5;--grid:#e8edf2;--curve:#14263a;--stab:#0b8a7a;--unst:#b4236f;--half:#c98a00;--acc:#2456c8}
+:root[data-theme="dark"]{--bg:#0f1720;--panel:#17212c;--ink:#e6edf3;--mute:#93a4b5;--line:#2c3b4a;--grid:#223140;--curve:#e6edf3;--stab:#3fd2bd;--unst:#ff6fb0;--half:#f2b632;--acc:#7fa6ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--panel:#17212c;--ink:#e6edf3;--mute:#93a4b5;--line:#2c3b4a;--grid:#223140;--curve:#e6edf3;--stab:#3fd2bd;--unst:#ff6fb0;--half:#f2b632;--acc:#7fa6ff}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Georgia,"Iowan Old Style","Times New Roman",serif}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:1.7rem;line-height:1.2;margin:.2em 0 .3em}
+.lead{color:var(--mute);max-width:62ch;margin:0 0 18px}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+nav button{font:inherit;font-size:.85rem;padding:6px 11px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;cursor:pointer}
+nav button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,input:focus-visible,canvas:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.eq{font-size:1.35rem;margin:.1em 0 .4em;font-style:italic}
+.plots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:760px){.plots{grid-template-columns:1fr}}
+canvas{width:100%;height:280px;display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;touch-action:none}
+.cap{font-size:.82rem;color:var(--mute);margin:4px 2px 0}
+.ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:8px 0;font-size:.9rem;font-family:system-ui,sans-serif}
+.ctl label{display:flex;gap:8px;align-items:center}
+.ctl input[type=range]{width:150px}
+.run{font:inherit;padding:6px 14px;border:0;border-radius:6px;background:var(--acc);color:#fff;cursor:pointer}
+.fp{margin:8px 0 0;padding:0;list-style:none;font-family:system-ui,sans-serif;font-size:.9rem}
+.fp li{padding:5px 0;border-top:1px solid var(--grid)}
+.s{color:var(--stab);font-weight:600}.u{color:var(--unst);font-weight:600}.h{color:var(--half);font-weight:600}
+.txt p{margin:.5em 0;max-width:68ch}
+.try{border-left:3px solid var(--acc);padding-left:12px;color:var(--ink)}
+footer{margin-top:22px;color:var(--mute);font-size:.82rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Потоци върху линия: примерите от учебника</h1>
+<p class="lead">Темите 2 и 3 от конспекта. Всеки пример от Строгац е тук като жива картинка. Хвани точката на лявата графика и я премествай: дясната показва как се държи решението от това начално условие.</p>
+<nav id="nav" aria-label="Примери"></nav>
+<div class="card">
+  <div class="eq" id="eq"></div>
+  <div class="plots">
+    <div><canvas id="c1" tabindex="0" aria-label="Фазов портрет: графика на f(x)"></canvas><p class="cap">Фазов портрет: x на хоризонталата, ẋ = f(x) на вертикалата. Стрелките показват накъде тече x.</p></div>
+    <div><canvas id="c2" aria-label="Решение x(t)"></canvas><p class="cap">Решения x(t) от различни начални точки. Дебелата линия е твоята.</p></div>
+  </div>
+  <div class="ctl" id="ctl"></div>
+  <ul class="fp" id="fp"></ul>
+  <div class="txt" id="txt" style="margin-top:12px"></div>
+</div>
+<footer>Фиксираните точки са запълнени кръгове при устойчиви, празни при неустойчиви, наполовина запълнени при полуустойчиви.</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const PI=Math.PI;
+function bis(f,a,b){for(let i=0;i<60;i++){const m=(a+b)/2;(f(a)*f(m)<=0)?b=m:a=m}return(a+b)/2}
+const E=[
+{id:'sin',name:'1. ẋ = sin x',eq:'ẋ = sin x',f:x=>Math.sin(x),xr:()=>[-9.5,9.5],T:10,x0:1,
+ fps:()=>{const a=[];for(let k=-3;k<=3;k++)a.push(k*PI);return a},
+ txt:`<p>Първият пример в книгата. Неподвижните точки са x* = kπ. Там, където графиката на sin x минава от положително към отрицателно, потокът се събира, значи точката е устойчива. Обратното дава неустойчива точка.</p><p class="try">Пробвай: сложи точката точно в 0 и тя остава там. Премести я на 0,05 вдясно и ще видиш как бавно се отделя, а после бързо стига до π.</p>`},
+{id:'x2',name:'2. ẋ = x² − 1',eq:'ẋ = x² − 1',f:x=>x*x-1,xr:()=>[-2.5,2.5],T:6,x0:0.5,
+ fps:()=>[-1,1],
+ txt:`<p>Пример 2.2.1. Решаваме x² − 1 = 0 и получаваме x* = ±1. Между тях f е отрицателна, затова потокът отива наляво, към −1. Отдясно на 1 f е положителна и x бяга надясно.</p><p class="try">Пробвай: започни от 1,2. Решението "експлодира" за крайно време. Това е нещо, което линейните системи никога не правят. Точката −1 е устойчива, но не глобално, защото от x₀ > 1 никога не стигаш до нея.</p>`},
+{id:'rc',name:'3. RC верига',eq:'Q̇ = V₀/R − Q/(RC)',f:(x,p)=>(1-x)/p.tau,xr:()=>[-0.5,2],T:8,x0:0,
+ params:[{k:'tau',l:'τ = RC',min:.3,max:3,v:1,s:.1}],
+ fps:()=>[1],
+ txt:`<p>Пример 2.2.2: кондензатор, зареждан през резистор. Взели сме V₀ = C = 1, така че Q* = CV₀ = 1. Уравнението е линейно, но е добро упражнение: от картинката се вижда, че зарядът расте и се приближава към 1 отляво.</p><p class="try">Пробвай: местиш τ. Колкото по-малко е τ, толкова по-бързо се зарежда кондензаторът. Започни и от Q > 1, т.е. презареден кондензатор: той се разрежда към същото равновесие.</p>`},
+{id:'cos',name:'4. ẋ = x − cos x',eq:'ẋ = x − cos x',f:x=>x-Math.cos(x),xr:()=>[-3,3],T:8,x0:-2,
+ fps:()=>[bis(x=>x-Math.cos(x),0,1)],
+ txt:`<p>Пример 2.2.3. Хитрината на книгата: не чертаем x − cos x направо, а чертаем y = x и y = cos x поотделно. Пресичат се в една точка, x* ≈ 0,739. Вдясно от нея x > cos x, значи ẋ > 0.</p><p class="try">Пробвай: започни съвсем близо до x* ≈ 0,739. Точката е неустойчива, защото f′ = 1 + sin x* > 0: от лявата страна x тръгва към −∞, от дясната към +∞. Виж стрелките.</p>`},
+{id:'log',name:'5. Логистично',eq:'Ṅ = rN(1 − N/K)',f:(x,p)=>p.r*x*(1-x/p.K),xr:p=>[-0.5,p.K*1.4],T:14,x0:0.2,
+ params:[{k:'r',l:'r',min:.2,max:2,v:1,s:.1},{k:'K',l:'K',min:1,max:5,v:3,s:.5}],
+ fps:p=>[0,p.K],
+ txt:`<p>Логистичното уравнение за популации, разгледано в 2.3 и 2.4. Неподвижни точки: N* = 0 (празна среда) и N* = K (капацитет на средата). Линеаризацията дава f′(0) = r и f′(K) = −r, затова 0 е неустойчива, а K устойчива, и характерното време е 1/r.</p><p class="try">Пробвай: започни с много малка популация. Първо расте почти експоненциално, после се "огъва" и спира при K. Увеличи r и виж как времето за достигане на K се скъсява.</p>`},
+{id:'a',name:'6а. ẋ = −x³',eq:'ẋ = −x³',f:x=>-x*x*x,xr:()=>[-2,2],T:12,x0:1.5,fps:()=>[0],cs:1},
+{id:'b',name:'6б. ẋ = x³',eq:'ẋ = x³',f:x=>x*x*x,xr:()=>[-2,2],T:3,x0:.4,fps:()=>[0],cs:1},
+{id:'c',name:'6в. ẋ = x²',eq:'ẋ = x²',f:x=>x*x,xr:()=>[-2,2],T:6,x0:-1.5,fps:()=>[0],cs:1},
+{id:'d',name:'6г. ẋ = 0',eq:'ẋ = 0',f:x=>0,xr:()=>[-2,2],T:6,x0:1,fps:()=>[],cs:1,
+ note:'Цялата права е от неподвижни точки: смущенията нито растат, нито затихват.'},
+{id:'cbrt',name:'7. ẋ = x^(1/3)',eq:'ẋ = x^(1/3)',f:x=>Math.cbrt(x),xr:()=>[-2,2],T:6,x0:0,
+ fps:()=>[0],
+ txt:`<p>Пример 2.5.1 за единствеността. От x₀ = 0 има очевидно решение x(t) = 0. Но като разделим променливите, получаваме и второ: x(t) = (2t/3)^(3/2). Двете започват от една и съща точка.</p><p class="try">Пробвай: оставаш в 0 и виждаш плоската линия, а пунктирът е второто решение. Теоремата за единственост не важи тук, защото производната на x^(1/3) не е ограничена при 0.</p>`}
+];
+const CS=`<p>Пример 2.4.3. Във всички четири случая x* = 0 и f′(0) = 0, но поведението е различно: (а) устойчива, (б) неустойчива, (в) полуустойчива, (г) цяла права от неподвижни точки. Затова, когато f′(x*) = 0, линейният анализ не казва нищо и се връщаме към графиката.</p><p class="try">Пробвай: премини през четирите бутона 6а–6г със същото начално условие и сравни дясната графика.</p>`;
+let cur=E[0],P={},x0=1,anim=null;
+function pv(){const o={};(cur.params||[]).forEach(q=>o[q.k]=P[q.k]);return o}
+function traj(x0,T,N=300){const f=x=>cur.f(x,pv()),h=T/N,out=[x0];let x=x0;
+ for(let i=0;i<N;i++){if(!isFinite(x)||Math.abs(x)>50){out.push(NaN);continue}
+  const k1=f(x),k2=f(x+h*k1/2),k3=f(x+h*k2/2),k4=f(x+h*k3);x+=h*(k1+2*k2+2*k3+k4)/6;out.push(x)}return out}
+function setup(c){const r=window.devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;
+ if(c.width!==Math.round(w*r)){c.width=Math.round(w*r);c.height=Math.round(h*r)}
+ const g=c.getContext('2d');g.setTransform(r,0,0,r,0,0);g.clearRect(0,0,w,h);return[g,w,h]}
+function yrange(){const[a,b]=cur.xr(pv());let lo=0,hi=0;
+ for(let i=0;i<=200;i++){const v=cur.f(a+(b-a)*i/200,pv());lo=Math.min(lo,v);hi=Math.max(hi,v)}
+ const pad=Math.max(.3,(hi-lo)*.12);return[lo-pad,hi+pad]}
+function classify(xs){const e=1e-3*Math.max(1,Math.abs(xs));const l=cur.f(xs-e,pv()),r=cur.f(xs+e,pv());
+ const sl=Math.abs(l)<1e-9?0:Math.sign(l),sr=Math.abs(r)<1e-9?0:Math.sign(r);
+ if(sl>0&&sr<0)return's';if(sl<0&&sr>0)return'u';return'h'}
+const fmt=v=>(Math.abs(v)<1e-9?0:v).toFixed(3).replace(/\.?0+$/,'').replace('.',',');
+function draw(){
+ const[xa,xb]=cur.xr(pv()),[ya,yb]=yrange(),m={l:36,r:10,t:10,b:24},ink=css('--ink'),mu=css('--mute'),gr=css('--grid');
+ let[g,w,h]=setup($('c1'));
+ const X=x=>m.l+(x-xa)/(xb-xa)*(w-m.l-m.r),Y=y=>h-m.b-(y-ya)/(yb-ya)*(h-m.t-m.b);
+ g.strokeStyle=gr;g.lineWidth=1;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(w-m.r,Y(0));g.stroke();
+ g.fillStyle=mu;g.font='11px system-ui';g.fillText('x',w-14,Y(0)-6);g.fillText('ẋ',m.l+4,m.t+10);
+ g.strokeStyle=css('--curve');g.lineWidth=2;g.beginPath();
+ for(let i=0;i<=300;i++){const x=xa+(xb-xa)*i/300,y=cur.f(x,pv());i?g.lineTo(X(x),Y(y)):g.moveTo(X(x),Y(y))}g.stroke();
+ const n=18,fps=cur.fps(pv());
+ for(let i=0;i<=n;i++){const x=xa+(xb-xa)*(i+.5)/(n+1),v=cur.f(x,pv());if(Math.abs(v)<1e-6||fps.some(p=>Math.abs(p-x)<(xb-xa)/40))continue;
+  const d=Math.sign(v),px=X(x),py=Y(0);g.fillStyle=d>0?css('--acc'):css('--half');g.beginPath();g.moveTo(px+d*7,py);g.lineTo(px-d*3,py-5);g.lineTo(px-d*3,py+5);g.fill()}
+ fps.forEach(p=>{const c=classify(p),col=c==='s'?css('--stab'):c==='u'?css('--unst'):css('--half');
+  g.strokeStyle=col;g.fillStyle=c==='s'?col:css('--panel');g.lineWidth=2;g.beginPath();g.arc(X(p),Y(0),6,0,7);g.fill();g.stroke();
+  if(c==='h'){g.fillStyle=col;g.beginPath();g.arc(X(p),Y(0),6,-PI/2,PI/2);g.fill()}});
+ const tr=traj(x0,cur.T),k=anim===null?null:Math.min(tr.length-1,Math.floor(anim/cur.T*(tr.length-1)));
+ const xm=k===null?x0:tr[k];
+ if(isFinite(xm)){g.fillStyle=css('--ink');g.beginPath();g.arc(X(xm),Y(0),7,0,7);g.fill();g.strokeStyle=css('--bg');g.lineWidth=2;g.stroke()}
+ g.fillStyle=mu;g.fillText(fmt(xa),m.l-2,h-8);g.fillText(fmt(xb),w-m.r-24,h-8);
+ // right plot
+ [g,w,h]=setup($('c2'));const T=cur.T;
+ const Xt=t=>m.l+t/T*(w-m.l-m.r),Yx=x=>h-m.b-(x-xa)/(xb-xa)*(h-m.t-m.b);
+ g.strokeStyle=gr;g.lineWidth=1;g.beginPath();g.moveTo(m.l,h-m.b);g.lineTo(w-m.r,h-m.b);g.stroke();
+ g.fillStyle=mu;g.fillText('t',w-12,h-m.b-6);g.fillText('x',m.l+4,m.t+10);g.fillText(fmt(xa),2,h-m.b);g.fillText(fmt(xb),2,m.t+22);
+ fps.forEach(p=>{g.strokeStyle=gr;g.setLineDash([4,4]);g.beginPath();g.moveTo(m.l,Yx(p));g.lineTo(w-m.r,Yx(p));g.stroke();g.setLineDash([])});
+ const line=(arr,col,lw,dash)=>{g.strokeStyle=col;g.lineWidth=lw;g.setLineDash(dash||[]);g.beginPath();let on=false;
+  arr.forEach((x,i)=>{if(!isFinite(x)||x<xa-1||x>xb+1){on=false;return}const px=Xt(i/(arr.length-1)*T),py=Yx(x);on?g.lineTo(px,py):g.moveTo(px,py);on=true});g.stroke();g.setLineDash([])};
+ for(let i=0;i<9;i++)line(traj(xa+(xb-xa)*(i+.5)/9,T),gr,1.2);
+ if(cur.id==='cbrt'){const N=300,a=[];for(let i=0;i<=N;i++)a.push(Math.pow(2*(i/N*T)/3,1.5));line(a,css('--unst'),2,[6,5])}
+ line(tr,css('--ink'),2.6);
+ if(k!==null&&isFinite(tr[k])){g.fillStyle=css('--ink');g.beginPath();g.arc(Xt(anim),Yx(tr[k]),5,0,7);g.fill()}
+ // text
+ const tau=fps.map(p=>{const e=1e-5,d=(cur.f(p+e,pv())-cur.f(p-e,pv()))/(2*e);return[p,d,classify(p)]});
+ $('fp').innerHTML=(tau.length?tau.map(([p,d,c])=>`<li>x* = ${fmt(p)}: f′(x*) = ${fmt(d)}, <span class="${c}">${c==='s'?'устойчива':c==='u'?'неустойчива':'полуустойчива'}</span>${Math.abs(d)<1e-3?' (f′ = 0: линейният анализ мълчи)':` , характерно време 1/|f′| ≈ ${fmt(1/Math.abs(d))}`}</li>`).join(''):`<li>${cur.note||'Няма неподвижни точки.'}</li>`);
+}
+function frame(ts){if(anim===null)return;if(!frame.t0)frame.t0=ts;anim=(ts-frame.t0)/1000*cur.T/6;
+ if(anim>=cur.T){anim=null;frame.t0=0;draw();return}draw();requestAnimationFrame(frame)}
+function select(e){cur=e;anim=null;frame.t0=0;x0=e.x0!==undefined?e.x0:1;P={};(e.params||[]).forEach(q=>P[q.k]=q.v);
+ document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.id===e.id));
+ $('eq').textContent=e.eq;$('txt').innerHTML=e.cs?CS:e.txt;
+ const c=$('ctl');c.innerHTML='';
+ (e.params||[]).forEach(q=>{const l=document.createElement('label');l.innerHTML=`${q.l} <input type="range" min="${q.min}" max="${q.max}" step="${q.s}" value="${q.v}"> <b>${fmt(q.v)}</b>`;
+  l.querySelector('input').oninput=ev=>{P[q.k]=+ev.target.value;l.querySelector('b').textContent=fmt(P[q.k]);const[a,b]=cur.xr(pv());x0=Math.min(b,Math.max(a,x0));draw()};c.appendChild(l)});
+ const b=document.createElement('button');b.className='run';b.textContent='Пусни';b.onclick=()=>{frame.t0=0;anim=0;requestAnimationFrame(frame)};c.appendChild(b);
+ draw()}
+E.forEach(e=>{const b=document.createElement('button');b.textContent=e.name;b.dataset.id=e.id;b.onclick=()=>select(e);$('nav').appendChild(b)});
+const c1=$('c1');let drag=false;
+function pick(ev){const r=c1.getBoundingClientRect(),[a,b]=cur.xr(pv());const px=(ev.clientX-r.left-36)/(r.width-46);x0=Math.min(b,Math.max(a,a+px*(b-a)));anim=null;draw()}
+c1.addEventListener('pointerdown',ev=>{drag=true;c1.setPointerCapture(ev.pointerId);pick(ev)});
+c1.addEventListener('pointermove',ev=>{if(drag)pick(ev)});
+c1.addEventListener('pointerup',()=>drag=false);
+c1.addEventListener('keydown',ev=>{const[a,b]=cur.xr(pv()),s=(b-a)/100;if(ev.key==='ArrowRight'){x0=Math.min(b,x0+s);draw()}if(ev.key==='ArrowLeft'){x0=Math.max(a,x0-s);draw()}});
+window.addEventListener('resize',draw);
+select(E[0]);
+</script>
+</body>
+</html>

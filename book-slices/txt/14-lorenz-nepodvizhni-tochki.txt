@@ -1,0 +1,360 @@
+=== PDF pages 334-340 (printed 319-325) ===
+         Torque Balance
+    The rotation of the wheel is governed by Newton’s law F  ma, expressed as a
+balance between the applied torques and the rate of change of angular momentum.
+Let I denote the moment of inertia of the wheel. Note that in general I depends on
+t, because the distribution of water does. But this complication disappears if we
+wait long enough: as t l d, one can show that I ( t ) l constant (Exercise 9.1.1).
+Hence, after the transients decay, the equation of motion is
+
+          I X  damping torque          gravitational torque.
+    There are two sources of damping: viscous damping due to the heavy oil in the
+brake, and a more subtle “inertial” damping caused by a spin-up effect—the water
+enters the wheel at zero angular velocity but is spun up to angular velocity X before
+it leaks out. Both of these effects produce torques proportional to X, so we have
+
+         damping torque  –vX,
+where v  0. The negative sign means that the damping opposes the motion.
+  The gravitational torque is like that of an inverted pendulum, since water is
+pumped in at the top of wheel (Figure 9.1.6).
+
+                                     θ
+
+
+                                     dθ
+                      g                                  (top view)
+
+
+
+
+                      Figure 9.1.6
+
+
+In an infinitesimal sector dR, the mass dM  mdR. This mass element produces a
+torque
+
+         dU  ( dM ) gr sinR  mgr sinR dR.
+To check that the sign is correct, observe that when sinR  0 the torque tends to
+increase X, just as in an inverted pendulum. Here g is the effective gravitational
+                                            constant, given by g  g0 sin B where
+                        wheel               g0 is the usual gravitational constant
+g0                              (side view) and B is the tilt of the wheel from hor-
+                α                           izontal (Figure 9.1.7). Integration over
+                                            all mass elements yields
+
+Figure 9.1.7
+
+
+
+
+                                               9.1   A CHAOTIC WATERWHEEL        315
+                                                     2π
+          gravitational torque = gr ∫                     m(θ, t )sin θ d θ.
+                                                 0
+
+
+
+Putting it all together, we obtain the torque balance equation
+
+                                  2π
+          I ω = −vω + gr ∫            m(θ, t )sin θ d θ.                                    (3)
+                              0
+
+
+
+This is called an integro-differential equation because it involves both derivatives
+and integrals.
+
+         Amplitude Equations
+   Equations (2) and (3) completely specify the evolution of the system. Given the
+current values of m ( R, t ) and X ( t ), (2) tells us how to update m and (3) tells us how
+to update X. So no further equations are needed.
+   If (2) and (3) truly describe the waterwheel’s behavior, there must be some pretty
+complicated motions hidden in there. How can we extract them? The equations
+appear much more intimidating than anything we’ve studied so far.
+   A miracle occurs if we use Fourier analysis to rewrite the system. Watch!
+   Since m ( R, t ) is periodic in R, we can write it as a Fourier series
+
+                         ∞
+          m(R, t ) = ∑ [an (t ) sin nR + bn (t ) cos nR ] .                                  (4)
+                        n=0
+
+
+By substituting this expression into (2) and (3), we’ll obtain a set of amplitude equa-
+tions, ordinary differential equations for the amplitudes an, bn of the different har-
+monics or modes. But first we must also write the inflow as a Fourier series:
+
+                    ∞
+          Q(R ) = ∑ qn cos nR.                                                               (5)
+                   n=0
+
+
+There are no sin nR terms in the series because water is added symmetrically at the
+top of the wheel; the same inflow occurs at R and –R. (In this respect, the water-
+wheel is unlike an ordinary, real-world waterwheel where asymmetry is used to
+drive the wheel in the same direction at all times.)
+   Substituting the series for m and Q into (2), we get
+
+          ∂ ⎡∞                                   ⎤      ∂ ⎡∞                                   ⎤
+              ⎢ ∑ an (t )sin nθ + bn (t ) cos nθ ⎥ = −ω     ⎢ ∑ an (t )sin nθ + bn (t ) cos nθ ⎥
+          ∂t ⎢⎣ n=0                              ⎥⎦     ∂θ ⎢⎣ n=0                              ⎥⎦
+                                                             ∞
+                                                          +∑ qn cos nθ
+                                                             n=0
+
+                                                             ⎡∞                                 ⎤
+                                                          −K ⎢ ∑ an (t )sin nθ + bn (t ) cos nθ ⎥ .
+                                                             ⎢⎣ n=0                             ⎥⎦
+
+
+316        LORENZ EQUATIONS
+Now carry out the differentiations on both sides, and collect terms. By orthogo-
+nality of the functions sin nR, cos nR, we can equate the coefficients of each har-
+monic separately. For instance, the coefficient of sin nR on the left-hand side is an ,
+and on the right it is nXbn  Kan . Hence
+
+         an = nXbn − Kan .                                                             (6)
+Similarly, matching coefficients of cos nR yields
+
+         bn = −nXan − Kbn + qn .                                                       (7)
+Both (6) and (7) hold for all n  0, 1, . . . .
+  Next we rewrite (3) in terms of Fourier series. Get ready for the miracle. When
+we substitute (4) into (3), only one term survives in the integral, by orthogonality:
+
+                                  2π   ⎡∞                                 ⎤
+         I ω = −vω + gr ∫             ⎢ ∑ an (t )sin nθ + bn (t ) cos nθ ⎥ sin θ d θ
+                              0        ⎢⎣ n=0                             ⎥⎦
+                                  2π
+              = −vω + gr ∫             a1 sin2 θ d θ                                    (8)
+                              0
+
+              = −vω + π gra1 .
+
+Hence, only a1 enters the differential equation for X . But then (6) and (7) imply
+that a1, b1, and X form a closed system—these three variables are decoupled from all
+the other an, bn, n v 1! The resulting equations are
+
+         a1 = ωb1 − Ka1
+         b = −ωa − Kb + q
+          1        1      1            1                                                (9)
+         ω = (−vω + π gra1 ) I .
+
+(If you’re curious about the higher modes an, bn, n v 1, see Exercise 9.1.2.)
+    We’ve simplified our problem tremendously: the original pair of integro-partial
+differential equations (2), (3) has boiled down to the three-dimensional system
+(9). It turns out that (9) is equivalent to the Lorenz equations! (See Exercise 9.1.3.)
+Before we turn to that more famous system, let’s try to understand a little about
+(9). No one has ever fully understood it—its behavior is fantastically complex—but
+we can say something.
+
+         Fixed Points
+  We begin by finding the fixed points of (9). For notational convenience, the
+usual asterisks will be omitted in the intermediate steps.
+  Setting all the derivatives equal to zero yields
+
+         a1  Xb1 / K                                                                   (10)
+
+
+
+                                                       9.1   A CHAOTIC WATERWHEEL              317
+         Xa1  q1 – Kb1                                                    (11)
+         a1  vX / Qgr.                                                    (12)
+
+Now solve for b1 by eliminating a1 from (10) and (11):
+
+                  Kq1
+         b1 =         .
+                X +K2
+                 2
+
+
+
+Equating (10) and (12) yields Xb1 / K  vX / Qgr. Hence X  0 or
+
+         b1  Kv / Qgr.                                                    (14)
+Thus, there are two kinds of fixed point to consider:
+         1. If X  0, then a1  0 and b1  q1 / K. This fixed point
+
+                ( a1*, b1*, X* )  (0 , q l /K , 0)                        (15)
+            corresponds to a state of no rotation; the wheel is at rest, with inflow
+            balanced by leakage. We’re not saying that this state is stable, just that
+            it exists; stability calculations will come later.
+         2. If X v 0, then (13) and (14) imply b1  Kq1 / ( X2       K2 )  Kv / Qgr.
+            Since K v 0, we get q1 / ( X 2     2
+                                             K )  v / Qgr. Hence
+
+                           π grq1
+                ( ω*)2 =          − K 2.                                   (16)
+                              v
+
+            If the right-hand side of (16) is positive, there are two solutions, ±X*,
+            corresponding to steady rotation in either direction. These solutions
+            exist if and only if
+
+                Qgrq1
+                       1.                                                 (17)
+                 K 2v
+
+    The dimensionless group in (17) is called the Rayleigh number. It measures how
+hard we’re driving the system, relative to the dissipation. More precisely, the ratio
+in (17) expresses a competition between g and q1 (gravity and inflow, which tend to
+spin the wheel), and K and v (leakage and damping, which tend to stop the wheel).
+So it makes sense that steady rotation is possible only if the Rayleigh number is
+large enough.
+    The Rayleigh number appears in other parts of fluid mechanics, notably con-
+vection, in which a layer of fluid is heated from below. There it is proportional to the
+difference in temperature from bottom to top. For small temperature gradients,
+heat is conducted vertically but the fluid remains motionless. When the Rayleigh
+number increases past a critical value, an instability occurs—the hot fluid is less
+
+
+318        LORENZ EQUATIONS
+dense and begins to rise, while the cold fluid on top begins to sink. This sets up
+a pattern of convection rolls, completely analogous to the steady rotation of our
+waterwheel. With further increases of the Rayleigh number, the rolls become wavy
+and eventually chaotic.
+   The analogy to the waterwheel breaks down at still higher Rayleigh numbers,
+when turbulence develops and the convective motion becomes complex in space
+as well as time (Drazin and Reid 1981, Bergé et al. 1984, Manneville 1990). In con-
+trast, the waterwheel settles into a pendulum-like pattern of reversals, turning
+once to the left, then back to the right, and so on indefinitely (see Example 9.5.2).
+
+
+9.2 Simple Properties of the Lorenz Equations
+In this section we’ll follow in Lorenz’s footsteps. He took the analysis as far as pos-
+sible using standard techniques, but at a certain stage he found himself confronted
+with what seemed like a paradox. One by one he had eliminated all the known pos-
+sibilities for the long-term behavior of his system: he showed that in a certain range
+of parameters, there could be no stable fixed points and no stable limit cycles, yet
+he also proved that all trajectories remain confined to a bounded region and are
+eventually attracted to a set of zero volume. What could that set be? And how do
+the trajectories move on it? As we’ll see in the next section, that set is the strange
+attractor, and the motion on it is chaotic.
+   But first we want to see how Lorenz ruled out the more traditional possibilities.
+As Sherlock Holmes said in The Sign of Four, “When you have eliminated the
+impossible, whatever remains, however improbable, must be the truth.”
+   The Lorenz equations are
+
+         x = T( y − x )
+         y = rx − y − xz                                                 (1)
+         z = xy − bz.
+
+Here T, r, b  0 are parameters: T is the Prandtl number, r is the Rayleigh number,
+and b has no name. (In the convection problem it is related to the aspect ratio of
+the rolls.)
+
+         Nonlinearity
+   The system (1) has only two nonlinearities, the quadratic terms xy and xz. This
+should remind you of the waterwheel equations (9.1.9), which had two nonlineari-
+ties, Xa1 and Xb1. See Exercise 9.1.3 for the change of variables that transforms the
+waterwheel equations into the Lorenz equations.
+
+
+
+
+                 9.2 SIMPLE PROPERTIES OF THE LORENZ EQUATIONS                     319
+          Symmetry
+    There is an important symmetry in the Lorenz equations. If we replace
+( x,y ) l ( –x,–y ) in (1), the equations stay the same. Hence, if ( x ( t ), y ( t ), z ( t )) is a
+solution, so is ( –x ( t ), –y ( t ), z ( t )). In other words, all solutions are either symmet-
+ric themselves, or have a symmetric partner.
+
+          Volume Contraction
+    The Lorenz system is dissipative: volumes in phase space contract under the
+flow. To see this, we must first ask: how do volumes evolve?
+    Let’s answer the question in general, for any three-dimensional system x  f ( x ).
+Pick an arbitrary closed surface S ( t ) of volume V ( t ) in phase space. Think of the
+points on S as initial conditions for trajectories, and let them evolve for an infini-
+tesimal time dt. Then S evolves into a new surface S ( t dt ); what is its volume
+V ( t dt )?
+    Figure 9.2.1 shows a side view of the volume.
+
+
+                                         n
+                                                          f
+
+
+                                                                    S(t +dt)
+                                         V(t)
+
+
+
+                                                                 S(t)
+
+                    Figure 9.2.1
+
+
+Let n denote the outward normal on S. Since f is the instantaneous velocity of the
+points, f ¸n is the outward normal component of velocity. Therefore in time dt a
+patch of area dA sweeps out a volume ( f ¸n dt ) dA, as shown in Figure 9.2.2.
+
+
+
+                          f.n dt {                   dA
+
+
+
+
+                          Figure 9.2.2
+
+
+
+
+320         LORENZ EQUATIONS
+Hence
+
+         V(t     dt )  V ( t )   (volume swept out by tiny patches of surface,
+                                        integrated over all patches),
+
+so we obtain
+
+         V (t + dt ) = V (t ) + ∫ (f ⋅ n dt ) dA.
+                                  S
+
+
+
+Hence
+
+              V (t + dt ) −V (t )
+         V =                     = ∫ f ⋅ n dA.
+                      dt             S
+
+
+
+Finally, we rewrite the integral above by the divergence theorem, and get
+
+         V = ∫ ∇⋅ f dV .                                                    (2)
+                V
+
+
+
+   For the Lorenz system,
+
+                 ∂                 ∂                 ∂
+          ∇⋅ f =    [T ( y − x )] + [rx − y − xz ] + [ xy − bz ]
+                 ∂x                ∂y                ∂z
+              = −T −1− b < 0.
+Since the divergence is constant, (2) reduces to V = −(T + 1 + b )V , which has solu-
+tion V ( t )  V (0) e–( T 1 b )t. Thus volumes in phase space shrink exponentially fast.
+   Hence, if we start with an enormous solid blob of initial conditions, it eventually
+shrinks to a limiting set of zero volume, like a balloon with the air being sucked
+out of it. All trajectories starting in the blob end up somewhere in this limiting set;
+later we’ll see it consists of fixed points, limit cycles, or for some parameter values,
+a strange attractor.
+   Volume contraction imposes strong constraints on the possible solutions of the
+Lorenz equations, as illustrated by the next two examples.
+
+
+EXAMPLE 9.2.1:
+
+Show that there are no quasiperiodic solutions of the Lorenz equations.
+   Solution: We give a proof by contradiction. If there were a quasiperiodic solu-
+tion, it would have to lie on the surface of a torus, as discussed in Section 8.6, and
+this torus would be invariant under the flow. Hence the volume inside the torus
+would be constant in time. But this contradicts the fact that all volumes shrink
+exponentially fast. ■
+
+
+
+                    9.2 SIMPLE PROPERTIES OF THE LORENZ EQUATIONS                    321
+

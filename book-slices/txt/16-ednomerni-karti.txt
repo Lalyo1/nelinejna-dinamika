@@ -1,0 +1,249 @@
+=== PDF pages 370-375 (printed 355-360) ===
+   These equations were proposed by Rikitake (1958) as a model for the self-gen-
+eration of the Earth’s magnetic field by large current-carrying eddies in the core.
+Computer experiments show that the model exhibits chaotic solutions for some
+parameter values. These solutions are loosely analogous to the irregular reversals
+of the Earth’s magnetic field inferred from geological data. See Cox (1982) for the
+geophysical background.
+
+9.3 Chaos on a Strange Attractor
+9.3.1     (Quasiperiodicity v chaos) The trajectories of the quasiperiodic system
+ 
+θ1  ω1 , θ2  ω2 , ( X / X  irrational) are not periodic.
+a) Why isn’t this system considered chaotic?
+b) Without using a computer, find the largest Liapunov exponent for the system.
+(Numerical experiments) For each of the values of r given below, use a computer to
+explore the dynamics of the Lorenz system, assuming T  10 and b  8 / 3 as usual.
+In each case, plot x ( t ), y ( t ), and x vs. z. You should investigate the consequences
+of choosing different initial conditions and lengths of integration. Also, in some
+cases you may want to ignore the transient behavior, and plot only the sustained
+long-term behavior.
+9.3.2    r  10                                 9.3.3     r  22 (transient chaos)
+9.3.4    r  24.5                               9.3.5     r  100 (surprise)
+         (chaos and stable point co-exist)
+9.3.6    r  126.52                             9.3.7     r  400
+9.3.8    (Practice with the definition of an attractor) Consider the following famil-
+iar system in polar coordinates: r = r( l − r 2 ), R  1 . Let D be the disk x 2 y 2 b 1.
+a) Is D an invariant set?
+b) Does D attract an open set of initial conditions?
+c) Is D an attractor? If not, why not? If so, find its basin of attraction.
+d) Repeat part (c) for the circle x 2 y 2  1.
+9.3.9    (Exponential divergence) Using numerical integration of two nearby tra-
+jectories, estimate the largest Liapunov exponent for the Lorenz system, assuming
+that the parameters have their standard values r  28, T  10, b  8 / 3.
+9.3.10 (Time horizon) To illustrate the “time horizon” after which prediction
+becomes impossible, numerically integrate the Lorenz equations for r  28,
+T  10, b  8 / 3. Start two trajectories from nearby initial conditions, and plot x ( t )
+for both of them on the same graph.
+
+9.4 Lorenz Map
+9.4.1    (Computer work) Using numerical integration, compute the Lorenz map
+for r  28, T  10, b  8 3.
+
+
+                                                                    EXERCISES         351
+9.4.2    (Tent map, as model of Lorenz map) Consider the map
+
+                 ⎧⎪ 2 x ,       0 ≤ xn ≤ 12
+         xn+1 = ⎪⎨ n
+                  ⎪⎪⎩2 − 2 xn , 12 ≤ xn ≤ 1
+
+as a simple analytical model of the Lorenz map.
+a) Why is it called the “tent map”?
+b) Find all the fixed points, and classify their stability.
+c) Show that the map has a period-2 orbit. Is it stable or unstable?
+d) Can you find any period-3 points? How about period-4? If so, are the corre-
+   sponding periodic orbits stable or unstable?
+
+9.5 Exploring Parameter Space
+(Numerical experiments) For each of the values of r given below, use a computer
+to explore the dynamics of the Lorenz system, assuming T  10 and b  8 3 as
+usual. In each case, plot x ( t ), y ( t ), and x vs. z.
+9.5.1    r  166.3 (intermittent chaos)
+9.5.2    r  212 (noisy periodicity)
+9.5.3    the interval 145  r  166 (period-doubling)
+9.5.4    (Hysteresis between a fixed point and a strange attractor) Consider the
+Lorenz equations with T  10 and b  8 / 3. Suppose that we slowly “turn the r
+knob” up and down. Specifically, let r  24.4 sin Xt, where X is small compared
+to typical orbital frequencies on the attractor. Numerically integrate the equa-
+tions, and plot the solutions in whatever way seems most revealing. You should see
+a striking hysteresis effect between an equilibrium and a chaotic state.
+9.5.5    (Lorenz equations for large r ) Consider the Lorenz equations in the limit
+r l d. By taking the limit in a certain way, all the dissipative terms in the equa-
+tions can be removed (Robbins 1979, Sparrow 1982).
+a) Let F  r –1 / 2, so that r l d corresponds to F l 0. Find a change of variables
+   involving F such that as F l 0, the equations become
+
+        Xa  Y
+        Ya  –XZ
+        Za  XY.
+
+b) Find two conserved quantities (i.e., constants of the motion) for the new system.
+c) Show that the new system is volume-preserving (i.e., the volume of an arbitrary
+   blob of “phase fluid” is conserved by the time-evolution of the system, even
+   though the shape of the blob may change dramatically.)
+d) Explain physically why the Lorenz equations might be expected to show some
+   conservative features in the limit r l d.
+
+352       LORENZ EQUATIONS
+e) Solve the system in part (a) numerically. What is the long-term behavior? Does
+   it agree with the behavior seen in the Lorenz equations for large r?
+9.5.6     (Transient chaos) Example 9.5.1 shows that the Lorenz system can exhibit
+transient chaos for r  21, T  10, b  83 . However, not all trajectories behave this
+way. Using numerical integration, find three different initial conditions for which
+there is transient chaos, and three others for which there isn’t. Give a rule of thumb
+which predicts whether an initial condition will lead to transient chaos or not.
+
+9.6 Using Chaos to Send Secret Messages
+9.6.1     (Exponentially fast synchronization) The Liapunov function of Example 9.6.1
+shows that the synchronization error e( t ) tends to zero as t l d, but it does not
+provide information about the rate of convergence. Sharpen the argument to show
+that the synchronization error e ( t ) decays exponentially fast.
+a) Prove that V = 12 e2 2 + 2e32 decays exponentially fast, by showing V ≤ −kV ,
+   for some constant k  0 to be determined.
+b) Show that part (a) implies that e2 ( t ), e3 ( t ) l 0 exponentially fast.
+c) Finally show that e1 ( t ) l 0 exponentially fast.
+9.6.2    (Pecora and Carroll’s approach) In the pioneering work of Pecora and
+Carroll (1990), one of the receiver variables is simply set equal to the corresponding
+transmitter variable. For instance, if x ( t ) is used as the transmitter drive signal,
+then the receiver equations are
+
+         x(t)  x(t)
+          yr = rx(t ) − yr − x(t )zr
+          zr = x(t ) yr − bzr
+
+where the first equation is not a differential equation. Their numerical simulations
+and a heuristic argument suggested that yr ( t ) l y ( t ) and zr ( t ) l z ( t ) as t ld,
+even if there were differences in the initial conditions.
+   Here is a simple proof of that result, due to He and Vaidya (1992).
+a) Show that the error dynamics are
+
+          e1 ≡ 0
+          e2 = −e2 − x(t )e3
+          e3 = x(t )e2 − be3
+
+   where e1  x – xr, e2  y – yr, and e3 = z − zr .
+b) Show that V = e22 + e32 is a Liapunov function.
+c) What do you conclude?
+
+
+
+
+                                                                   EXERCISES          353
+9.6.3    (Computer experiments on synchronized chaos) Let x, y, z be governed
+by the Lorenz equations with r  60, T  10, b  8 / 3. Let xr , yr , zr be governed by
+the system in Exercise 9.6.2. Choose different initial conditions for y and yr, and
+similarly for z and zr , and then start integrating numerically.
+a) Plot y ( t ) and yr ( t ) on the same graph. With any luck, the two time series should
+   eventually merge, even though both are chaotic.
+b) Plot the ( y,z ) projection of both trajectories.
+9.6.4    (Some drives don’t work) Suppose z ( t ) were the drive signal in Exercise 9.6.2,
+instead of x ( t ). In other words, we replace zr by z ( t ) everywhere in the receiver
+equations, and watch how xr and yr evolve.
+a) Show numerically that the receiver does not synchronize in this case.
+b) What if y ( t ) were the drive?
+9.6.5    (Masking) In their signal-masking approach, Cuomo and Oppenheim
+(1992, 1993) use the following receiver dynamics:
+
+           x r = T( yr − xr )
+           yr = rs(t ) − yr − s(t )zr
+           zr = s(t ) yr − bzr
+
+where s ( t )  x ( t ) m ( t ), and m ( t ) is the low-power message added to the much
+stronger chaotic mask x ( t ). If the receiver has synchronized with the drive, then
+xr ( t ) x x ( t ) and so m ( t ) may be recovered as m      ˆ (t ) = s(t ) − xr (t ). Test this
+approach numerically, using a sine wave for m ( t ). How close is the estimate m            ˆ (t )
+to the actual message m ( t )? How does the error depend on the frequency of the
+sine wave?
+9.6.6   (Lorenz circuit) Derive the circuit equations for the transmitter circuit
+shown in Figures 9.6.1.
+
+
+
+
+354         LORENZ EQUATIONS
+    10
+          ONE-DIMENSIONAL MAPS
+
+
+
+
+10.0      Introduction
+This chapter deals with a new class of dynamical systems in which time is discrete,
+rather than continuous. These systems are known variously as difference equa-
+tions, recursion relations, iterated maps, or simply maps.
+    For instance, suppose you repeatedly press the cosine button on your cal-
+culator, starting from some number x0 . Then the successive readouts are
+x1 cos x0, x2 cos x1, and so on. Set your calculator to radian mode and try
+it. Can you explain the surprising result that emerges after many iterations?
+    The rule xn l cos xn is an example of a one-dimensional map, so-called because
+the points xn belong to the one-dimensional space of real numbers. The sequence
+x0, x1, x2, . . . is called the orbit starting from x0 .
+    Maps arise in various ways:
+         1. As tools for analyzing differential equations. We have already encoun-
+            tered maps in this role. For instance, Poincaré maps allowed us to
+            prove the existence of a periodic solution for the driven pendulum and
+            Josephson junction (Section 8.5), and to analyze the stability of peri-
+            odic solutions in general (Section 8.7). The Lorenz map (Section 9.4)
+            provided strong evidence that the Lorenz attractor is truly strange,
+            and is not just a long-period limit cycle.
+         2. As models of natural phenomena. In some scientific contexts it is natu-
+            ral to regard time as discrete. This is the case in digital electronics, in
+            parts of economics and finance theory, in impulsively driven mechani-
+            cal systems, and in the study of certain animal populations where suc-
+            cessive generations do not overlap.
+         3. As simple examples of chaos. Maps are interesting to study in their own
+            right, as mathematical laboratories for chaos. Indeed, maps are capable
+
+
+
+                                                    10.0 INTRODUCTION             355
+             of much wilder behavior than differential equations because the points
+             xn hop along their orbits rather than flow continuously (Figure 10.0.1).
+
+
+
+
+                      x0        x2                                    x1
+
+              Figure 10.0.1
+
+
+   The study of maps is still in its infancy, but exciting progress has been made
+in the last few decades, thanks to the growing availability of calculators, then
+computers, and now computer graphics. Maps are easy and fast to simulate on
+digital computers where time is inherently discrete. Such computer experiments
+have revealed a number of unexpected and beautiful patterns, which in turn have
+stimulated new theoretical developments. Most surprisingly, maps have generated
+a number of successful predictions about the routes to chaos in semiconductors,
+convecting fluids, heart cells, lasers, and chemical oscillators.
+   We discuss some of the properties of maps and the techniques for analyzing
+them in Sections 10.1–10.5. The emphasis is on period-doubling and chaos in the
+logistic map. Section 10.6 introduces the amazing idea of universality, and summa-
+rizes experimental tests of the theory. Section 10.7 is an attempt to convey the basic
+ideas of Feigenbaum’s renormalization technique.
+   As usual, our approach will be intuitive. For rigorous treatments of
+one-dimensional maps, see Devaney (1989) and Collet and Eckmann (1980).
+
+
+10.1 Fixed Points and Cobwebs
+In this section we develop some tools for analyzing one-dimensional maps of the
+form xn l f ( xn ) , where f is a smooth function from the real line to itself.
+
+          A Pedantic Point
+    When we say “map,” do we mean the function f or the difference equation
+xn 1 f ( xn ) ? Following common usage, we’ll call both of them maps. If you’re
+disturbed by this, you must be a pure mathematician . . . or should consider
+becoming one!
+
+          Fixed Points and Linear Stability
+    Suppose x * satisfies f ( x * ) x *. Then x * is a fixed point, for if xn x * then
+xn 1 f ( xn ) f ( x * )  x * ; hence the orbit remains at x * for all future iterations.
+    To determine the stability of x *, we consider a nearby orbit xn x * I n and
+ask whether the orbit is attracted to or repelled from x *. That is, does the deviation
+I n grow or decay as n increases? Substitution yields
+
+
+
+356        ONE-DIMENSIONAL MAPS
+

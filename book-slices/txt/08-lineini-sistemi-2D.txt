@@ -1,0 +1,719 @@
+=== PDF pages 140-154 (printed 125-139) ===
+         5
+          LINEAR SYSTEMS
+
+
+
+
+5.0 Introduction
+As we’ve seen, in one-dimensional phase spaces the flow is extremely confined—
+all trajectories are forced to move monotonically or remain constant. In higher-
+dimensional phase spaces, trajectories have much more room to maneuver, and
+so a wider range of dynamical behavior becomes possible. Rather than attack all
+this complexity at once, we begin with the simplest class of higher-dimensional
+systems, namely linear systems in two dimensions. These systems are interesting
+in their own right, and, as we’ll see later, they also play an important role in the
+classification of fixed points of nonlinear systems. We begin with some definitions
+and examples.
+
+
+5.1 Definitions and Examples
+A two-dimensional linear system is a system of the form
+
+         x = ax + by
+         y = cx + dy
+
+where a, b, c, d are parameters. If we use boldface to denote vectors, this system
+can be written more compactly in matrix form as
+
+         x  Ax,
+where
+
+              ⎛a b ⎞⎟            ⎛ x⎞
+         A = ⎜⎜       ⎟ and x = ⎜⎜ ⎟⎟⎟.
+              ⎜⎝c d ⎟⎟⎠          ⎜⎝ y⎟⎠
+
+
+                                          5.1   DEFINITIONS AND EXAMPLES        125
+Such a system is linear in the sense that if x1 and x2 are solutions, then so is any
+linear combination c1x1 c2x2. Notice that x = 0 when x = 0 , so x* = 0 is always
+a fixed point for any choice of A.
+    The solutions of x = Ax can be visualized as trajectories moving on the ( x, y )
+plane, in this context called the phase plane. Our first example presents the phase
+plane analysis of a familiar system.
+
+
+EXAMPLE 5.1.1:
+
+As discussed in elementary physics courses, the vibrations of a mass hanging from
+a linear spring are governed by the linear differential equation
+
+          mx + kx = 0                                                         (1)
+where m is the mass, k is the spring constant, and x is the displacement of the mass
+from equilibrium (Figure 5.1.1). Give a phase plane analysis of this simple harmonic
+oscillator.
+                      Solution: As you probably recall, it’s easy to solve (1) ana-
+                  lytically in terms of sines and cosines. But that’s precisely what
+                  makes linear equations so special! For the nonlinear equations
+              k of ultimate interest to us, it’s usually impossible to find an ana-
+                  lytical solution. We want to develop methods for deducing the
+                  behavior of equations like (1) without actually solving them.
+             m        The motion in the phase plane is determined by a vector field
+  x               that comes from the differential equation (1). To find this vector
+                  field, we note that the state of the system is characterized by its
+                  current position x and velocity v; if we know the values of both
+Figure 5.1.1      x and v, then (1) uniquely determines the future states of the
+                  system. Therefore we rewrite (1) in terms of x and v, as follows:
+
+          x  v                                                                (2a)
+          v = − x.k
+                   m
+                                                                                (2b)
+
+Equation (2a) is just the definition of velocity, and (2b) is the differential equation
+(1) rewritten in terms of v. To simplify the notation, let X 2  k / m. Then (2) becomes
+
+          x  v                                                                (3a)
+          v = −X x.   2
+                                                                                (3b)
+
+The system (3) assigns a vector ( x , v) = (v, −X 2 x ) at each point (x, v ), and therefore
+represents a vector field on the phase plane.
+
+
+
+
+126        LINEAR SYSTEMS
+      For example, let’s see what the vector field looks like when we’re on the x-axis.
+Then v  0 and so (x , v) = ( 0, −X 2 x ). Hence the vectors point vertically down-
+ward for positive x and vertically upward for negative x (Figure 5.1.2). As x gets
+larger in magnitude, the vectors (0, X2 x ) get longer. Similarly, on the v-axis,
+the vector field is (x , v) = (v, 0), which points to the right when v  0 and to the left
+when v  0. As we move around in phase space, the vectors change direction as
+shown in Figure 5.1.2.
+                                                         Just as in Chapter 2, it is helpful to
+                           v
+                                                     visualize the vector field in terms of the
+                                                     motion of an imaginary fluid. In the
+                                                     present case, we imagine that a fluid is
+                                                     flowing steadily on the phase plane
+                                                     with a local velocity given by
+                                                x ( x , v) = (v, −X 2 x ). Then, to find the tra-
+                                                     jectory starting at ( x0, v0 ), we place an
+                                                     imaginary particle or phase point at
+                                                     ( x0, v0 ) and watch how it is carried
+                                                     around by the flow.
+Figure 5.1.2                                             The flow in Figure 5.1.2 swirls about
+                                                     the origin. The origin is special, like the
+eye of a hurricane: a phase point placed there would remain motionless, because
+ ( x , v)  ( 0, 0 ) when ( x, v )  (0, 0); hence the origin is a fixed point. But a phase
+point starting anywhere else would circulate around the origin and eventually
+return to its starting point. Such trajectories form closed orbits, as shown in
+Figure 5.1.3. Figure 5.1.3 is called the phase portrait of the system—it shows the
+overall picture of trajectories in phase space.
+                                                        What do fixed points and closed
+                           v                        orbits have to do with the original prob-
+                                                    lem of a mass on a spring? The answers
+                                                    are beautifully simple. The fixed point
+                                                    ( x, v )  (0, 0) corresponds to static equi-
+                                                    librium of the system: the mass is at rest at
+                                                x its equilibrium position and will remain
+                                                    there forever, since the spring is relaxed.
+                                                    The closed orbits have a more interest-
+                                                    ing interpretation: they correspond to
+                                                    periodic motions, i.e., oscillations of the
+Figure 5.1.3                                        mass. To see this, just look at some points
+                                                    on a closed orbit (Figure 5.1.4). When the
+displacement x is most negative, the velocity v is zero; this corresponds to one
+extreme of the oscillation, where the spring is most compressed (Figure 5.1.4).
+
+
+
+
+                                            5.1   DEFINITIONS AND EXAMPLES                    127
+                 x=0
+
+
+
+                                 (a)    (b)               (c)       (d)
+
+
+                                                      v
+
+                                                    (b)
+                                              (a)         (c)
+                                                                x
+                                                    (d)
+
+
+
+
+                 Figure 5.1.4
+
+
+In the next instant as the phase point flows along the orbit, it is carried to points
+where x has increased and v is now positive; the mass is being pushed back toward
+its equilibrium position. But by the time the mass has reached x  0, it has a large
+positive velocity (Figure 5.1.4b) and so it overshoots x  0. The mass eventually
+comes to rest at the other end of its swing, where x is most positive and v is zero
+again (Figure 5.1.4c). Then the mass gets pulled up again and eventually completes
+the cycle (Figure 5.1.4d).
+    The shape of the closed orbits also has an interesting physical interpretation.
+The orbits in Figures 5.1.3 and 5.1.4 are actually ellipses given by the equation
+X2x 2 v 2  C, where C p 0 is a constant. In Exercise 5.1.1, you are asked to derive
+this geometric result, and to show that it is equivalent to conservation of energy. ■
+
+
+EXAMPLE 5.1.2:
+                                            ⎛a 0 ⎞⎟
+Solve the linear system x  Ax, where A = ⎜⎜       ⎟. Graph the phase portrait as
+                                            ⎜⎝0 −1⎟⎟⎠
+
+a varies from d to d, showing the qualitatively different cases.
+   Solution: The system is
+
+         ⎛x ⎞⎟ ⎛a 0 ⎞⎟⎛x⎞⎟
+         ⎜⎜ ⎟ = ⎜⎜          ⎟⎜ ⎟ .
+          ⎜⎝ y ⎟⎟⎠ ⎜⎝0 −1⎟⎟⎠⎜⎜⎝ y⎟⎟⎠
+
+Matrix multiplication yields
+
+
+
+
+128       LINEAR SYSTEMS
+         x  ax
+         y = −y
+
+which shows that the two equations are uncoupled; there’s no x in the y-equation
+and vice versa. In this simple case, each equation may be solved separately. The
+solution is
+
+         x ( t )  x0 e a t                                                (1a)
+                        t
+         y ( t )  y0 e .                                                  (1b)
+
+The phase portraits for different values of a are shown in Figure 5.1.5. In each case,
+y ( t ) decays exponentially. When a  0, x ( t ) also decays exponentially and so all
+trajectories approach the origin as t l d. However, the direction of approach
+depends on the size of a compared to 1.
+
+
+
+
+              (a) a < −1              (b) a = −1             (c) =1 <a<0
+
+
+
+
+              (d) a=0                 (e) a>0
+
+       Figure 5.1.5
+
+
+   In Figure 5.1.5a, we have a  1, which implies that x( t ) decays more rapidly
+than y ( t ). The trajectories approach the origin tangent to the slower direction
+(here, the y-direction). The intuitive explanation is that when a is very negative, the
+trajectory slams horizontally onto the y-axis, because the decay of x ( t ) is almost
+instantaneous. Then the trajectory dawdles along the y-axis toward the origin, and
+so the approach is tangent to the y-axis. On the other hand, if we look backwards
+
+
+
+                                      5.1   DEFINITIONS AND EXAMPLES              129
+along a trajectory ( t l d), then the trajectories all become parallel to the faster
+decaying direction (here, the x-direction). These conclusions are easily proved by
+looking at the slope dy / dx  y / x along the trajectories; see Exercise 5.1.2. In
+Figure 5.1.5a, the fixed point x*  0 is called a stable node.
+    Figure 5.1.5b shows the case a  1. Equation (1) shows that y ( t ) / x ( t )  y0 / x0 
+constant, and so all trajectories are straight lines through the origin. This is a very
+special case—it occurs because the decay rates in the two directions are precisely
+equal. In this case, x* is called a symmetrical node or star.
+    When 1  a  0, we again have a node, but now the trajectories approach x*
+along the x-direction, which is the more slowly decaying direction for this range of
+a (Figure 5.1.5c).
+    Something dramatic happens when a  0 (Figure 5.1.5d). Now (1a) becomes
+x ( t ) w x0 and so there’s an entire line of fixed points along the x-axis. All trajecto-
+ries approach these fixed points along vertical lines.
+    Finally when B  0 (Figure 5.1.5e), x* becomes unstable, due to the exponential
+growth in the x-direction. Most trajectories veer away from x* and head out to
+infinity. An exception occurs if the trajectory starts on the y-axis; then it walks
+a tightrope to the origin. In forward time, the trajectories are asymptotic to the
+x-axis; in backward time, to the y-axis. Here x*  0 is called a saddle point. The
+y-axis is called the stable manifold of the saddle point x*, defined as the set of initial
+conditions x0 such that x( t ) l x* as t l d. Likewise, the unstable manifold of x*
+is the set of initial conditions such that x( t ) l x* as t l d. Here the unstable
+manifold is the x-axis. Note that a typical trajectory asymptotically approaches
+the unstable manifold as t ld, and approaches the stable manifold as t l d.
+This sounds backwards, but it’s right! ■
+
+          Stability Language
+   It’s useful to introduce some language that allows us to discuss the stability of
+different types of fixed points. This language will be especially useful when we
+analyze fixed points of nonlinear systems. For now we’ll be informal; precise defi-
+nitions of the different types of stability will be given in Exercise 5.1.10.
+   We say that x*  0 is an attracting fixed point in Figures 5.1.5a–c; all trajectories
+that start near x* approach it as t l d. That is, x( t ) l x* as t l d. In fact x*
+attracts all trajectories in the phase plane, so it could be called globally attracting.
+   There’s a completely different notion of stability which relates to the behav-
+ior of trajectories for all time, not just as t l d. We say that a fixed point x* is
+Liapunov stable if all trajectories that start sufficiently close to x* remain close to it
+for all time. In Figures 5.1.5a–d, the origin is Liapunov stable.
+   Figure 5.1.5d shows that a fixed point can be Liapunov stable but not attracting.
+This situation comes up often enough that there is a special name for it. When a
+fixed point is Liapunov stable but not attracting, it is called neutrally stable. Nearby
+trajectories are neither attracted to nor repelled from a neutrally stable point. As a
+second example, the equilibrium point of the simple harmonic oscillator
+
+
+130        LINEAR SYSTEMS
+(Figure 5.1.3) is neutrally stable. Neutral stability is commonly encountered in
+mechanical systems in the absence of friction. Conversely, it’s possible for a fixed
+point to be attracting but not Liapunov stable; thus, neither notion of stability
+implies the other. An example is given by the following vector field on the circle:
+ R = 1− cos R (Figure 5.1.6). Here R*  0 attracts all trajectories as t l d, but it is
+                        not Liapunov stable; there are trajectories that start infini-
+                        tesimally close to R* but go on a very large excursion before
+                        returning to R*.
+                           However, in practice the two types of stability often
+                        occur together. If a fixed point is both Liapunov stable and
+                        attracting, we’ll call it stable, or sometimes asymptotically
+                        stable.
+                           Finally, x* is unstable in Figure 5.1.5e, because it is nei-
+Figure 5.1.6
+                        ther attracting nor Liapunov stable.
+    A graphical convention: we’ll use open dots to denote unstable fixed points, and
+solid black dots to denote Liapunov stable fixed points. This convention is consis-
+tent with that used in previous chapters.
+
+
+5.2 Classification of Linear Systems
+The examples in the last section had the special feature that two of the entries in
+the matrix A were zero. Now we want to study the general case of an arbitrary
+2 q 2 matrix, with the aim of classifying all the possible phase portraits that can
+occur.
+   Example 5.1.2 provides a clue about how to proceed. Recall that the x and y
+axes played a crucial geometric role. They determined the direction of the trajecto-
+ries as t l od. They also contained special straight-line trajectories: a trajectory
+starting on one of the coordinate axes stayed on that axis forever, and exhibited
+simple exponential growth or decay along it.
+   For the general case, we would like to find the analog of these straight-line tra-
+jectories. That is, we seek trajectories of the form
+
+         x( t )  e Mt v ,                                                 (2)
+where v v 0 is some fixed vector to be determined, and M is a growth rate, also to be
+determined. If such solutions exist, they correspond to exponential motion along
+the line spanned by the vector v.
+   To find the conditions on v and M, we substitute x( t )  eMtv into x = Ax , and
+obtain MeMt v  eMtA v. Canceling the nonzero scalar factor eMt yields
+
+         A v  Mv ,                                                        (3)
+
+
+
+
+                              5.2 CLASSIFICATION OF LINEAR SYSTEMS                 131
+which says that the desired straight line solutions exist if v is an eigenvector of A with
+corresponding eigenvalue M. In this case we call the solution (2) an eigensolution.
+   Let’s recall how to find eigenvalues and eigenvectors. (If your memory needs
+more refreshing, see any text on linear algebra.) In general, the eigenvalues of a
+matrix A are given by the characteristic equation det( A  MI )  0, where I is the
+identity matrix. For a 2 q 2 matrix
+
+               ⎛a b ⎞⎟
+          A = ⎜⎜       ⎟,
+               ⎜⎝c d ⎟⎟⎠
+
+the characteristic equation becomes
+
+               ⎛a − M   b ⎞⎟
+          det ⎜⎜              ⎟ = 0.
+               ⎜⎝ c   d − M ⎟⎟⎠
+
+Expanding the determinant yields
+
+         M2  UM       %0                                                     (4)
+where
+
+         U  trace( A )  a d,
+         %  det( A )  ad  bc.
+
+Then
+
+                  τ + τ 2 − 4Δ        τ − τ 2 − 4Δ
+          λ 1=                 , λ 2=                                          (5)
+                       2                   2
+
+are the solutions of the quadratic equation (4). In other words, the eigenvalues
+depend only on the trace and determinant of the matrix A.
+   The typical situation is for the eigenvalues to be distinct: M1 v M2. In this case, a
+theorem of linear algebra states that the corresponding eigenvectors v1 and v2 are
+                 x 0 = c1v 1 +c2v 2 linearly independent, and hence span the entire
+                                    plane (Figure 5.2.1). In particular, any initial
+                                    condition x0 can be written as a linear combi-
+    c2 v 2                          nation of eigenvectors, say x0  c1v1 c2v2. This
+                                    observation allows us to write down the general
+                                    solution for x( t )—it is simply
+
+                                       x(t ) = c1eM 1t v1 + c2 eM 2t v 2 .     (6)
+               c1v 1
+                                       Why is this the general solution? First of all, it is
+                                       a linear combination of solutions to x  Ax,
+Figure 5.2.1
+
+
+
+132        LINEAR SYSTEMS
+and hence is itself a solution. Second, it satisfies the initial condition x(0)  x0, and
+so by the existence and uniqueness theorem, it is the only solution. (See Section 6.2
+for a general statement of the existence and uniqueness theorem.)
+
+
+EXAMPLE 5.2.1:
+
+Solve the initial value problem x = x + y, y = 4 x − 2 y, subject to the initial con-
+dition ( x0 , y0 )  (2, 3).
+   Solution: The corresponding matrix equation is
+
+          ⎛x ⎞⎟ ⎛1 1 ⎞⎟⎛x⎞⎟
+          ⎜⎜ ⎟ = ⎜⎜          ⎟⎜ ⎟ .
+           ⎜⎝ y ⎟⎟⎠ ⎜⎝4 −2⎟⎟⎠⎜⎜⎝ y⎟⎟⎠
+
+First we find the eigenvalues of the matrix A. The matrix has U  1 and %  6,
+so the characteristic equation is M2 M  6  0. Hence
+
+          M1  2, M2  3.
+   Next we find the eigenvectors. Given an eigenvalue M, the corresponding eigen-
+vector v  ( v1 , v2 ) satisfies
+
+          ⎛1− M
+          ⎜⎜      1 ⎞⎟⎛⎜ v1 ⎞⎟ ⎛⎜0⎞⎟
+                         ⎟⎜ ⎟ = ⎜ ⎟ .
+           ⎜⎝ 4 −2 − M ⎟⎟⎠⎜⎝v2 ⎟⎟⎠ ⎜⎝0⎟⎟⎠
+
+                               ⎛−1 1 ⎞⎟⎛ v1 ⎞⎟ ⎛0⎞⎟
+For M1  2, this yield ⎜⎜               ⎟⎜ ⎟ = ⎜ ⎟ , which has a nontrivial solution
+                               ⎜⎝ 4 −4⎟⎟⎠⎜⎜⎝v ⎟⎟⎠ ⎜⎜⎝0⎟⎟⎠
+                                             2
+( v1, v2 )  (1, 1), or any scalar multiple thereof. (Of course, any multiple of an eigen-
+vector is always an eigenvector; we try to pick the simplest multiple, but any one
+                                                                       ⎛4 1⎞⎟⎛ v1 ⎞⎟ ⎛0⎞⎟
+will do.) Similarly, for M2  3, the eigenvector equation becomes ⎜⎜         ⎟⎜ ⎟ = ⎜ ⎟ ,
+                                                                       ⎜⎝4 1⎟⎟⎠⎜⎜⎝v ⎟⎟⎠ ⎜⎜⎝0⎟⎟⎠
+                                                                                   2
+
+which has a nontrivial solution ( v1 , v2 )  (1, 4). In summary,
+
+                ⎛1⎞                 ⎛1⎞
+          v1 = ⎜⎜ ⎟⎟⎟ ,      v 2 = ⎜⎜ ⎟⎟⎟.
+                ⎜⎝1⎟⎠               ⎜⎝−4⎟⎠
+
+  Next we write the general solution as a linear combination of eigensolutions.
+From (6), the general solution is
+
+                      ⎛1⎞              ⎛1⎞
+          x(t ) = c1 ⎜⎜ ⎟⎟⎟ e 2t + c2 ⎜⎜ ⎟⎟⎟ e−3t .                              (7)
+                      ⎜⎝1⎟⎠            ⎜⎝−4⎟⎠
+
+Finally, we compute c1 and c2 to satisfy the initial condition ( x0 , y0 )  (2, 3). At
+t  0, (7) becomes
+
+
+                                         5.2 CLASSIFICATION OF LINEAR SYSTEMS             133
+         ⎛ 2 ⎞⎟      ⎛⎞       ⎛ ⎞
+         ⎜⎜ ⎟ = c ⎜⎜1⎟⎟ + c ⎜⎜ 1 ⎟⎟ ,
+          ⎜⎝−3⎟⎟⎠ 1 ⎜⎝1⎟⎟⎠ 2 ⎜⎝−4⎟⎟⎠
+
+which is equivalent to the algebraic system
+
+          2  c1 c2 ,
+         3  c1  4c2 .
+
+The solution is c1  1, c2  1. Substituting back into (7) yields
+
+         x ( t )  e2t e 3t ,
+         y ( t )  e2t  4e 3t
+
+for the solution to the initial value problem. ■
+   Whew! Fortunately we don’t need to go through all this to draw the phase por-
+trait of a linear system. All we need to know are the eigenvectors and eigenvalues.
+
+
+EXAMPLE 5.2.2:
+
+Draw the phase portrait for the system of Example 5.2.1.
+   Solution: The system has eigenvalues M1  2, M2  3. Hence the first eigenso-
+lution grows exponentially, and the second eigensolution decays. This means the
+origin is a saddle point. Its stable manifold is the line spanned by the eigenvector
+v2  (1, 4), corresponding to the decaying eigensolution. Similarly, the unstable
+manifold is the line spanned by v1  (1, 1). As with all saddle points, a typical tra-
+jectory approaches the unstable manifold as t l d, and the stable manifold as
+t l d. Figure 5.2.2 shows the phase portrait. ■
+
+                                             y
+
+
+
+
+                                                                    x
+
+
+
+
+                    Figure 5.2.2
+
+
+
+
+134       LINEAR SYSTEMS
+EXAMPLE 5.2.3:
+
+Sketch a typical phase portrait for the case M2  M  0.
+   Solution: First suppose M2  M1  0. Then both eigensolutions decay exponen-
+tially. The fixed point is a stable node, as in Figures 5.1.5a and 5.1.5c, except now
+                                                   the eigenvectors are not mutually per-
+               y               slow eigendirection
+                                                   pendicular, in general. Trajectories
+                                                   typically approach the origin tangent
+                                                   to the slow eigendirection, defined as
+                                                   the direction spanned by the eigen-
+                                  x                vector with the smaller |M|. In back-
+                                                   wards time ( t l d), the trajectories
+                                                   become parallel to the fast eigendi-
+                                                   rection. Figure 5.2.3 shows the phase
+                     fast eigendirection           portrait. (If we reverse all the arrows
+                                                   in Figure 5.2.3, we obtain a typical
+Figure 5.2.3
+                                                   phase portrait for an unstable node.) ■
+
+
+EXAMPLE 5.2.4:
+
+What happens if the eigenvalues are complex numbers?
+   Solution: If the eigenvalues are complex, the fixed point is either a center
+(Figure 5.2.4a) or a spiral (Figure 5.2.4b). We’ve already seen an example of a
+                                                    center in the simple harmonic
+                                                    oscillator of Section 5.1; the ori-
+                                                    gin is surrounded by a family of
+                                                    closed orbits. Note that centers
+                                                    are neutrally stable, since nearby
+                                                    trajectories are neither attracted
+                                                    to nor repelled from the fixed
+                                                    point. A spiral would occur if
+     (a) center                   (b) spiral
+                                                    the harmonic oscillator were
+Figure 5.2.4
+                                                    lightly damped. Then the tra-
+                                                    jectory would just fail to close,
+because the oscillator loses a bit of energy on each cycle.
+   To justify these statements, recall that the eigenvalues are
+
+
+                  (
+         λ 1,2 = 12 τ ± τ 2 − 4Δ .)
+   Thus complex eigenvalues occur when
+
+         U2  4%  0 .
+
+
+
+                               5.2 CLASSIFICATION OF LINEAR SYSTEMS                  135
+To simplify the notation, let’s write the eigenvalues as
+
+         M1,2  Bo iX
+where
+
+         B  U / 2, ω = 12 4Δ − τ 2 .
+By assumption, X v 0. Then the eigenvalues are distinct and so the general solution
+is still given by
+
+                      Mt          M t
+          x(t ) = c1e 1 v1 + c2 e 2 v 2 .
+But now the c’s and v’s are complex, since the M’s are. This means that x( t ) involves
+linear combinations of e ( BoiX ) t. By Euler’s formula, eiXt  cos Xt i sin Xt. Hence
+x( t ) is a combination of terms involving e Bt cos Xt and e Bt sin Xt. Such terms repre-
+sent exponentially decaying oscillations if B  Re( M )  0 and growing oscillations if
+B  0. The corresponding fixed points are stable and unstable spirals, respectively.
+Figure 5.2.4b shows the stable case.
+    If the eigenvalues are pure imaginary (B  0), then all the solutions are periodic
+with period T  2QX. The oscillations have fixed amplitude and the fixed point
+is a center.
+    For both centers and spirals, it’s easy to determine whether the rotation is clock-
+wise or counterclockwise; just compute a few vectors in the vector field and the
+sense of rotation should be obvious. ■
+
+
+EXAMPLE 5.2.5:
+
+In our analysis of the general case, we have been assuming that the eigenvalues are
+distinct. What happens if the eigenvalues are equal ?
+   Solution: Suppose M1  M2  M. There are two possibilities: either there are two
+independent eigenvectors corresponding to M, or there’s only one.
+   If there are two independent eigenvectors, then they span the plane and so every
+vector is an eigenvector with this same eigenvalue M. To see this, write an arbitrary
+                               vector x0 as a linear combination of the two eigenvec-
+                               tors: x0  c1v1 c2v2. Then
+
+                                   A x0 A ( c1v1      c2v2 )  c1Mv1   c2Mv2  Mx0
+                                   so x0 is also an eigenvector with eigenvalue M. Since
+                                   multiplication by A simply stretches every vector by a
+                                   factor M, the matrix must be a multiple of the identity:
+
+                                         ⎛M 0 ⎞⎟
+                                    A = ⎜⎜        ⎟.
+                                         ⎜⎝ 0 M ⎟⎟⎠
+Figure 5.2.5
+
+
+
+136        LINEAR SYSTEMS
+Then if M v 0, all trajectories are straight lines through the origin (x( t )  e Mt x0 )
+and the fixed point is a star node (Figure 5.2.5). On the other hand, if M  0, the
+whole plane is filled with fixed points! (No surprise—the system is x  0. )
+   The other possibility is that there’s only one eigenvector (more accurately, the
+eigenspace corresponding to M is one-dimensional.) For example, any matrix of the
+          ⎛M b ⎞⎟
+form A = ⎜⎜        ⎟ , with b v 0 has only a one-dimensional eigenspace (Exercise 5.2.11).
+          ⎜⎝ 0 M ⎟⎟⎠
+
+    When there’s only one eigendirection, the fixed point is a degenerate node. A
+typical phase portrait is shown in Figure 5.2.6. As t l d and also as t l d,
+all trajectories become parallel to the one available eigendirection.
+
+
+
+
+                                                          eigendirection
+
+
+
+
+                  Figure 5.2.6
+
+
+   A good way to think about the degenerate node is to imagine that it has been
+created by deforming an ordinary node. The ordinary node has two independent
+eigendirections; all trajectories are parallel to the slow eigendirection as t l d,
+and to the fast eigendirection as t l d (Figure 5.2.7a).
+
+                                      fast
+
+                                      slow
+
+
+
+
+                     (a) node                              (b) degenerate node
+
+           Figure 5.2.7
+
+
+Now suppose we start changing the parameters of the system in such a way that the
+two eigendirections are scissored together. Then some of the trajectories will get
+squashed in the collapsing region between the two eigendirections, while the sur-
+viving trajectories get pulled around to form the degenerate node (Figure 5.2.7b).
+
+
+
+
+                                 5.2 CLASSIFICATION OF LINEAR SYSTEMS                137
+  Another way to get intuition about this case is to realize that the degenerate
+node is on the borderline between a spiral and a node. The trajectories are trying to
+wind around in a spiral, but they don’t quite make it. ■
+
+         Classification of Fixed Points
+   By now you’re probably tired of all the examples and ready for a simple classifi-
+cation scheme. Happily, there is one. We can show the type and stability of all the
+different fixed points on a single diagram (Figure 5.2.8).
+
+                              τ                                      τ2 − 4 Δ = 0
+                                  unstable nodes
+
+
+                                             unstable spirals
+
+            saddle points                        centers               Δ
+                                             stable spirals
+
+
+                                  stable nodes
+               non-isolated
+               fixed points
+                                           stars, degenerate nodes
+
+
+            Figure 5.2.8
+
+
+The axes are the trace U and the determinant % of the matrix A. All of the infor-
+mation in the diagram is implied by the following formulas:
+
+
+                 (
+         λ 1,2= 12 τ ± τ 2 − 4Δ ,  )      %  M1M2 ,          U  M1     M2 .
+
+
+The first equation is just (5). The second and third can be obtained by writing the
+characteristic equation in the form ( M  M1 )( M  M2 )  M2  UM %  0.
+    To arrive at Figure 5.2.8, we make the following observations:
+    If %  0, the eigenvalues are real and have opposite signs; hence the fixed point
+is a saddle point.
+    If %  0, the eigenvalues are either real with the same sign (nodes), or com-
+plex conjugate (spirals and centers). Nodes satisfy U2  4%  0 and spirals satisfy
+U2  4%  0. The parabola U2  4%  0 is the borderline between nodes and spi-
+rals; star nodes and degenerate nodes live on this parabola. The stability of the
+nodes and spirals is determined by U. When U  0, both eigenvalues have nega-
+tive real parts, so the fixed point is stable. Unstable spirals and nodes have U  0.
+Neutrally stable centers live on the borderline U  0, where the eigenvalues are
+purely imaginary.
+
+
+
+
+138       LINEAR SYSTEMS
+   If %  0, at least one of the eigenvalues is zero. Then the origin is not an isolated
+fixed point. There is either a whole line of fixed points, as in Figure 5.1.5d, or a
+plane of fixed points, if A  0.
+   Figure 5.2.8 shows that saddle points, nodes, and spirals are the major types of
+fixed points; they occur in large open regions of the ( %,U) plane. Centers, stars,
+degenerate nodes, and non-isolated fixed points are borderline cases that occur
+along curves in the ( %,U) plane. Of these borderline cases, centers are by far the
+most important. They occur very commonly in frictionless mechanical systems
+where energy is conserved.
+
+
+EXAMPLE 5.2.6:
+                                                                   ⎛1 2⎞⎟
+Classify the fixed point x*  0 for the system x  Ax, where A = ⎜⎜      ⎟.
+                                                                   ⎜⎝3 4⎟⎟⎠
+  Solution: The matrix has %  2; hence the fixed point is a saddle point. ■
+
+
+EXAMPLE 5.2.7:
+                            ⎛2 1⎞⎟
+Redo Example 5.2.6 for A = ⎜⎜      ⎟.
+                            ⎜⎝3 4⎟⎟⎠
+
+  Solution: Now %  5 and U  6. Since %  0 and U2  4%  16  0, the fixed
+point is a node. It is unstable, since U  0. ■
+
+
+5.3     Love Affairs
+To arouse your interest in the classification of linear systems, we now discuss a
+simple model for the dynamics of love affairs (Strogatz 1988). The following story
+illustrates the idea.
+    Romeo is in love with Juliet, but in our version of this story, Juliet is a fickle
+lover. The more Romeo loves her, the more Juliet wants to run away and hide. But
+when Romeo gets discouraged and backs off, Juliet begins to find him strangely
+attractive. Romeo, on the other hand, tends to echo her: he warms up when she
+loves him, and grows cold when she hates him.
+    Let
+
+         R ( t )  Romeo’s love / hate for Juliet at time t
+         J ( t )  Juliet’s love / hate for Romeo at time t.
+
+
+
+
+                                                          5.3   LOVE AFFAIRS       139
+

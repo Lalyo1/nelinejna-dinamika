@@ -1,0 +1,321 @@
+=== PDF pages 266-272 (printed 251-257) ===
+which has eigenvectors (1,1) and (1,1), with eigenvalues M  0 and M  2, respec-
+tively. For N slightly greater than 2 , the origin becomes a saddle and so the zero
+eigenvalue becomes slightly positive. This information implies the phase portrait
+shown in Figure 8.1.7.
+
+                                       y
+
+
+
+
+                                                                       x
+
+
+
+
+          Figure 8.1.7
+
+
+Note that because of the approximations we’ve made, this picture is only valid
+locally in both parameter and phase space—if we’re not near the origin and if N is
+not close to N c, all bets are off. ■
+
+   In all of the examples above, the bifurcation occurs when %  0, or equiva-
+lently, when one of the eigenvalues equals zero. More generally, the saddle-node,
+transcritical, and pitchfork bifurcations are all examples of zero-eigenvalue bifur-
+cations. (There are other examples, but these are the most common.) Such bifurca-
+tions always involve the collision of two or more fixed points.
+   In the next section we’ll consider a fundamentally new kind of bifurcation, one
+that has no counterpart in one-dimensional systems. It provides a way for a fixed
+point to lose stability without colliding with any other fixed points.
+
+
+8.2 Hopf Bifurcations
+Suppose a two-dimensional system has a stable fixed point. What are all the pos-
+sible ways it could lose stability as a parameter N varies? The eigenvalues of the
+Jacobian are the key. If the fixed point is stable, the eigenvalues M1, M2 must both
+lie in the left half-plane Re M  0. Since the M’s satisfy a quadratic equation with
+
+
+
+                                              8.2   HOPF BIFURCATIONS           251
+real coefficients, there are two possible pictures: either the eigenvalues are both
+real and negative (Figure 8.2.1a) or they are complex conjugates (Figure 8.2.1b). To
+destabilize the fixed point, we need one or both of the eigenvalues to cross into the
+right half-plane as N varies.
+
+                     Im λ                                  Im λ
+
+
+
+
+                                 Re λ                                       Re λ
+
+
+
+
+                     (a)                                    (b)
+
+      Figure 8.2.1
+
+
+   In Section 8.1 we explored the cases in which a real eigenvalue passes through
+M  0. These were just our old friends from Chapter 3, namely the saddle-node,
+transcritical, and pitchfork bifurcations. Now we consider the other possible sce-
+nario, in which two complex conjugate eigenvalues simultaneously cross the imag-
+inary axis into the right half-plane.
+
+           Supercritical Hopf Bifurcation
+   Suppose we have a physical system that settles down to equilibrium through
+exponentially damped oscillations. In other words, small disturbances decay after
+“ringing” for a while (Figure 8.2.2a). Now suppose that the decay rate depends on
+a control parameter N. If the decay becomes slower and slower and finally changes
+to growth at a critical value N c , the equilibrium state will lose stability. In many
+cases the resulting motion is a small-amplitude, sinusoidal, limit cycle oscillation
+about the former steady state (Figure 8.2.2b). Then we say that the system has
+undergone a supercritical Hopf bifurcation.
+                                                       In terms of the flow in phase
+                                      (a) μ < μc   space, a supercritical Hopf bifur-
+                                                   cation occurs when a stable spiral
+                                                   changes into an unstable spiral
+                                      (b) μ > μc surrounded by a small, nearly
+                                                   elliptical limit cycle. Hopf bifur-
+                                                   cations can occur in phase spaces
+Figure 8.2.2
+
+
+
+
+252         BIFURCATIONS REVISITED
+of any dimension n p 2, but as in the rest of this chapter, we’ll restrict ourselves to
+two dimensions.
+   A simple example of a supercritical Hopf bifurcation is given by the following
+system:
+
+          r  Nr  r 3
+          R  X br 2 .
+
+There are three parameters: N controls the stability of the fixed point at the origin,
+X gives the frequency of infinitesimal oscillations, and b determines the depen-
+dence of frequency on amplitude for larger amplitude oscillations.
+   Figure 8.2.3 plots the phase portraits for N above and below the bifurcation.
+When N  0 the origin r  0 is a stable spiral whose sense of rotation depends on
+the sign of X. For N  0 the origin is still a stable spiral, though a very weak one: the
+decay is only algebraically fast. (This case was shown in Figure 6.3.2. Recall that
+the linearization wrongly predicts a center at the origin.) Finally, for N  0 there is
+an unstable spiral at the origin and a stable circular limit cycle at r  N .
+
+
+
+
+                        μ<0                                    μ >0
+
+           Figure 8.2.3
+
+
+   To see how the eigenvalues behave during the bifurcation, we rewrite the system
+in Cartesian coordinates; this makes it easier to find the Jacobian. We write x 
+r cos R, y  r sin R. Then
+
+          x  r cos R  rR sin R
+             ( Nr  r 3 ) cos R  r( X   br 2 )sin R
+             N  [x2       y2 ] x  X      b[ x 2   y2 ] y
+             Nx  X y       cubic terms
+and similarly
+
+          y  X x    Ny     cubic terms.
+So the Jacobian at the origin is
+
+
+
+                                                     8.2   HOPF BIFURCATIONS        253
+                 N X ¬­
+          A         ­,
+               X N ­®­
+
+which has eigenvalues
+
+         M  N o iX
+As expected, the eigenvalues cross the imaginary axis from left to right as N
+increases from negative to positive values.
+
+         Rules of Thumb
+Our idealized case illustrates two rules that hold generically for supercritical Hopf
+bifurcations:
+         1. The size of the limit cycle grows continuously from zero, and increases
+            proportional to N – Nc , for N close to N c.
+         2. The frequency of the limit cycle is given approximately by X  Im M,
+            evaluated at N  N c. This formula is exact at the birth of the limit cycle,
+            and correct within O ( N N c) for N close to N c. The period is therefore
+            T  (2Q Im M ) O( N  Nc ).
+
+
+    But our idealized example also has some artifactual properties. First, in Hopf
+bifurcations encountered in practice, the limit cycle is elliptical, not circular, and
+its shape becomes distorted as N moves away from the bifurcation point. Our
+example is only typical topologically, not geometrically. Second, in our idealized
+case the eigenvalues move on horizontal lines as N varies, i.e., Im M is strictly inde-
+pendent of N. Normally, the eigenvalues would follow a curvy path and cross the
+imaginary axis with nonzero slope (Figure 8.2.4).
+
+                                            Im λ
+
+                                     λ (μ)
+
+
+
+                                                        Re λ
+
+                                    λ (μ )
+
+
+
+
+                             Figure 8.2.4
+
+
+
+
+254       BIFURCATIONS REVISITED
+         Subcritical Hopf Bifurcation
+    Like pitchfork bifurcations, Hopf bifurcations come in both super- and subcrit-
+ical varieties. The subcritical case is always much more dramatic, and potentially
+dangerous in engineering applications. After the bifurcation, the trajectories must
+jump to a distant attractor, which may be a fixed point, another limit cycle, infin-
+ity, or—in three and higher dimensions—a chaotic attractor. We’ll see a concrete
+example of this last, most interesting case when we study the Lorenz equations
+(Chapter 9).
+    But for now, consider the two-dimensional example
+
+          r  Nr r 3  r 5
+          R  X br 2 .
+
+The important difference from the earlier supercritical case is that the cubic term
+r 3 is now destabilizing; it helps to drive trajectories away from the origin.
+     The phase portraits are shown in Figure 8.2.5. For N  0 there are two attrac-
+tors, a stable limit cycle and a stable fixed point at the origin. Between them lies an
+unstable cycle, shown as a dashed curve in Figure 8.2.5; it’s the player to watch in
+this scenario. As N increases, the unstable cycle tightens like a noose around the
+fixed point. A subcritical Hopf bifurcation occurs at N  0, where the unstable cycle
+shrinks to zero amplitude and engulfs the origin, rendering it unstable. For N  0,
+the large-amplitude limit cycle is suddenly the only attractor in town. Solutions
+that used to remain near the origin are now forced to grow into large-amplitude
+oscillations.
+
+
+
+
+                         μ <0                            μ >0
+
+                Figure 8.2.5
+
+
+   Note that the system exhibits hysteresis: once large-amplitude oscillations have
+begun, they cannot be turned off by bringing N back to zero. In fact, the large
+oscillations will persist until N   where the stable and unstable cycles collide
+and annihilate. This destruction of the large-amplitude cycle occurs via another
+type of bifurcation, to be discussed in Section 8.4.
+
+
+
+
+                                               8.2   HOPF BIFURCATIONS            255
+   Subcritical Hopf bifurcations occur in the dynamics of nerve cells (Rinzel and
+Ermentrout 1989), in aeroelastic flutter and other vibrations of airplane wings
+(Dowell and Ilgamova 1988, Thompson and Stewart 1986), and in instabilities of
+fluid flows (Drazin and Reid 1981).
+
+         Subcritical, Supercritical, or Degenerate Bifurcation?
+    Given that a Hopf bifurcation occurs, how can we tell if it’s sub- or supercriti-
+cal? The linearization doesn’t provide a distinction: in both cases, a pair of eigen-
+values moves from the left to the right half-plane.
+    An analytical criterion exists, but it can be difficult to use (see Exercises 8.2.12–
+15 for some tractable cases). A quick and dirty approach is to use the computer.
+If a small, attracting limit cycle appears immediately after the fixed point goes
+unstable, and if its amplitude shrinks back to zero as the parameter is reversed,
+the bifurcation is supercritical; otherwise, it’s probably subcritical, in which case
+the nearest attractor might be far from the fixed point, and the system may exhibit
+hysteresis as the parameter is reversed. Of course, computer experiments are
+not proofs and you should check the numerics carefully before making any firm
+conclusions.
+    Finally, you should also be aware of a degenerate Hopf bifurcation. An example
+is given by the damped pendulum x Nx sin x  0. As we change the damping
+N from positive to negative, the fixed point at the origin changes from a stable to an
+unstable spiral. However at N  0 we do not have a true Hopf bifurcation because
+there are no limit cycles on either side of the bifurcation. Instead, at N  0 we have
+a continuous band of closed orbits surrounding the origin. These are not limit
+cycles! (Recall that a limit cycle is an isolated closed orbit.)
+    This degenerate case typically arises when a nonconservative system suddenly
+becomes conservative at the bifurcation point. Then the fixed point becomes a
+nonlinear center, rather than the weak spiral required by a Hopf bifurcation. See
+Exercise 8.2.11 for another example.
+
+
+EXAMPLE 8.2.1:
+
+   Consider the system x  Nx  y xy2 , y  x N y y3 . Show that a Hopf
+bifurcation occurs at the origin as N varies. Is the bifurcation subcritical, supercrit-
+ical, or degenerate?
+                                                       N 1¬­
+   Solution: The Jacobian at the origin is A                 ­ , which has U  2N,
+                                                        1 N ­­®
+%  N2 1  0, and M  N o i. Hence, as N increases through zero, the origin
+changes from a stable spiral to an unstable spiral. This suggests that some kind of
+Hopf bifurcation takes place at N  0.
+
+
+
+
+256        BIFURCATIONS REVISITED
+  To decide whether the bifurcation is subcritical, supercritical, or degenerate,
+we use simple reasoning and numerical integration. If we transform the system to
+polar coordinates, we find that
+
+          r  Nr   ry 2 ,
+
+as you should check. Hence r p Nr. This implies that for N  0, r ( t ) grows at least
+as fast as r0 eNt. In other words, all trajectories are repelled out to infinity! So there
+are certainly no closed orbits for N  0. In particular, the unstable spiral is not
+surrounded by a stable limit cycle; hence the bifurcation cannot be supercritical.
+   Could the bifurcation be degenerate? That would require that the origin be a
+nonlinear center when N  0. But r is strictly positive away from the x-axis, so
+closed orbits are still impossible.
+   By process of elimination, we expect that the bifurcation is subcritical. This
+is confirmed by Figure 8.2.6, which is a computer-generated phase portrait for
+N  0.2.
+
+                                          y
+                                         1
+
+
+
+
+                                                                  x
+                             −1                         1
+
+
+
+                                        −1
+
+
+                      Figure 8.2.6
+
+
+Note that an unstable limit cycle surrounds the stable fixed point, just as we expect
+in a subcritical bifurcation. Furthermore, the cycle is nearly elliptical and sur-
+rounds a gently winding spiral—these are typical features of either kind of Hopf
+bifurcation. ■
+
+
+8.3 Oscillating Chemical Reactions
+For an application of Hopf bifurcations, we now consider a class of experimen-
+tal systems known as chemical oscillators. These systems are remarkable, both
+for their spectacular behavior and for the story behind their discovery. After pre-
+senting this background information, we analyze a simple model for oscillations
+in the chlorine dioxide–iodine–malonic acid reaction. The definitive reference
+
+
+
+                                  8.3 OSCILLATING CHEMICAL REACTIONS                 257
+

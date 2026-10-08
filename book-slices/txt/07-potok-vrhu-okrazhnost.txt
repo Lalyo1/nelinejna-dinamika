@@ -1,0 +1,532 @@
+=== PDF pages 110-120 (printed 95-105) ===
+          4
+           FLOWS ON THE CIRCLE
+
+
+
+
+4.0     Introduction
+So far we’ve concentrated on the equation x  f ( x ), which we visualized as a
+vector field on the line. Now it’s time to consider a new kind of differential equa-
+tion and its corresponding phase space. This equation,
+
+          R  f (R ),
+
+corresponds to a vector field on the circle. Here R is a point on the circle and R is the
+velocity vector at that point, determined by the rule R  f (R ). Like the line, the
+circle is one-dimensional, but it has an important new property: by flowing in one
+direction, a particle can eventually return to its starting place (Figure 4.0.1). Thus
+periodic solutions become possible for the first time in this book! To put it another
+                 way, vector fields on the circle provide the most basic model of sys-
+                 tems that can oscillate.
+                     However, in all other respects, flows on the circle are similar to
+                 flows on the line, so this will be a short chapter. We will discuss
+                 the dynamics of some simple oscillators, and then show that these
+                 equations arise in a wide variety of applications. For example, the
+                 flashing of fireflies and the voltage oscillations of superconduct-
+Figure 4.0.1
+                 ing Josephson junctions have been modeled by the same equation,
+even though their oscillation frequencies differ by about ten orders of magnitude!
+
+
+4.1 Examples and Definitions
+Let’s begin with some examples, and then give a more careful definition of vector
+fields on the circle.
+
+
+
+                                        4.1   EXAMPLES AND DEFINITIONS                 95
+EXAMPLE 4.1.1:
+
+Sketch the vector field on the circle corresponding to R  sin R.
+    Solution: We assign coordinates to the circle in the usual way, with R  0 in the
+direction of “east,” and with R increasing counterclockwise.
+    To sketch the vector field, we first find the fixed points, defined by R  0. These
+occur at R*  0 and R*  Q. To determine their stability, note that sin R  0 on the
+upper semicircle. Hence R  0, so the flow is counterclockwise. Similarly, the flow
+is clockwise on the lower semicircle, where R  0. Hence R*  Q is stable and
+R*  0 is unstable, as shown in Figure 4.1.1.
+                                         Actually, we’ve seen this example before—it’s
+                                     given in Section 2.1. There we regarded x  sin x
+θ* = π                    θ * = 0 as a vector field on the line. Compare Figure 2.1.1
+                                     with Figure 4.1.1 and notice how much clearer it
+                                     is to think of this system as a vector field on the
+                                     circle. ■
+Figure 4.1.1
+
+
+
+
+EXAMPLE 4.1.2:
+
+Explain why R  R cannot be regarded as a vector field on the circle, for R in the
+range d  R  d.
+   Solution: The velocity is not uniquely defined. For example, R  0 and R  2Q
+are two labels for the same point on the circle, but the first label implies a velocity
+of 0 at that point, while the second implies a velocity of 2Q. ■
+
+   If we try to avoid this non-uniqueness by restricting R to the range Q  Rb Q,
+then the velocity vector jumps discontinuously at the point corresponding to R  Q.
+Try as we might, there’s no way to consider R  R as a smooth vector field on the
+entire circle.
+   Of course, there’s no problem regarding R  R as a vector field on the line,
+because then R  0 and R  2Q are different points, and so there’s no conflict about
+how to define the velocity at each of them.
+   Example 4.1.2 suggests how to define vector fields on the circle. Here’s a geo-
+metric definition: A vector field on the circle is a rule that assigns a unique velocity
+vector to each point on the circle.
+   In practice, such vector fields arise when we have a first-order system R  f (R ) ,
+where f ( R) is a real-valued, 2Q-periodic function. That is, f ( R 2Q)  f ( R) for all
+real R. Moreover, we assume (as usual) that f ( R) is smooth enough to guarantee
+existence and uniqueness of solutions. Although this system could be regarded as
+a special case of a vector field on the line, it is usually clearer to think of it as a
+vector field on the circle (as in Example 4.1.1). This means that we don’t distinguish
+
+
+96         FLOWS ON THE CIRCLE
+between R’s that differ by an integer multiple of 2Q. Here’s where the periodicity of
+f ( R ) becomes important—it ensures that the velocity R is uniquely defined at each
+point R on the circle, in the sense that R is the same, whether we call that point R or
+R 2Q, or R 2Qk for any integer k.
+
+
+4.2 Uniform Oscillator
+A point on a circle is often called an angle or a phase. Then the simplest oscillator
+of all is one in which the phase R changes uniformly:
+
+         θ  ω
+where X is a constant. The solution is
+
+         R( t )  Xt   R0 ,
+which corresponds to uniform motion around the circle at an angular frequency X.
+This solution is periodic, in the sense that R( t ) changes by 2Q, and therefore returns
+to the same point on the circle, after a time T  2Q / X. We call T the period of the
+oscillation.
+   Notice that we have said nothing about the amplitude of the oscillation. There
+really is no amplitude variable in our system. If we had an amplitude as well as a
+phase variable, we’d be in a two-dimensional phase space; this situation is more com-
+plicated and will be discussed later in the book. (Or if you prefer, you can imagine
+that the oscillation occurs at some fixed amplitude, corresponding to the radius of
+our circular phase space. In any case, amplitude plays no role in the dynamics.)
+
+
+EXAMPLE 4.2.1:
+
+Two joggers, Speedy and Pokey, are running at a steady pace around a circular
+track. It takes Speedy T1 seconds to run once around the track, whereas it takes
+Pokey T2  T1 seconds. Of course, Speedy will periodically overtake Pokey; how
+long does it take for Speedy to lap Pokey once, assuming that they start together?
+   Solution: Let R1( t ) be Speedy’s position on the track. Then θ1  ω1 where
+X1  2Q / T1. This equation says that Speedy runs at a steady pace and completes
+               θ1        a circuit every T1 seconds. Similarly, suppose that
+                         θ2  ω2  2π T2 for Pokey.
+             φ     θ2        The condition for Speedy to lap Pokey is that the angle
+                         between them has increased by 2Q. Thus if we define the
+                         phase difference G  R1  R2, we want to find how long it
+                         takes for G to increase by 2Q (Figure 4.2.1). By subtraction
+                         we find φ = θ1 − θ2 = ω1 − ω2 . Thus G increases by 2Q after
+Figure 4.2.1
+                         a time
+
+
+                                              4.2 UNIFORM OSCILLATOR                  97
+                                         −1
+                       2π       ⎛1 1⎞
+            Tlap =          = ⎜⎜⎜ − ⎟⎟⎟ . ■
+                     ω1 − ω2 ⎜⎝T1 T2 ⎟⎠
+
+   Example 4.2.1 illustrates an effect called the beat phenomenon. Two noninter-
+acting oscillators with different frequencies will periodically go in and out of phase
+with each other. You may have heard this effect on a Sunday morning: sometimes
+the bells of two different churches will ring simultaneously, then slowly drift apart,
+and then eventually ring together again. If the oscillators interact (for example, if
+the two joggers try to stay together or the bell ringers can hear each other), then we
+can get more interesting effects, as we will see in Section 4.5 on the flashing rhythm
+of fireflies.
+
+
+4.3     Nonuniform Oscillator
+The equation
+
+            θ = ω − a sin θ                                                (1)
+arises in many different branches of science and engineering. Here is a partial list:
+            Electronics (phase-locked loops)
+            Biology (oscillating neurons, firefly flashing rhythm, human sleep-wake
+               cycle)
+            Condensed-matter physics (Josephson junction, charge-density waves)
+            Mechanics (Overdamped pendulum driven by a constant torque)
+Some of these applications will be discussed later in this chapter and in the
+exercises.
+                             To analyze (1), we assume that X  0 and a p 0 for
+            .            convenience; the results for negative X and a are sim-
+           θ
+                         ilar. A typical graph of f ( R )  X  a sin R is shown
+        ω                in Figure 4.3.1. Note that X is the mean and a is the
+                     a
+                         amplitude.
+                               θ
+     −π 2            π 2           Vector Fields
+                                 If a  0, (1) reduces to the uniform oscillator. The
+                              parameter a introduces a nonuniformity in the flow
+                              around the circle: the flow is fastest at R  –Q / 2 and
+Figure 4.3.1                  slowest at R  Q / 2 (Figure 4.3.2a). This nonuniformity
+                              becomes more pronounced as a increases. When a is
+slightly less than X, the oscillation is very jerky: the phase point R( t ) takes a long
+time to pass through a bottleneck near R  Q / 2, after which it zips around the rest
+of the circle on a much faster time scale. When a  X, the system stops oscillating
+
+
+
+98           FLOWS ON THE CIRCLE
+altogether: a half-stable fixed point has been born in a saddle-node bifurcation at
+R  Q / 2 (Figure 4.3.2b). Finally, when a X, the half-stable fixed point splits into a
+stable and unstable fixed point (Figure 4.3.2c). All trajectories are attracted to the
+stable fixed point as t l d.
+
+                  .
+                 θ
+
+
+
+
+                      π 2   θ
+slow passage
+through here
+(bottleneck)
+
+        (a) a < ω                      (b) a = ω                     (c) a > ω
+
+Figure 4.3.2
+
+
+The same information can be shown by plotting the vector fields on the circle
+(Figure 4.3.3).
+
+                                         θ =π 2
+        slow
+
+
+
+
+        fast
+     (a) a < ω                         (b) a = ω                         (c) a > ω
+
+ Figure 4.3.3
+
+
+
+
+EXAMPLE 4.3.1:
+
+Use linear stability analysis to classify the fixed points of (1) for a  X.
+  Solution: The fixed points R * satisfy
+
+          sin θ*  ω a ,               cos θ* = ± 1− ( ω a )2 .
+Their linear stability is determined by
+
+           f ′(θ*) = −a cos θ* = B a 1− ( ω a )2 .
+
+
+                                         4.3   NONUNIFORM OSCILLATOR                 99
+Thus the fixed point with cos R*  0 is the stable one, since f ′(θ*)  0. This agrees
+with Figure 4.3.2c. ■
+
+         Oscillation Period
+   For a  X, the period of the oscillation can be found analytically, as follows: the
+time required for R to change by 2Q is given by
+
+                                   2π   dt
+         T = ∫ dt = ∫                      dθ
+                               0        dθ
+                     2π      dθ
+            =∫
+                 0        ω − a sin θ
+
+where we have used (1) to replace dt / dR. This integral can be evaluated by complex
+variable methods, or by the substitution u  tan R2 . (See Exercise 4.3.2 for details.)
+The result is
+
+                      2π
+         T=                         .                                     (2)
+                 ω 2 − a2
+
+Figure 4.3.4 shows the graph of T as a function of a.
+
+                                        T
+
+
+
+
+                              2π ω
+                                                     ω       a
+
+                              Figure 4.3.4
+
+
+When a  0, Equation (2) reduces to T  2Q / X, the familiar result for a uniform
+oscillator. The period increases with a and diverges as a approaches X from below
+(we denote this limit by a l X – ).
+   We can estimate the order of the divergence by noting that
+
+             X 2 − a2 = X + a X − a
+                            ≈ 2X X − a
+
+as a l X –. Hence
+
+               ⎛ π 2 ⎞⎟ 1
+         T ≈ ⎜⎜⎜      ⎟⎟     ,                                            (3)
+               ⎜⎝ ω ⎟⎠ ω − a
+
+
+
+100       FLOWS ON THE CIRCLE
+which shows that T blows up like ( ac  a )–1 / 2, where ac  X. Now let’s explain the
+origin of this square-root scaling law.
+
+         Ghosts and Bottlenecks
+   The square-root scaling law found above is a very general feature of systems that
+are close to a saddle-node bifurcation. Just after the fixed points collide, there is a
+saddle-node remnant or ghost that leads to slow passage through a bottleneck.
+   For example, consider θ = ω − a sin θ for decreasing values of a, starting with
+a  X. As a decreases, the two fixed points approach each other, collide, and dis-
+appear (this sequence was shown earlier in Figure 4.3.3, except now you have to
+read from right to left.) For a slightly less than X, the fixed points near Q / 2 no lon-
+ger exist, but they still make themselves felt through a saddle-node ghost
+(Figure 4.3.5).
+
+                                            .
+                                           θ
+
+
+
+                                                                 θ
+
+
+
+                                                       bottleneck
+                                                       due to ghost
+
+
+                                 Figure 4.3.5
+
+
+   A graph of R(t ) would have the shape shown in Figure 4.3.6. Notice how the
+trajectory spends practically all its time getting through the bottleneck.
+
+                  θ                      Tbottleneck
+
+
+
+
+                                                                      t
+
+                  Figure 4.3.6
+
+
+   Now we want to derive a general scaling law for the time required to pass
+through a bottleneck. The only thing that matters is the behavior of R in the
+immediate vicinity of the minimum, since the time spent there dominates all other
+time scales in the problem. Generically, R looks parabolic near its minimum. Then
+the problem simplifies tremendously: the dynamics can be reduced to the normal
+
+
+
+
+                                           4.3    NONUNIFORM OSCILLATOR             101
+form for a saddle-node bifurcation! By a local rescaling of space, we can rewrite
+the vector field as
+
+          x = r + x 2
+where r is proportional to the distance from the bifurcation, and 0  r  1. The
+graph of x is shown in Figure 4.3.7.
+
+                                .
+                                x
+
+
+
+
+                                                           x
+                                               0
+
+                                Figure 4.3.7
+
+
+To estimate the time spent in the bottleneck, we calculate the time taken for x to
+go from d (all the way on one side of the bottleneck) to d (all the way on the
+other side). The result is
+
+                            ∞ dx      Q
+          Tbottleneck ≈ ∫           =    ,                                    (4)
+                         −∞ r + x 2
+                                       r
+
+which shows the generality of the square-root scaling law. (Exercise 4.3.1 reminds
+you how to evaluate the integral in (4).)
+
+
+EXAMPLE 4.3.2:
+
+Estimate the period of θ = ω − a sin θ in the limit a l X – , using the normal form
+method instead of the exact result.
+   Solution: The period will be essentially the time required to get through the
+bottleneck. To estimate this time, we use a Taylor expansion about R  Q / 2, where
+the bottleneck occurs. Let G  R – Q/2, where G is small. Then
+
+          φ = ω − a sin(φ + π2 )
+            = ω − a cos φ
+            = ω − a + 12 aφ 2 + 
+
+which is close to the desired normal form. If we let
+
+          x = ( a 2 )1 2 φ,         r = ω −a
+then ( 2 a )1 2 x ≈ r + x 2 , to leading order in x. Separating variables yields
+
+
+102        FLOWS ON THE CIRCLE
+                            ∞     dx                Q
+         T ≈ ( 2 a )1 2 ∫              = ( 2 a )1 2    .
+                        −∞      r + x2               r
+
+Now we substitute r  X a . Furthermore, since a l X – , we may replace 2 / a by
+2 / X. Hence
+
+               ⎛ π 2 ⎞⎟ 1
+         T ≈ ⎜⎜⎜      ⎟⎟     ,
+               ⎜⎝ ω ⎟⎠ ω − a
+
+which agrees with (3). ■
+
+
+4.4 Overdamped Pendulum
+We now consider a simple mechanical example of a nonuniform oscillator: an over-
+damped pendulum driven by a constant torque. Let R denote the angle between the
+pendulum and the downward vertical, and suppose that R increases counterclock-
+wise (Figure 4.4.1).
+
+                                        Γ
+
+
+
+                                                           g
+                                            L
+                                       θ
+                                                  m
+
+
+                                   Figure 4.4.1
+
+
+Then Newton’s law yields
+
+         mL2 R + bR + mgL sin R = Γ                                     (1)
+where m is the mass and L is the length of the pendulum, b is a viscous damping
+constant, g is the acceleration due to gravity, and ( is a constant applied torque.
+All of these parameters are positive. In particular, (  0 implies that the applied
+torque drives the pendulum counterclockwise, as shown in Figure 4.4.1.
+   Equation (1) is a second-order system, but in the overdamped limit of extremely
+large b, it may be approximated by a first-order system (see Section 3.5 and
+Exercise 4.4.1). In this limit the inertia term mL2 R is negligible and so (1) becomes
+
+         bR + mgL sin R = Γ .                                             (2)
+
+
+
+
+                                                4.4   OVERDAMPED PENDULUM          103
+To think about this problem physically, you should imagine that the pendulum
+is immersed in molasses. The torque ( enables the pendulum to plow through its
+viscous surroundings. Please realize that this is the opposite limit from the familiar
+frictionless case in which energy is conserved, and the pendulum swings back and
+forth forever. In the present case, energy is lost to damping and pumped in by the
+applied torque.
+    To analyze (2), we first nondimensionalize it. Dividing by mgL yields
+
+           b     Γ
+              R=     − sin R.
+          mgL    mgL
+
+Hence, if we let
+
+              mgL                    Γ
+         τ=       t,           γ=                                        (3)
+               b                    mgL
+
+then
+
+         θ ′ = γ − sin θ                                                 (4)
+where θ ′ = d θ d τ .
+
+    The dimensionless group H is the ratio of the applied torque to the maximum
+gravitational torque. If H  1 then the applied torque can never be balanced by the
+gravitational torque and the pendulum will overturn continually. The rotation rate
+is nonuniform, since gravity helps the applied torque on one side and opposes it on
+the other (Figure 4.4.2).
+
+                                           γ
+
+
+
+
+                            fast                    slow
+                                           θ
+
+
+
+
+                            Figure 4.4.2
+
+
+   As H l 1+, the pendulum takes longer and longer to climb past R  Q / 2 on the
+slow side. When H  1 a fixed point appears at R *  Q / 2, and then splits into two
+when H  1 (Figure 4.4.3). On physical grounds, it’s clear that the lower of the two
+equilibrium positions is the stable one.
+
+
+
+
+104        FLOWS ON THE CIRCLE
+                                            γ
+
+
+
+
+                                  Figure 4.4.3
+
+
+As H decreases, the two fixed points move farther apart. Finally, when H  0, the
+applied torque vanishes and there is an unstable equilibrium at the top (inverted
+pendulum) and a stable equilibrium at the bottom.
+
+
+4.5     Fireflies
+Fireflies provide one of the most spectacular examples of synchronization in
+nature. In some parts of southeast Asia, thousands of male fireflies gather in trees
+at night and flash on and off in unison. Meanwhile the female fireflies cruise over-
+head, looking for males with a handsome light.
+    To really appreciate this amazing display, you have to see a movie or videotape
+of it. A good example is shown in David Attenborough’s (1992) television series
+The Trials of Life, in the episode called “Talking to Strangers.” See Buck and Buck
+(1976) for a beautifully written introduction to synchronous fireflies, and Buck
+(1988) for a comprehensive review. For mathematical models of synchronous fire-
+flies, see Mirollo and Strogatz (1990) and Ermentrout (1991).
+    How does the synchrony occur? Certainly the fireflies don’t start out synchro-
+nized; they arrive in the trees at dusk, and the synchrony builds up gradually as
+the night goes on. The key is that the fireflies influence each other: When one firefly
+sees the flash of another, it slows down or speeds up so as to flash more nearly in
+phase on the next cycle.
+    Hanson (1978) studied this effect experimentally, by periodically flashing a light
+at a firefly and watching it try to synchronize. For a range of periods close to the
+firefly’s natural period (about 0.9 sec), the firefly was able to match its frequency to
+the periodic stimulus. In this case, one says that the firefly had been entrained by
+the stimulus. However, if the stimulus was too fast or too slow, the firefly could not
+keep up and entrainment was lost—then a kind of beat phenomenon occurred.
+But in contrast to the simple beat phenomenon of Section 4.2, the phase differ-
+ence between stimulus and firefly did not increase uniformly. The phase difference
+increased slowly during part of the beat cycle, as the firefly struggled in vain to
+synchronize, and then it increased rapidly through 2Q, after which the firefly tried
+again on the next beat cycle. This process is called phase walkthrough or phase drift.
+
+
+                                                             4.5 FIREFLIES         105
+

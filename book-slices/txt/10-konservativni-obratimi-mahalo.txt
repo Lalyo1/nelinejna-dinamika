@@ -1,0 +1,725 @@
+=== PDF pages 175-189 (printed 160-174) ===
+stable manifold are traditionally called separatrices. Basins and their boundaries
+are important because they partition the phase space into regions of different long-
+term behavior.
+
+
+6.5 Conservative Systems
+Newton’s law F  ma is the source of many important second-order systems. For
+example, consider a particle of mass m moving along the x-axis, subject to a non-
+linear force F ( x ). Then the equation of motion is
+
+          mx = F (x ).
+Notice that we are assuming that F is independent of both x and t; hence there is
+no damping or friction of any kind, and there is no time-dependent driving force.
+    Under these assumptions, we can show that energy is conserved, as follows. Let
+V ( x ) denote the potential energy, defined by F ( x )  dV / dx. Then
+
+                   dV
+          mx +      = 0.                                               (1)
+                   dx
+
+Now comes a trick worth remembering: multiply both sides by x and notice that
+the left-hand side becomes an exact time-derivative!
+
+                    dV         d
+             +
+          mxx          x = 0 ⇒ ⎡⎣⎢ 12 mx 2 +V ( x )⎤⎦⎥ = 0
+                    dx         dt
+
+where we’ve used the chain rule
+
+          d               dV dx
+             V ( x(t )) 
+          dt              dx dt
+
+in reverse. Hence, for a given solution x ( t ), the total energy
+
+          E = 12 mx 2 +V ( x )
+is constant as a function of time. The energy is often called a conserved quantity,
+a constant of motion, or a first integral. Systems for which a conserved quantity
+exists are called conservative systems.
+    Let’s be a bit more general and precise. Given a system x  f ( x ), a conserved
+quantity is a real-valued continuous function E(x) that is constant on trajectories,
+i.e. dE / dt  0. To avoid trivial examples, we also require that E (x) be nonconstant
+on every open set. Otherwise a constant function like E (x) w 0 would qualify as a
+conserved quantity for every system, and so every system would be conservative!
+Our caveat rules out this silliness.
+
+
+160        PHASE PLANE
+   The first example points out a basic fact about conservative systems.
+
+
+EXAMPLE 6.5.1:
+
+Show that a conservative system cannot have any attracting fixed points.
+   Solution: Suppose x* were an attracting fixed point. Then all points in its basin
+of attraction would have to be at the same energy E (x*) (because energy is constant
+on trajectories and all trajectories in the basin flow to x*). Hence E (x) must be a con-
+stant function for x in the basin. But this contradicts our definition of a conservative
+system, in which we required that E (x) be nonconstant on all open sets. ■
+
+  If attracting fixed points can’t occur, then what kind of fixed points can occur?
+One generally finds saddles and centers, as in the next example.
+
+
+EXAMPLE 6.5.2:
+
+Consider a particle of mass m  1 moving in a double-well potential
+V ( x ) = − 12 x 2 + 14 x 4 . Find and classify all the equilibrium points for the system.
+Then plot the phase portrait and interpret the results physically.
+   Solution: The force is dV / dx  x  x3, so the equation of motion is
+
+          x = x − x3 .
+This can be rewritten as the vector field
+
+          x  y
+
+          y = x − x3
+
+where y represents the particle’s velocity. Equilibrium points occur where
+(x , y )  (0, 0). Hence the equilibria are ( x*, y*)  (0, 0) and (o1, 0). To classify
+these fixed points we compute the Jacobian:
+
+               ⎛ 0         1⎞⎟
+          A = ⎜⎜              ⎟.
+               ⎜⎝1− 3x 2   0⎟⎟⎠
+
+At (0, 0), we have %  1, so the origin is a saddle point. But when ( x*, y*) 
+(o1, 0), we find U  0 , %  2; hence these equilibria are predicted to be centers.
+   At this point you should be hearing warning bells—in Section 6.3 we saw that
+small nonlinear terms can easily destroy a center predicted by the linear approxi-
+mation. But that’s not the case here, because of energy conservation. The trajecto-
+ries are closed curves defined by the contours of constant energy, i.e.,
+
+          E = 12 y 2 − 12 x 2 + 14 x 4 = constant.
+
+
+                                               6.5 CONSERVATIVE SYSTEMS              161
+   Figure 6.5.1 shows the trajectories corresponding to different values of E. To
+decide which way the arrows point along the trajectories, we simply compute the
+vector ( x , y ) at a few convenient locations. For example, x  0 and y  0 on the
+positive y-axis, so the motion is to the right. The orientation of neighboring trajec-
+tories follows by continuity.
+   As expected, the system has a saddle point at (0, 0) and centers at (1, 0) and
+(1, 0). Each of the neutrally stable centers is surrounded by a family of small
+                         y                        closed orbits. There are also large
+                                                  closed orbits that encircle all three
+                                                  fixed points.
+                                                      Thus solutions of the system are
+                                             x    typically  periodic, except for the equi-
+                                                  librium solutions and two very special
+                                                  trajectories: these are the trajectories
+                                                  that appear to start and end at the
+                                                  origin. More precisely, these trajecto-
+Figure 6.5.1                                      ries approach the origin as t l od.
+                                                  Trajectories that start and end at the
+same fixed point are called homoclinic orbits. They are common in conservative
+systems, but are rare otherwise. Notice that a homoclinic orbit does not corre-
+spond to a periodic solution, because the trajectory takes forever trying to reach
+the fixed point.
+   Finally, let’s connect the phase portrait to the motion of an undamped particle
+in a double-well potential (Figure 6.5.2).
+                                      The neutrally stable equilibria correspond to the
+                                   particle at rest at the bottom of one of the wells, and
+                                   the small closed orbits represent small oscillations
+                                   about these equilibria. The large orbits represent
+                                   more energetic oscillations that repeatedly take the
+                                   particle back and forth over the hump. Do you see
+                                   what the saddle point and the homoclinic orbits
+Figure 6.5.2                       mean physically? ■
+
+
+EXAMPLE 6.5.3:
+
+Sketch the graph of the energy function E( x, y ) for Example 6.5.2.
+   Solution: The graph of E ( x, y ) is shown in Figure 6.5.3. The energy E is plotted
+above each point ( x, y ) of the phase plane. The resulting surface is often called the
+energy surface for the system.
+
+
+
+
+162        PHASE PLANE
+                         E
+
+
+                    y
+
+
+
+                                              x
+
+          Figure 6.5.3
+
+
+    Figure 6.5.3 shows that the local minima of E project down to centers in the
+phase plane. Contours of slightly higher energy correspond to the small orbits
+surrounding the centers. The saddle point and its homoclinic orbits lie at even
+higher energy, and the large orbits that encircle all three fixed points are the most
+energetic of all.
+    It’s sometimes helpful to think of the flow as occurring on the energy surface
+itself, rather than in the phase plane. But notice—the trajectories must maintain a
+constant height E, so they would run around the surface, not down it. ■
+
+         Nonlinear Centers
+   Centers are ordinarily very delicate but, as the examples above suggest, they
+are much more robust when the system is conservative. We now present a theorem
+about nonlinear centers in second-order conservative systems.
+   The theorem says that centers occur at the local minima of the energy func-
+tion. This is physically plausible—one expects neutrally stable equilibria and small
+oscillations to occur at the bottom of any potential well, no matter what its shape.
+
+          Theorem 6.5.1: (Nonlinear centers for conservative systems) Consider the
+system x  f ( x ) , where x  ( x, y )  R2, and f is continuously differentiable.
+Suppose there exists a conserved quantity E (x) and suppose that x* is an isolated
+fixed point (i.e., there are no other fixed points in a small neighborhood surround-
+ing x*). If x* is a local minimum of E, then all trajectories sufficiently close to x*
+are closed.
+
+         Ideas behind the proof: Since E is constant on trajectories, each trajectory
+is contained in some contour of E. Near a local maximum or minimum, the con-
+tours are closed. (We won’t prove this, but Figure 6.5.3 should make it seem obvi-
+ous.) The only remaining question is whether the trajectory actually goes all the
+way around the contour or whether it stops at a fixed point on the contour. But
+because we’re assuming that x* is an isolated fixed point, there cannot be any fixed
+
+
+
+
+                                           6.5 CONSERVATIVE SYSTEMS              163
+points on contours sufficiently close to x*. Hence all trajectories in a sufficiently
+small neighborhood of x* are closed orbits, and therefore x* is a center. ■
+
+   Two remarks about this result:
+          1. The theorem is valid for local maxima of E also. Just replace the
+             function E by E, and maxima get converted to minima; then
+             Theorem 6.5.1 applies.
+          2. We need to assume that x* is isolated. Otherwise there are counterex-
+             amples due to fixed points on the energy contour—see Exercise 6.5.12.
+
+   Another theorem about nonlinear centers will be presented in the next section.
+
+
+6.6      Reversible Systems
+Many mechanical systems have time-reversal symmetry. This means that their
+dynamics look the same whether time runs forward or backward. For example, if
+you were watching a movie of an undamped pendulum swinging back and forth,
+you wouldn’t see any physical absurdities if the movie were run backward.
+   In fact, any mechanical system of the form mx  F ( x ) is symmetric under
+time reversal. If we make the change of variables t l t, the second derivative x
+stays the same and so the equation is unchanged. Of course, the velocity x would
+be reversed. Let’s see what this means in the phase plane. The equivalent system is
+
+          x  y
+          y  m1 F ( x )
+
+where y is the velocity. If we make the change of variables t l t and y l y,
+both equations stay the same. Hence if ( x ( t ), y ( t )) is a solution, then so is ( x ( t ),
+y ( t )). Therefore every trajectory has a twin: they differ only by time-reversal
+and a reflection in the x-axis (Figure 6.6.1).
+
+                                             y
+
+
+
+                                                           x
+
+
+
+
+                                  Figure 6.6.1
+
+
+The trajectory above the x-axis looks just like the one below the x-axis, except the
+arrows are reversed.
+
+
+
+164         PHASE PLANE
+   More generally, let’s define a reversible system to be any second-order system
+that is invariant under t l t and y l y. For example, any system of the form
+
+           x  f ( x, y )
+           y  g ( x, y ),
+
+where f is odd in y and g is even in y (i.e., f ( x, y )  f ( x, y ) and g ( x , y )  g ( x, y ))
+is reversible.
+    Reversible systems are different from conservative systems, but they have many
+of the same properties. For instance, the next theorem shows that centers are
+robust in reversible systems as well.
+
+        Theorem 6.6.1: (Nonlinear centers for reversible systems) Suppose the ori-
+gin x*  0 is a linear center for the continuously differentiable system
+
+           x  f ( x, y )
+           y  g ( x, y ),
+
+and suppose that the system is reversible. Then sufficiently close to the origin, all
+trajectories are closed curves.
+           y
+                                            Ideas behind the proof: Consider a trajectory that
+                                  starts on the positive x-axis near the origin (Figure 6.6.2).
+                              x   Sufficiently near the origin, the flow swirls around the
+                                  origin, thanks to the dominant influence of the lin-
+                                  ear center, and so the trajectory eventually intersects
+                                  the negative x-axis. (This is the step where our proof
+Figure 6.6.2                      lacks rigor, but the claim should seem plausible.) Now
+                                  we use reversibility. By reflecting the trajectory across
+            y                     the x-axis, and changing the sign of t, we obtain a twin
+                                  trajectory with the same endpoints but with its arrow
+                              x   reversed (Figure 6.6.3).
+
+                                     Together the two trajectories form a closed orbit, as
+                                  desired. Hence all trajectories sufficiently close to the
+Figure 6.6.3                      origin are closed. ■
+
+
+EXAMPLE 6.6.1:
+
+Show that the system
+
+                      x = y − y3
+                       y = −x − y 2
+
+
+                                                       6.6 REVERSIBLE SYSTEMS                    165
+has a nonlinear center at the origin, and plot the phase portrait.
+   Solution: We’ll show that the hypotheses of the theorem are satisfied. The
+Jacobian at the origin is
+
+              ⎛ 0 1 ⎞⎟
+         A = ⎜⎜       ⎟.
+              ⎜⎝−1 0⎟⎟⎠
+
+This has U  0, %  0, so the origin is a linear center. Furthermore, the system
+is reversible, since the equations are invariant under the transformation t l t,
+y l y. By Theorem 6.6.1, the origin is a nonlinear center.
+    The other fixed points of the system are (1, 1) and (1, 1). They are saddle
+points, as is easily checked by computing the linearization. A computer-generated
+phase portrait is shown in Figure 6.6.4. It looks like some exotic sea creature, per-
+haps a manta ray. The reversibility symmetry is apparent. The trajectories above
+the x-axis have twins below the x-axis, with arrows reversed.
+
+
+                                        y
+
+
+
+
+                                                              x
+
+
+
+
+                    Figure 6.6.4
+
+
+   Notice that the twin saddle points are joined by a pair of trajectories. They are
+called heteroclinic trajectories or saddle connections. Like homoclinic orbits, het-
+eroclinic trajectories are much more common in reversible or conservative systems
+than in other types of systems. ■
+
+   Although we have relied on the computer to plot Figure 6.6.4, it can be sketched
+on the basis of qualitative reasoning alone. For example, the existence of the het-
+eroclinic trajectories can be deduced rigorously using reversibility arguments
+(Exercise 6.6.6). The next example illustrates the spirit of such arguments.
+
+
+
+
+166       PHASE PLANE
+EXAMPLE 6.6.2:
+
+Using reversibility arguments alone, show that the system
+
+          x = y
+          y = x − x 2
+
+has a homoclinic orbit in the half-plane x p 0.
+   Solution: Consider the unstable manifold of the saddle point at the origin. This
+manifold leaves the origin along the vector (1, 1), since this is the unstable eigen-
+direction for the linearization. Hence, close to the origin, part of the unstable man-
+ifold lies in the first quadrant x, y  0. Now imagine a phase point with coordi-
+nates ( x ( t ), y ( t )) moving along the unstable manifold, starting from x, y small and
+positive. At first, x ( t ) must increase since x = y > 0. Also, y ( t ) increases initially,
+                                    since y = x − x 2 > 0 for small x. Thus the phase
+            y                       point moves up and to the right. Its horizontal veloc-
+                                    ity is continually increasing, so at some time it must
+                               x cross the vertical line x  1. Then y  0 so y ( t )
+                          1
+                                    decreases, eventually reaching y  0. Figure 6.6.5
+                                    shows the situation.
+                                       Now, by reversibility, there must be a twin trajec-
+Figure 6.6.5                        tory  with the same endpoints but with arrow reversed
+                                    (Figure 6.6.6). Together the two trajectories form the
+            y
+                                    desired homoclinic orbit. ■
+
+                           x        There is a more general definition of reversibility
+                    1
+                                which extends nicely to higher-order systems.
+                                Consider any mapping R (x) of the phase space to
+                                itself that satisfies R 2 (x)  x. In other words, if the
+Figure 6.6.6                    mapping is applied twice, all points go back to where
+                                they started. In our two-dimensional examples, a
+reflection about the x-axis (or any axis through the origin) has this property. Then
+the system x  f ( x ) is reversible if it is invariant under the change of variables
+t l t, x l R (x).
+   Our next example illustrates this more general notion of reversibility, and also
+highlights the main difference between reversible and conservative systems.
+
+
+EXAMPLE 6.6.3:
+
+Show that the system
+
+          x = −2 cos x − cos y
+          y = −2 cos y − cos x
+
+
+                                                   6.6 REVERSIBLE SYSTEMS                167
+is reversible, but not conservative. Then plot the phase portrait.
+    Solution: The system is invariant under the change of variables t l t, x l x,
+and y l y. Hence the system is reversible, with R (x, y )  (x, y ) in the preced-
+ing notation.
+    To show that the system is not conservative, it suffices to show that it has an
+attracting fixed point. (Recall that a conservative system can never have an attract-
+ing fixed point—see Example 6.5.1.)
+    The fixed points satisfy 2 cos x  cos y and 2 cos y  cos x. Solving these
+equations simultaneously yields cos x*  cos y*  0. Hence there are four fixed
+points, given by ( x*, y*) = (± Q2 , ± Q2 ) .
+    We claim that ( x*, y*) = (− Q2 , − Q2 ) is an attracting fixed point. The Jacobian
+there is
+
+               ⎛2 sin x *    sin y * ⎞⎟ ⎛⎜−2 −1⎞⎟
+          A = ⎜⎜                       ⎟=⎜         ⎟,
+               ⎜⎝sin x *    2 sin y *⎟⎟⎠ ⎜⎝−1 − 2⎟⎟⎠
+
+which has U  4, %  3, U2  4%  4. Therefore the fixed point is a stable node.
+This shows that the system is not conservative.
+                y
+                                           The other three fixed points can be
+                                       shown to be an unstable node and two sad-
+                                       dles. A computer-generated phase portrait
+                                       is shown in Figure 6.6.7. To see the revers-
+                                       ibility symmetry, compare the dynamics at
+                                   x   any two points ( x, y ) and R ( x, y ) 
+                                       ( x, y ). The trajectories look the same,
+                                       but the arrows are reversed. In particular,
+                                       the stable node at ( Q2 ,  Q2 ) is the twin of
+                                            the unstable node at ( Q2 , Q2 ) . ■
+
+                                             The system in Example 6.6.3 is closely
+Figure 6.6.7
+                                         related to a model of two superconducting
+Josephson junctions coupled through a resistive load (Tsang et al. 1991). For fur-
+ther discussion, see Exercise 6.6.9 and Example 8.7.4. Reversible, nonconservative
+systems also arise in the context of lasers (Politi et al. 1986) and fluid flows (Stone,
+Nadim, and Strogatz 1991 and Exercise 6.6.8).
+
+
+6.7 Pendulum
+Do you remember the first nonlinear system you ever studied in school? It was
+probably the pendulum. But in elementary courses, the pendulum’s essential non-
+linearity is sidestepped by the small-angle approximation sin R x R. Enough of
+
+
+
+168        PHASE PLANE
+that! In this section we use phase plane methods to analyze the pendulum, even in
+the dreaded large-angle regime where the pendulum whirls over the top.
+   In the absence of damping and external driving, the motion of a pendulum is
+governed by
+
+          d 2R g
+              + sin R = 0                                                    (1)
+          dt 2 L
+
+                            where R is the angle from the downward vertical, g is the
+                     g
+    L                       acceleration due to gravity, and L is the length of the pendu-
+θ                           lum (Figure 6.7.1).
+         m
+                               We nondimensionalize (1) by introducing a frequency
+                             X  g L and a dimensionless time τ  ωt. Then the
+Figure 6.7.1                equation becomes
+
+          R + sin R = 0                                                    (2)
+where the overdot denotes differentiation with respect to U. The corresponding
+system in the phase plane is
+
+          R  v                                                             (3a)
+          v = −sin R                                                        (3b)
+
+where v is the (dimensionless) angular velocity.
+   The fixed points are ( R*, v*)  ( kQ, 0), where k is any integer. There’s no physical
+difference between angles that differ by 2Q, so we’ll concentrate on the two fixed
+points (0, 0) and ( Q, 0). At (0, 0), the Jacobian is
+
+               ⎛ 0 1 ⎞⎟
+          A = ⎜⎜       ⎟
+               ⎜⎝−1 0⎟⎟⎠
+
+so the origin is a linear center.
+   In fact, the origin is a nonlinear center, for two reasons. First, the system (3) is
+reversible: the equations are invariant under the transformation U l U , v l v .
+Then Theorem 6.6.1 implies that the origin is a nonlinear center.
+   Second, the system is also conservative. Multiplying (2) by R and integrating
+yields
+          R(R + sin R ) = 0 ⇒ 12 R2 − cos R = constant.
+The energy function
+
+          E (R, v ) = 12 v 2 − cos R                                         (4)
+
+
+
+
+                                                             6.7   PENDULUM          169
+has a local minimum at (0, 0), since E ≈ 12 (v 2 + R 2 ) −1 for small ( R, v ). Hence
+Theorem 6.5.1 provides a second proof that the origin is a nonlinear center. (This
+argument also shows that the closed orbits are approximately circular, with
+R 2 v2 x 2( E 1).)
+   Now that we’ve beaten the origin to death, consider the fixed point at ( Q, 0). The
+Jacobian is
+
+              ⎛0 1⎞⎟
+         A = ⎜⎜      ⎟.
+              ⎜⎝1 0⎟⎟⎠
+
+The characteristic equation is M2  1  0. Therefore M1  1, M2  1; the fixed point
+is a saddle. The corresponding eigenvectors are v1  (1, 1) and v2  (1 , 1).
+    The phase portrait near the fixed points can be sketched from the information
+obtained so far (Figure 6.7.2).
+
+                                         v
+
+
+                                                          θ
+
+
+
+
+                          Figure 6.7.2
+
+
+To fill in the picture, we include the energy contours E = 12 v 2 − cos R for different
+values of E. The resulting phase portrait is shown in Figure 6.7.3. The picture is
+periodic in the R-direction, as we’d expect.
+
+                                         v
+
+
+
+
+                                                                    θ
+
+
+
+
+                Figure 6.7.3
+
+
+   Now for the physical interpretation. The center corresponds to a state of neu-
+trally stable equilibrium, with the pendulum at rest and hanging straight down.
+This is the lowest possible energy state ( E  1). The small orbits surrounding
+the center represent small oscillations about equilibrium, traditionally called
+
+
+
+170       PHASE PLANE
+librations. As E increases, the orbits grow. The critical case is E  1, corresponding
+to the heteroclinic trajectories joining the saddles in Figure 6.7.3. The saddles rep-
+resent an inverted pendulum at rest; hence the heteroclinic trajectories represent
+delicate motions in which the pendulum slows to a halt precisely as it approaches
+the inverted position. For E  1, the pendulum whirls repeatedly over the top.
+These rotations should also be regarded as periodic solutions, since R  Q and
+R  Q are the same physical position.
+
+         Cylindrical Phase Space
+   The phase portrait for the pendulum is more illuminating when wrapped onto
+the surface of a cylinder (Figure 6.7.4). In fact, a cylinder is the natural phase space
+for the pendulum, because it incorporates the fundamental geometric difference
+between v and R: the angular velocity v is a real number, whereas R is an angle.
+
+
+
+
+                                                         E >1
+
+                                                         E =1
+                       v
+                                                         E = −1
+
+                                                         E =1
+
+                                                         E >1
+
+
+
+
+                                              θ
+
+                       Figure 6.7.4
+
+
+   There are several advantages to the cylindrical representation. Now the peri-
+odic whirling motions look periodic—they are the closed orbits that encircle the
+cylinder for E  1. Also, it becomes obvious that the saddle points in Figure 6.7.3
+are all the same physical state (an inverted pendulum at rest). The heteroclinic tra-
+jectories of Figure 6.7.3 become homoclinic orbits on the cylinder.
+   There is an obvious symmetry between the top and bottom half of Figure 6.7.4.
+For example, both homoclinic orbits have the same energy and shape. To highlight
+this symmetry, it is interesting (if a bit mind-boggling at first) to plot the energy
+vertically instead of the angular velocity v (Figure 6.7.5). Then the orbits on the
+cylinder remain at constant height, while the cylinder gets bent into a U-tube. The
+two arms of the tube are distinguished by the sense of rotation of the pendulum,
+
+
+
+                                                          6.7   PENDULUM           171
+either clockwise or counterclockwise. At low energies, this distinction no longer
+exists; the pendulum oscillates to and fro. The homoclinic orbits lie at E  1, the
+borderline between rotations and librations.
+
+                   clockwise            counterclockwise
+                    whirling               whirling
+
+
+
+
+                                                                rotations
+
+
+
+
+                                                                E=1
+
+                                                                librations
+
+                                                                E = −1
+
+                  Figure 6.7.5
+
+
+   At first you might think that the trajectories are drawn incorrectly on one of the
+arms of the U-tube. It might seem that the arrows for clockwise and counterclock-
+wise motions should go in opposite directions. But if you think about the coordi-
+nate system shown in Figure 6.7.6, you’ll see that the picture is correct.
+
+       θ                                     θ                                            θ
+bottom                                        top                    top
+
+                                                                         θ =π          θ =0
+
+
+       θ=0          θ=π           θ=π     θ =0
+                                                                                v =0
+                                                                     v
+                                                     bend and
+                                                     stretch
+                           v =0
+v increasing
+                                                                  bottom
+
+Figure 6.7.6
+
+
+   The point is that the direction of increasing R has reversed when the bot-
+tom of the cylinder is bent around to form the U-tube. (Please understand that
+Figure 6.7.6 shows the coordinate system, not the actual trajectories; the trajecto-
+ries were shown in Figure 6.7.5.)
+
+172            PHASE PLANE
+         Damping
+   Now let’s return to the phase plane, and suppose that we add a small amount of
+linear damping to the pendulum. The governing equation becomes
+
+         R + bR + sin R = 0
+where b  0 is the damping strength. Then centers become stable spirals while sad-
+dles remain saddles. A computer-generated phase portrait is shown in Figure 6.7.7.
+
+
+
+
+                       Figure 6.7.7
+
+   The picture on the U-tube is clearer. All trajectories continually lose altitude,
+except for the fixed points (Figure 6.7.8).
+
+                 clockwise            counterclockwise
+                  whirling               whirling
+
+
+
+
+                                                               rotations
+
+
+
+
+                                                                E =1
+
+                                                                librations
+
+                                                               E = −1
+
+               Figure 6.7.8
+
+
+We can see this explicitly by computing the change in energy along a trajectory:
+
+         dE   d 1 2
+            =
+         dτ dτ 2
+                ( θ − cos θ ) = θ(θ + sin θ ) = −bθ2 ≤ 0.
+
+                                                         6.7     PENDULUM       173
+Hence E decreases monotonically along trajectories, except at fixed points where
+ R w 0.
+    The trajectory shown in Figure 6.7.8 has the following physical interpretation:
+the pendulum is initially whirling clockwise. As it loses energy, it has a harder time
+rotating over the top. The corresponding trajectory spirals down the arm of the
+U-tube until E  1; then the pendulum doesn’t have enough energy to whirl, and
+so it settles down into a small oscillation about the bottom. Eventually the motion
+damps and the pendulum comes to rest at its stable equilibrium.
+    This example shows how far we can go with pictures—without invoking any
+difficult formulas, we were able to extract all the important features of the pen-
+dulum’s dynamics. It would be much more difficult to obtain these results analyt-
+ically, and much more confusing to interpret the formulas, even if we could find
+them.
+
+
+6.8 Index Theory
+In Section 6.3 we learned how to linearize a system about a fixed point. Linearization
+is a prime example of a local method: it gives us a detailed microscopic view of the
+trajectories near a fixed point, but it can’t tell us what happens to the trajectories
+after they leave that tiny neighborhood. Furthermore, if the vector field starts with
+quadratic or higher-order terms, the linearization tells us nothing.
+    In this section we discuss index theory, a method that provides global informa-
+tion about the phase portrait. It enables us to answer such questions as: Must a
+closed trajectory always encircle a fixed point? If so, what types of fixed points are
+permitted? What types of fixed points can coalesce in bifurcations? The method
+also yields information about the trajectories near higher-order fixed points.
+Finally, we can sometimes use index arguments to rule out the possibility of closed
+orbits in certain parts of the phase plane.
+
+         The Index of a Closed Curve
+   The index of a closed curve C is an integer that measures the winding of the
+vector field on C. The index also provides information about any fixed points that
+might happen to lie inside the curve, as we’ll see.
+   This idea may remind you of a concept in electrostatics. In that subject, one
+often introduces a hypothetical closed surface (a “Gaussian surface”) to probe
+a configuration of electric charges. By studying the behavior of the electric field
+on the surface, one can determine the total amount of charge inside the surface.
+Amazingly, the behavior on the surface tells us what’s happening far away inside
+the surface! In the present context, the electric field is analogous to our vector field,
+the Gaussian surface is analogous to the curve C, and the total charge is analogous
+to the index.
+
+
+
+
+174        PHASE PLANE
+

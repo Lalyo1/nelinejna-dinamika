@@ -1,0 +1,360 @@
+=== PDF pages 89-95 (printed 74-80) ===
+         Bead on a Tilted Wire
+   As a simple example of imperfect bifurcation and catastrophe, consider the fol-
+lowing mechanical system (Figure 3.6.7).
+
+                                      x
+                    θ
+
+                                           m               wire
+                             a
+                                     k              g
+
+
+
+             Figure 3.6.7
+
+
+A bead of mass m is constrained to slide along a straight wire inclined at an angle
+R with respect to the horizontal. The mass is attached to a spring of stiffness k and
+relaxed length L 0 , and is also acted on by gravity. We choose coordinates along the
+wire so that x = 0 occurs at the point closest to the support point of the spring; let
+a be the distance between this support point and the wire.
+    In Exercises 3.5.4 and 3.6.5, you are asked to analyze the equilibrium positions
+of the bead. But first let’s get some physical intuition. When the wire is horizontal
+( R = 0), there is perfect symmetry between the left and right sides of the wire, and
+x = 0 is always an equilibrium position. The stability of this equilibrium depends
+on the relative sizes of L 0 and a : if L 0  a, the spring is in tension and so the
+equilibrium should be stable. But if L 0  a, the spring is compressed and so we
+expect an unstable equilibrium at x = 0 and a pair of stable equilibria to either side
+of it. Exercise 3.5.4 deals with this simple case.
+    The problem becomes more interesting when we tilt the wire ( R v 0). For small
+tilting, we expect that there are still three equilibria if L 0  a. However if the
+tilt becomes too steep, perhaps you can see intuitively that the uphill equilibrium
+might suddenly disappear, causing the bead to jump catastrophically to the down-
+hill equilibrium. You might even want to build this mechanical system and try it.
+Exercise 3.6.5 asks you to work through the mathematical details.
+
+
+3.7     Insect Outbreak
+For a biological example of bifurcation and catastrophe, we turn now to a model
+for the sudden outbreak of an insect called the spruce budworm. This insect is
+a serious pest in eastern Canada, where it attacks the leaves of the balsam fir tree.
+When an outbreak occurs, the budworms can defoliate and kill most of the fir trees
+in the forest in about four years.
+
+
+
+
+74        BIFURCATIONS
+   Ludwig et al. (1978) proposed and analyzed an elegant model of the interaction
+between budworms and the forest. They simplified the problem by exploiting a
+separation of time scales: the budworm population evolves on a fast time scale
+(they can increase their density fivefold in a year, so they have a characteristic
+time scale of months), whereas the trees grow and die on a slow time scale (they
+can completely replace their foliage in about 7–10 years, and their life span in the
+absence of budworms is 100–150 years.) Thus, as far as the budworm dynamics are
+concerned, the forest variables may be treated as constants. At the end of the anal-
+ysis, we will allow the forest variables to drift very slowly—this drift ultimately
+triggers an outbreak.
+
+         Model
+   The proposed model for the budworm population dynamics is
+
+                  ⎛ N⎞
+         N = RN ⎜⎜1− ⎟⎟⎟ − p( N ).
+                  ⎜⎝ K ⎠
+
+In the absence of predators, the budworm population N ( t ) is assumed to grow
+logistically with growth rate R and carrying capacity K. The carrying capacity
+depends on the amount of foliage left on the trees, and so it is a slowly drifting
+                                          parameter; at this stage we treat it as fixed.
+                                          The term p ( N ) represents the death rate
+B                                p(N )
+                                          due to predation, chiefly by birds, and
+                                          is assumed to have the shape shown in
+                                          Figure 3.7.1. There is almost no predation
+                                  N       when budworms are scarce; the birds seek
+          A                               food elsewhere. However, once the popula-
+                                          tion exceeds a certain critical level N = A,
+Figure 3.7.1
+                                          the predation turns on sharply and then
+saturates (the birds are eating as fast as they can). Ludwig et al. (1978) assumed the
+specific form
+
+                      BN 2
+          p( N ) =
+                     A +N2
+                      2
+
+
+
+where A, B  0. Thus the full model is
+
+                  ⎛ N⎞      BN 2
+         N = RN ⎜⎜1− ⎟⎟⎟ − 2    .                                         (1)
+                  ⎜⎝ K ⎠ A + N 2
+
+   We now have several questions to answer. What do we mean by an “outbreak”
+in the context of this model? The idea must be that, as parameters drift, the bud-
+worm population suddenly jumps from a low to a high level. But what do we
+
+
+
+                                                   3.7 INSECT OUTBREAK               75
+mean by “low” and “high,” and are there solutions with this character? To answer
+these questions, it is convenient to recast the model into a dimensionless form,
+as in Section 3.5.
+
+         Dimensionless Formulation
+    The model (1) has four parameters: R, K, A, and B. As usual, there are various
+ways to nondimensionalize the system. For example, both A and K have the same
+dimension as N, and so either N / A or N / K could serve as a dimensionless popu-
+lation level. It often takes some trial and error to find the best choice. In this case,
+our heuristic will be to scale the equation so that all the dimensionless groups are
+pushed into the logistic part of the dynamics, with none in the predation part.
+This turns out to ease the graphical analysis of the fixed points.
+    To get rid of the parameters in the predation term, we divide (1) by B and
+then let
+
+         x = N / A,
+which yields
+
+          A dx R    ⎛ Ax ⎞⎟    x2
+              = Ax ⎜⎜1−    ⎟ −       .                                     (2)
+          B dt B    ⎜⎝  K ⎟⎠ 1 + x 2
+
+Equation (2) suggests that we should introduce a dimensionless time U and dimen-
+sionless groups r and k, as follows:
+
+               Bt              RA                K
+         U       ,      r       ,         k     .
+               A               B                 A
+
+Then (2) becomes
+
+          dx       ⎛ x⎞      x2
+             = rx ⎜⎜1− ⎟⎟⎟ −      ,                                        (3)
+          dU       ⎜⎝ k ⎠ 1 + x 2
+
+which is our final dimensionless form. Here r and k are the dimensionless growth
+rate and carrying capacity, respectively.
+
+         Analysis of Fixed Points
+Equation (3) has a fixed point at x * = 0; it is always unstable (Exercise 3.7.1). The
+intuitive explanation is that the predation is extremely weak for small x, and so the
+budworm population grows exponentially for x near zero.
+   The other fixed points of (3) are given by the solutions of
+
+            ⎛ x⎞      x
+         r ⎜⎜1− ⎟⎟⎟ =      .                                               (4)
+            ⎜⎝ k ⎠ 1 + x 2
+
+
+
+76         BIFURCATIONS
+                                           This equation is easy to analyze graph-
+                                           ically—we simply graph the right- and
+r                                          left-hand sides of (4), and look for inter-
+                                           sections (Figure 3.7.2). The left-hand side
+                            x              of (4) represents a straight line with
+                         1 +x2             x-intercept equal to k and a y-intercept
+                                           equal to r, and the right-hand side rep-
+        k                             x resents a curve that is independent of
+                                           the parameters! Hence, as we vary the
+Figure 3.7.2
+                                           parameters r and k, the line moves but
+                                           the curve doesn’t—this convenient prop-
+erty is what motivated our choice of nondimensionalization.
+Figure 3.7.2 shows that if k is sufficiently small, there is exactly one intersection
+for any r  0. However, for large k, we can have one, two, or three intersections,
+depending on the value of r (Figure 3.7.3). Let’s suppose that there are three inter-
+                                                sections a, b, and c. As we decrease
+                                                r with k fixed, the line rotates coun-
+                                                terclockwise about k. Then the
+r
+                                                fixed points b and c approach each
+                                                other and eventually coalesce in a
+                                                saddle-node bifurcation when the
+                                                line intersects the curve tangentially
+                                                (dashed line in Figure 3.7.3). After the
+                                         x
+   a         b               c     k            bifurcation, the only remaining fixed
+                                                point is a (in addition to x * = 0, of
+Figure 3.7.3                                    course). Similarly, a and b can collide
+                                                and annihilate as r is increased.
+   To determine the stability of the fixed points, we recall that x * = 0 is unstable,
+and also observe that the stability type must alternate as we move along the
+x-axis.
+                                                        Hence a is stable, b is unsta-
+                                                     ble, and c is stable. Thus, for r
+dx                                                   and k in the range correspond-
+dτ
+                                                     ing to three positive fixed points,
+                                                     the vector field is qualitatively
+                                                     like that shown in Figure 3.7.4.
+                                               x
+                                  c
+                                                     The smaller stable fixed point
+              a        b
+                                                     a is called the refuge level of the
+                                                     budworm population, while the
+Figure 3.7.4
+                                                     larger stable point c is the out-
+break level. From the point of view of pest control, one would like to keep the
+population at a and away from c. The fate of the system is determined by the initial
+
+
+
+                                                   3.7 INSECT OUTBREAK               77
+condition x 0 ; an outbreak occurs if and only if x0  b. In this sense the unstable
+equilibrium b plays the role of a threshold.
+   An outbreak can also be triggered by a saddle-node bifurcation. If the param-
+eters r and k drift in such a way that the fixed point a disappears, then the popula-
+tion will jump suddenly to the outbreak level c. The situation is made worse by
+the hysteresis effect—even if the parameters are restored to their values before the
+outbreak, the population will not drop back to the refuge level.
+
+         Calculating the Bifurcation Curves
+     Now we compute the curves in ( k, r ) space where the system undergoes
+saddle-node bifurcations. The calculation is somewhat harder than that in
+Section 3.6: we will not be able to write r explicitly as a function of k, for exam-
+ple. Instead, the bifurcation curves will be written in the parametric form ( k ( x ),
+r ( x )), where x runs through all positive values. (Please don’t be confused by this
+traditional terminology—one would call x the “parameter” in these parametric
+equations, even though r and k are themselves parameters in a different sense.)
+     As discussed earlier, the condition for a saddle-node bifurcation is that the line
+r (1  x / k ) intersects the curve x / (1 x 2) tangentially. Thus we require both
+
+            ⎛ x⎞      x
+         r ⎜⎜1− ⎟⎟⎟ =                                                      (5)
+            ⎜⎝ k ⎠ 1 + x 2
+
+and
+
+          d ⎡ ⎛⎜ x ⎞⎟⎤     d ⎡ x ⎤
+              ⎢ r ⎜1− ⎟⎥ =   ⎢        ⎥.                                   (6)
+                  ⎜   ⎟
+          dx ⎢⎣ ⎝ k ⎠⎥⎦ dx ⎢⎣1 + x 2 ⎥⎦
+
+After differentiation, (6) reduces to
+
+             r   1− x 2
+         −     =           .                                               (7)
+             k (1 + x 2 )2
+
+We substitute this expression for r / k into (5), which allows us to express r solely in
+terms of x. The result is
+
+                 2 x3
+         r=               .                                                (8)
+              (1 + x 2 )2
+
+Then inserting (8) into (7) yields
+
+                2 x3
+         k=           .                                                    (9)
+               x 2 −1
+
+The condition k  0 implies that x must be restricted to the range x  1.
+
+78         BIFURCATIONS
+   Together (8) and (9) define the bifurcation curves. For each x  1, we plot the
+corresponding point (k ( x ), r ( x )) in the ( k, r ) plane. The resulting curves are shown
+in Figure 3.7.5. (Exercise 3.7.2 deals with some of the analytical properties of these
+curves.)
+
+                        0.8
+                        0.7                                 outbreak
+                        0.6
+                        0.5
+                r
+                        0.4
+                                                            bistable
+                        0.3
+                        0.2
+                                          refuge
+                        0.1
+                        0.0
+                              0               10       20              30     40
+                                                       k
+
+                Figure 3.7.5
+
+
+The different regions in Figure 3.7.5 are labeled according to the stable fixed points
+that exist. The refuge level a is the only stable state for low r, and the outbreak level
+c is the only stable state for large r. In the bistable region, both stable states exist.
+    The stability diagram is very similar to Figure 3.6.2. It too can be regarded
+as the projection of a cusp catastrophe surface, as schematically illustrated in
+Figure 3.7.6. You are hereby challenged to graph the surface accurately!
+
+                    x
+                                                                   outbreak
+                                      r
+
+
+                                  k                refuge
+
+
+
+
+                    Figure 3.7.6
+
+
+
+         Comparison with Observations
+   Now we need to decide on biologically plausible values of the dimensionless
+groups r = RA / B and k = K / A. A complication is that these parameters may drift
+
+
+
+                                                              3.7 INSECT OUTBREAK        79
+slowly as the condition of the forest changes. According to Ludwig et al. (1978), r
+increases as the forest grows, while k remains fixed.
+   They reason as follows: let S denote the average size of the trees, interpreted as the
+total surface area of the branches in a stand. Then the carrying capacity K should
+be proportional to the available foliage, so K = K ′S . Similarly, the half-saturation
+parameter A in the predation term should be proportional to S; predators such as
+birds search units of foliage, not acres of forest, and so the relevant quantity Aa must
+have the dimensions of budworms per unit of branch area. Hence A = AaS and
+therefore
+
+               RA′                   K′
+          r=       S,         k=        .                                      (10)
+                B                    A′
+
+   The experimental observations suggest that for a young forest, typically k x 300
+and r  1 / 2 so the parameters lie in the bistable region. The budworm population is
+kept down by the birds, which find it easy to search the small number of branches per
+acre. However, as the forest grows, S increases and therefore the point ( k, r ) drifts
+upward in parameter space toward the outbreak region of Figure 3.7.5. Ludwig et al.
+(1978) estimate that r x 1 for a fully mature forest, which lies dangerously in the
+outbreak region. After an outbreak occurs, the fir trees die and the forest is taken
+over by birch trees. But they are less efficient at using nutrients and eventually the fir
+trees come back—this recovery takes about 50–100 years (Murray 2002).
+   We conclude by mentioning some of the approximations in the model presented
+here. The tree dynamics have been neglected; see Ludwig et al. (1978) for a discussion
+of this longer time-scale behavior. We’ve also neglected the spatial distribution of
+budworms and their possible dispersal—see Ludwig et al. (1979) and Murray (2002)
+for treatments of this aspect of the problem.
+
+
+ EXERCISES FOR CHAPTER 3
+
+
+3.1 Saddle-Node Bifurcation
+For each of the following exercises, sketch all the qualitatively different vector
+fields that occur as r is varied. Show that a saddle-node bifurcation occurs at a
+critical value of r, to be determined. Finally, sketch the bifurcation diagram of
+fixed points x* versus r.
+3.1.1     x = 1 + rx + x 2                     3.1.2     x = r − cosh x
+3.1.3     x = r + x − ln (1 + x )              3.1.4     x = r + 12 x − x / (1 + x )
+3.1.5    (Unusual bifurcations) In discussing the normal form of the saddle-node
+bifurcation, we mentioned the assumption that a = ∂f / ∂r |(x*,rc ) = 0 . To see what
+
+
+
+
+80         BIFURCATIONS
+
